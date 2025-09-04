@@ -54,7 +54,7 @@ export const createRollingMigrationPlanJson = (
   if (migrationTemplate) spec.migrationTemplate = migrationTemplate
 
   return {
-    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
+    apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
     kind: "RollingMigrationPlan",
     metadata: {
       name: name || `rolling-migration-plan-${uuidv4().substring(0, 8)}`,

@@ -14,7 +14,7 @@ export const getVMwareMachines = async (
   const config = vmwareCredName
     ? {
         params: {
-          labelSelector: `vjailbreak.k8s.pf9.io/vmwarecreds=${vmwareCredName}`,
+          labelSelector: `vjailbreak.k8s.stellaris-migrate.io/vmwarecreds=${vmwareCredName}`,
         },
       }
     : undefined
@@ -75,7 +75,7 @@ export const mapToVmData = (machines: VMwareMachine[]): VmData[] => {
     labels: machine.metadata.labels,
     osFamily: machine.spec.vms.osFamily,
     esxHost:
-      machine.metadata?.labels?.[`vjailbreak.k8s.pf9.io/esxi-name`] || "",
+      machine.metadata?.labels?.[`vjailbreak.k8s.stellaris-migrate.io/esxi-name`] || "",
     vmWareMachineName: machine.metadata.name,
     networkInterfaces: machine.spec.vms.networkInterfaces?.map((nic) => ({
       mac: nic.mac,

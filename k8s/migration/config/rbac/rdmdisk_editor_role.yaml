@@ -1,7 +1,7 @@
 # This rule is not used by the project migration itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
-# Grants permissions to create, update, and delete resources within the vjailbreak.k8s.pf9.io.
+# Grants permissions to create, update, and delete resources within the vjailbreak.k8s.stellaris-migrate.io.
 # This role is intended for users who need to manage these resources
 # but should not control RBAC or manage permissions for others.
 
@@ -14,7 +14,7 @@ metadata:
   name: rdmdisk-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks
   verbs:
@@ -26,7 +26,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks/status
   verbs:

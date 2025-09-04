@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: rollingmigrationplans.vjailbreak.k8s.pf9.io
+  name: rollingmigrationplans.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: RollingMigrationPlan
     listKind: RollingMigrationPlanList

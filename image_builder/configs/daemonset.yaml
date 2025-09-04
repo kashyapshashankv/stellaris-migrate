@@ -45,20 +45,20 @@ spec:
           ports:
             - containerPort: 873
           volumeMounts:
-            - name: pf9-env
-              mountPath: /etc/pf9
+            - name: stellaris-migrate-env
+              mountPath: /etc/stellaris-migrate
               readOnly: true
             - name: vmwarelib
               mountPath: /home/ubuntu/vmware-vix-disklib-distrib
             - name: logs
-              mountPath: /var/log/pf9
+              mountPath: /var/log/stellaris-migrate
             - name: virtio-win
               mountPath: /home/ubuntu/virtio-win
           command: ["/bin/sh", "-c"]
           args:
             - |
-              IS_MASTER=$(grep -E '^export IS_MASTER=' /etc/pf9/k3s.env | cut -d'=' -f2)
-              MASTER_IP=$(grep -E '^export MASTER_IP=' /etc/pf9/k3s.env | cut -d'=' -f2)
+              IS_MASTER=$(grep -E '^export IS_MASTER=' /etc/stellaris-migrate/k3s.env | cut -d'=' -f2)
+              MASTER_IP=$(grep -E '^export MASTER_IP=' /etc/stellaris-migrate/k3s.env | cut -d'=' -f2)
               if [ "$IS_MASTER" = "true" ]; then
                 echo "Master node detected. IP: $MASTER_IP"
                 
@@ -67,15 +67,15 @@ spec:
                 # Note: Not restarting services to avoid disruption
                 # Instead, properly closing files in the v2v-helper code
                 # Clean master's own logs and force delete any stuck files
-                find /var/log/pf9 -type f -mtime +1 -delete 2>/dev/null || true
+                find /var/log/stellaris-migrate -type f -mtime +1 -delete 2>/dev/null || true
                 # Clean worker logs stored on master and force delete any stuck files
                 find /var/lib/rsync/worker-logs -type f -mtime +1 -delete 2>/dev/null || true
                 # Clear deleted but open files (useful when processes still hold file handles)
                 echo "Clearing deleted but open files..."
-                lsof +L1 | grep "/var/log/pf9\|/var/lib/rsync/worker-logs" | awk '{print $2}' | xargs -r kill -HUP 2>/dev/null || true
+                lsof +L1 | grep "/var/log/stellaris-migrate\|/var/lib/rsync/worker-logs" | awk '{print $2}' | xargs -r kill -HUP 2>/dev/null || true
                 
                 echo "Starting rsync daemon..."
-                rsync --daemon --config=/etc/pf9/rsyncd.conf --no-detach
+                rsync --daemon --config=/etc/stellaris-migrate/rsyncd.conf --no-detach
                 if ps aux | grep rsync | grep -v grep; then
                   echo "rsync daemon is running."
                 else
@@ -92,10 +92,10 @@ spec:
                   # Note: Not restarting services to avoid disruption
                   # Instead, properly closing files in the v2v-helper code
                   # Force delete old log files
-                  find /var/log/pf9 -type f -mtime +1 -delete 2>/dev/null || true
+                  find /var/log/stellaris-migrate -type f -mtime +1 -delete 2>/dev/null || true
                   # Clear deleted but open files
                   echo "Clearing deleted but open files..."
-                  lsof +L1 | grep "/var/log/pf9" | awk '{print $2}' | xargs -r kill -HUP 2>/dev/null || true
+                  lsof +L1 | grep "/var/log/stellaris-migrate" | awk '{print $2}' | xargs -r kill -HUP 2>/dev/null || true
                   # Free up disk space by clearing caches
                   sync
                   echo 3 > /proc/sys/vm/drop_caches 2>/dev/null || true
@@ -104,7 +104,7 @@ spec:
                   rsync -avz rsync://${MASTER_IP}/vmwarelib/ /home/ubuntu/vmware-vix-disklib-distrib/
 
                   # Sync logs from worker to master (with delete flag to sync deletions too)
-                  rsync -avz --delete /var/log/pf9 rsync://${MASTER_IP}/worker-logs
+                  rsync -avz --delete /var/log/stellaris-migrate rsync://${MASTER_IP}/worker-logs
 
                   # Sync virtio-win drivers from master to worker
                   rsync -avz rsync://${MASTER_IP}/virtio-win /home/ubuntu/virtio-win
@@ -118,9 +118,9 @@ spec:
                 done
               fi
       volumes:
-        - name: pf9-env
+        - name: stellaris-migrate-env
           hostPath:
-            path: /etc/pf9
+            path: /etc/stellaris-migrate
             type: DirectoryOrCreate
         - name: vmwarelib
           hostPath:
@@ -129,7 +129,7 @@ spec:
         - name: logs
           hostPath:
             type: DirectoryOrCreate
-            path: /var/log/pf9
+            path: /var/log/stellaris-migrate
         - name: virtio-win
           hostPath:
             type: DirectoryOrCreate

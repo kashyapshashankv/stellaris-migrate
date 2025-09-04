@@ -5,7 +5,7 @@
 set -euo pipefail
 
 
-# get tag from /etc/pf9/yamls/01ui.yaml
+# get tag from /etc/stellaris-migrate/yamls/01ui.yaml
 TAG=$1
 
 REGISTRY="quay.io"

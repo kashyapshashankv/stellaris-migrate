@@ -45,15 +45,15 @@ type OpenstackCredsReconciler struct {
 	Local  bool
 }
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=openstackcreds,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=openstackcreds/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=openstackcreds/finalizers,verbs=update
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdhosts,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdhosts/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdhosts/finalizers,verbs=update
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdclusters,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdclusters/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=pcdclusters/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=openstackcreds,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=openstackcreds/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=openstackcreds/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdhosts,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdhosts/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdhosts/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdclusters,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdclusters/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=pcdclusters/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

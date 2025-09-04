@@ -37,7 +37,7 @@ spec:
             spec:
               resources:
                 - groupVersionKind:
-                    group: vjailbreak.k8s.pf9.io
+                    group: vjailbreak.k8s.stellaris-migrate.io
                     kind: "Migration"
                     version: "v1alpha1"
                   labelsFromPath:

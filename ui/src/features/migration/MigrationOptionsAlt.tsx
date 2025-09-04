@@ -109,7 +109,7 @@ export default function MigrationOptionsAlt({
     return dayjs(minDate).add(1, "minute")
   }, [params, selectedMigrationOptions])
 
-  const isPCD = openstackCredentials?.metadata?.labels?.["vjailbreak.k8s.pf9.io/is-pcd"] === "true";
+  const isPCD = openstackCredentials?.metadata?.labels?.["vjailbreak.k8s.stellaris-migrate.io/is-pcd"] === "true";
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

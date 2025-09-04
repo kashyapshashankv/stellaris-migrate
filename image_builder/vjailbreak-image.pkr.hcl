@@ -85,25 +85,25 @@ build {
 
   provisioner "shell" {
     inline = [
-    "sudo mv /tmp/install.sh /etc/pf9/install.sh",
-    "sudo mv /tmp/k3s.env /etc/pf9/k3s.env",
+    "sudo mv /tmp/install.sh /etc/stellaris-migrate/install.sh",
+    "sudo mv /tmp/k3s.env /etc/stellaris-migrate/k3s.env",
     "sudo mkdir -p image_builder/images",
-    "sudo mv /home/ubuntu/images/* /etc/pf9/images",
+    "sudo mv /home/ubuntu/images/* /etc/stellaris-migrate/images",
     "sudo mkdir -p /home/ubuntu/virtio-win",
     "sudo chown -R ubuntu:ubuntu /home/ubuntu/virtio-win",
-    "sudo mv /etc/pf9/images/virtio-win.iso /home/ubuntu/virtio-win/virtio-win.iso",
-    "sudo mv /tmp/yamls /etc/pf9/yamls",
-    "sudo mv /tmp/rsyncd.conf /etc/pf9/rsyncd.conf",
-    "sudo mv /tmp/daemonset.yaml /etc/pf9/yamls/daemonset.yaml",
-    "sudo mv /tmp/env /etc/pf9/env",
-    "sudo mv /tmp/vjailbreak-settings.yaml /etc/pf9/yamls/vjailbreak-settings.yaml",
+    "sudo mv /etc/stellaris-migrate/images/virtio-win.iso /home/ubuntu/virtio-win/virtio-win.iso",
+    "sudo mv /tmp/yamls /etc/stellaris-migrate/yamls",
+    "sudo mv /tmp/rsyncd.conf /etc/stellaris-migrate/rsyncd.conf",
+    "sudo mv /tmp/daemonset.yaml /etc/stellaris-migrate/yamls/daemonset.yaml",
+    "sudo mv /tmp/env /etc/stellaris-migrate/env",
+    "sudo mv /tmp/vjailbreak-settings.yaml /etc/stellaris-migrate/yamls/vjailbreak-settings.yaml",
     "sudo mv /tmp/opensource.txt /home/ubuntu/opensource.txt",
-    "sudo chmod +x /etc/pf9/install.sh",
-    "sudo chown root:root /etc/pf9/k3s.env",
-    "sudo chmod 644 /etc/pf9/k3s.env",
-    "sudo chmod 644 /etc/pf9/env",
+    "sudo chmod +x /etc/stellaris-migrate/install.sh",
+    "sudo chown root:root /etc/stellaris-migrate/k3s.env",
+    "sudo chmod 644 /etc/stellaris-migrate/k3s.env",
+    "sudo chmod 644 /etc/stellaris-migrate/env",
     "sudo df -h",
-    "echo '@reboot root /etc/pf9/install.sh' | sudo tee -a /etc/crontab"
+    "echo '@reboot root /etc/stellaris-migrate/install.sh' | sudo tee -a /etc/crontab"
     ]
   }
 }

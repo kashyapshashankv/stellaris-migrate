@@ -8,7 +8,7 @@ metadata:
   name: rollingmigrationplan-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans/status
   verbs:

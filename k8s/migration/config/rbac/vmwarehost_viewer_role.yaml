@@ -8,7 +8,7 @@ metadata:
   name: vmwarehost-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts/status
   verbs:

@@ -1,7 +1,7 @@
 # This rule is not used by the project migration itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
-# Grants read-only access to vjailbreak.k8s.pf9.io resources.
+# Grants read-only access to vjailbreak.k8s.stellaris-migrate.io resources.
 # This role is intended for users who need visibility into these resources
 # without permissions to modify them. It is ideal for monitoring purposes and limited-access viewing.
 
@@ -14,7 +14,7 @@ metadata:
   name: rdmdisk-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks
   verbs:
@@ -22,7 +22,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks/status
   verbs:

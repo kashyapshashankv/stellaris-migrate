@@ -12,9 +12,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: bmconfigs.vjailbreak.k8s.pf9.io
+  name: bmconfigs.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: BMConfig
     listKind: BMConfigList
@@ -125,9 +125,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: clustermigrations.vjailbreak.k8s.pf9.io
+  name: clustermigrations.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: ClusterMigration
     listKind: ClusterMigrationList
@@ -271,9 +271,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: esximigrations.vjailbreak.k8s.pf9.io
+  name: esximigrations.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: ESXIMigration
     listKind: ESXIMigrationList
@@ -394,9 +394,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: migrationplans.vjailbreak.k8s.pf9.io
+  name: migrationplans.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: MigrationPlan
     listKind: MigrationPlanList
@@ -560,9 +560,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: migrations.vjailbreak.k8s.pf9.io
+  name: migrations.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: Migration
     listKind: MigrationList
@@ -717,9 +717,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: migrationtemplates.vjailbreak.k8s.pf9.io
+  name: migrationtemplates.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: MigrationTemplate
     listKind: MigrationTemplateList
@@ -822,9 +822,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: networkmappings.vjailbreak.k8s.pf9.io
+  name: networkmappings.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: NetworkMapping
     listKind: NetworkMappingList
@@ -914,9 +914,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: openstackcreds.vjailbreak.k8s.pf9.io
+  name: openstackcreds.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: OpenstackCreds
     listKind: OpenstackCredsList
@@ -1138,9 +1138,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: pcdclusters.vjailbreak.k8s.pf9.io
+  name: pcdclusters.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: PCDCluster
     listKind: PCDClusterList
@@ -1230,9 +1230,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: pcdhosts.vjailbreak.k8s.pf9.io
+  name: pcdhosts.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: PCDHost
     listKind: PCDHostList
@@ -1327,9 +1327,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: rdmdisks.vjailbreak.k8s.pf9.io
+  name: rdmdisks.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: RDMDisk
     listKind: RDMDiskList
@@ -1485,9 +1485,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: rollingmigrationplans.vjailbreak.k8s.pf9.io
+  name: rollingmigrationplans.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: RollingMigrationPlan
     listKind: RollingMigrationPlanList
@@ -1782,9 +1782,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: storagemappings.vjailbreak.k8s.pf9.io
+  name: storagemappings.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: StorageMapping
     listKind: StorageMappingList
@@ -1876,9 +1876,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vjailbreaknodes.vjailbreak.k8s.pf9.io
+  name: vjailbreaknodes.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: VjailbreakNode
     listKind: VjailbreakNodeList
@@ -2017,9 +2017,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vmwareclusters.vjailbreak.k8s.pf9.io
+  name: vmwareclusters.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: VMwareCluster
     listKind: VMwareClusterList
@@ -2083,9 +2083,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vmwarecreds.vjailbreak.k8s.pf9.io
+  name: vmwarecreds.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: VMwareCreds
     listKind: VMwareCredsList
@@ -2198,9 +2198,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vmwarehosts.vjailbreak.k8s.pf9.io
+  name: vmwarehosts.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: VMwareHost
     listKind: VMwareHostList
@@ -2265,9 +2265,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vmwaremachines.vjailbreak.k8s.pf9.io
+  name: vmwaremachines.vjailbreak.k8s.stellaris-migrate.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: vjailbreak.k8s.stellaris-migrate.io
   names:
     kind: VMwareMachine
     listKind: VMwareMachineList
@@ -2521,7 +2521,7 @@ metadata:
   name: migration-bmconfig-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs
   verbs:
@@ -2533,7 +2533,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/status
   verbs:
@@ -2548,7 +2548,7 @@ metadata:
   name: migration-bmconfig-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs
   verbs:
@@ -2556,7 +2556,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/status
   verbs:
@@ -2571,7 +2571,7 @@ metadata:
   name: migration-clustermigration-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - clustermigrations
   verbs:
@@ -2583,7 +2583,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - clustermigrations/status
   verbs:
@@ -2598,7 +2598,7 @@ metadata:
   name: migration-clustermigration-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - clustermigrations
   verbs:
@@ -2606,7 +2606,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - clustermigrations/status
   verbs:
@@ -2621,7 +2621,7 @@ metadata:
   name: migration-esximigration-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - esximigrations
   verbs:
@@ -2633,7 +2633,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - esximigrations/status
   verbs:
@@ -2648,7 +2648,7 @@ metadata:
   name: migration-esximigration-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - esximigrations
   verbs:
@@ -2656,7 +2656,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - esximigrations/status
   verbs:
@@ -2743,7 +2743,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs
   - clustermigrations
@@ -2772,7 +2772,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/finalizers
   - clustermigrations/finalizers
@@ -2791,7 +2791,7 @@ rules:
   verbs:
   - update
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/status
   - clustermigrations/status
@@ -2823,7 +2823,7 @@ metadata:
   name: migration-migration-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrations
   verbs:
@@ -2835,7 +2835,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrations/status
   verbs:
@@ -2850,7 +2850,7 @@ metadata:
   name: migration-migration-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrations
   verbs:
@@ -2858,7 +2858,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrations/status
   verbs:
@@ -2873,7 +2873,7 @@ metadata:
   name: migration-migrationplan-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationplans
   verbs:
@@ -2885,7 +2885,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationplans/status
   verbs:
@@ -2900,7 +2900,7 @@ metadata:
   name: migration-migrationplan-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationplans
   verbs:
@@ -2908,7 +2908,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationplans/status
   verbs:
@@ -2923,7 +2923,7 @@ metadata:
   name: migration-migrationtemplate-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationtemplates
   verbs:
@@ -2935,7 +2935,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationtemplates/status
   verbs:
@@ -2950,7 +2950,7 @@ metadata:
   name: migration-migrationtemplate-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationtemplates
   verbs:
@@ -2958,7 +2958,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - migrationtemplates/status
   verbs:
@@ -2973,7 +2973,7 @@ metadata:
   name: migration-networkmapping-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - networkmappings
   verbs:
@@ -2985,7 +2985,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - networkmappings/status
   verbs:
@@ -3000,7 +3000,7 @@ metadata:
   name: migration-networkmapping-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - networkmappings
   verbs:
@@ -3008,7 +3008,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - networkmappings/status
   verbs:
@@ -3023,7 +3023,7 @@ metadata:
   name: migration-openstackcreds-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - openstackcreds
   verbs:
@@ -3035,7 +3035,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - openstackcreds/status
   verbs:
@@ -3050,7 +3050,7 @@ metadata:
   name: migration-openstackcreds-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - openstackcreds
   verbs:
@@ -3058,7 +3058,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - openstackcreds/status
   verbs:
@@ -3073,7 +3073,7 @@ metadata:
   name: migration-pcdcluster-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdclusters
   verbs:
@@ -3085,7 +3085,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdclusters/status
   verbs:
@@ -3100,7 +3100,7 @@ metadata:
   name: migration-pcdcluster-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdclusters
   verbs:
@@ -3108,7 +3108,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdclusters/status
   verbs:
@@ -3123,7 +3123,7 @@ metadata:
   name: migration-pcdhost-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdhosts
   verbs:
@@ -3135,7 +3135,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdhosts/status
   verbs:
@@ -3150,7 +3150,7 @@ metadata:
   name: migration-pcdhost-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdhosts
   verbs:
@@ -3158,7 +3158,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - pcdhosts/status
   verbs:
@@ -3173,13 +3173,13 @@ metadata:
   name: migration-rdmdisk-admin-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks
   verbs:
   - '*'
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks/status
   verbs:
@@ -3194,7 +3194,7 @@ metadata:
   name: migration-rdmdisk-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks
   verbs:
@@ -3206,7 +3206,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks/status
   verbs:
@@ -3221,7 +3221,7 @@ metadata:
   name: migration-rdmdisk-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks
   verbs:
@@ -3229,7 +3229,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rdmdisks/status
   verbs:
@@ -3244,7 +3244,7 @@ metadata:
   name: migration-rollingmigrationplan-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans
   verbs:
@@ -3256,7 +3256,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans/status
   verbs:
@@ -3271,7 +3271,7 @@ metadata:
   name: migration-rollingmigrationplan-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans
   verbs:
@@ -3279,7 +3279,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - rollingmigrationplans/status
   verbs:
@@ -3294,7 +3294,7 @@ metadata:
   name: migration-storagemapping-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - storagemappings
   verbs:
@@ -3306,7 +3306,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - storagemappings/status
   verbs:
@@ -3321,7 +3321,7 @@ metadata:
   name: migration-storagemapping-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - storagemappings
   verbs:
@@ -3329,7 +3329,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - storagemappings/status
   verbs:
@@ -3344,7 +3344,7 @@ metadata:
   name: migration-vjailbreaknode-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vjailbreaknodes
   verbs:
@@ -3356,7 +3356,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vjailbreaknodes/status
   verbs:
@@ -3371,7 +3371,7 @@ metadata:
   name: migration-vjailbreaknode-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vjailbreaknodes
   verbs:
@@ -3379,7 +3379,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vjailbreaknodes/status
   verbs:
@@ -3394,7 +3394,7 @@ metadata:
   name: migration-vmwarecluster-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwareclusters
   verbs:
@@ -3406,7 +3406,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwareclusters/status
   verbs:
@@ -3421,7 +3421,7 @@ metadata:
   name: migration-vmwarecluster-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwareclusters
   verbs:
@@ -3429,7 +3429,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwareclusters/status
   verbs:
@@ -3444,7 +3444,7 @@ metadata:
   name: migration-vmwarecreds-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarecreds
   verbs:
@@ -3456,7 +3456,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarecreds/status
   verbs:
@@ -3471,7 +3471,7 @@ metadata:
   name: migration-vmwarecreds-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarecreds
   verbs:
@@ -3479,7 +3479,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarecreds/status
   verbs:
@@ -3494,7 +3494,7 @@ metadata:
   name: migration-vmwarehost-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts
   verbs:
@@ -3506,7 +3506,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts/status
   verbs:
@@ -3521,7 +3521,7 @@ metadata:
   name: migration-vmwarehost-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts
   verbs:
@@ -3529,7 +3529,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwarehosts/status
   verbs:
@@ -3544,7 +3544,7 @@ metadata:
   name: migration-vmwaremachine-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwaremachines
   verbs:
@@ -3556,7 +3556,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwaremachines/status
   verbs:
@@ -3571,7 +3571,7 @@ metadata:
   name: migration-vmwaremachine-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwaremachines
   verbs:
@@ -3579,7 +3579,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - vmwaremachines/status
   verbs:
@@ -3693,7 +3693,7 @@ spec:
             cpu: 200m
             memory: 256Mi
         volumeMounts:
-        - mountPath: /etc/pf9/k3s
+        - mountPath: /etc/stellaris-migrate/k3s
           name: master-token
         - mountPath: /home/ubuntu
           name: vddk

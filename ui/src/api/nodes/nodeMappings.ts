@@ -102,7 +102,7 @@ const createNodeObject = (params: {
   namespace?: string
   spec: Spec
 }): NodeItem => ({
-  apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
+  apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
   kind: "VjailbreakNode",
   metadata: {
     name: params.name || generateAgentName(),

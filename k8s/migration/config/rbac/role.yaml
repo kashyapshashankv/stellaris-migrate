@@ -80,7 +80,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs
   - clustermigrations
@@ -109,7 +109,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/finalizers
   - clustermigrations/finalizers
@@ -128,7 +128,7 @@ rules:
   verbs:
   - update
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - vjailbreak.k8s.stellaris-migrate.io
   resources:
   - bmconfigs/status
   - clustermigrations/status

@@ -128,13 +128,13 @@ export const createOpenstackCredsWithSecretFlow = async (
 
   // Then create the OpenStack credentials with the label
   const credBody = {
-    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
+    apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
     kind: "OpenstackCreds",
     metadata: {
       name: credName,
       namespace,
       labels: {
-        "vjailbreak.k8s.pf9.io/is-pcd": isPcd ? "true" : "false",
+        "vjailbreak.k8s.stellaris-migrate.io/is-pcd": isPcd ? "true" : "false",
       },
     },
     spec: {
