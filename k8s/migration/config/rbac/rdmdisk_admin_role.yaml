@@ -1,7 +1,7 @@
 # This rule is not used by the project migration itself.
 # It is provided to allow the cluster admin to help manage permissions for users.
 #
-# Grants full permissions ('*') over vjailbreak.k8s.stellaris-migrate.io.
+# Grants full permissions ('*') over vjailbreak.k8s.pf9.io.
 # This role is intended for users authorized to modify roles and bindings within the cluster,
 # enabling them to delegate specific permissions to other users or groups as needed.
 
@@ -14,13 +14,13 @@ metadata:
   name: rdmdisk-admin-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - rdmdisks
   verbs:
   - '*'
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - rdmdisks/status
   verbs:

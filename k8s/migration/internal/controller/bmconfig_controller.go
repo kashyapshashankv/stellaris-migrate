@@ -41,9 +41,9 @@ type BMConfigReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=bmconfigs,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=bmconfigs/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=bmconfigs/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=bmconfigs,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=bmconfigs/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=bmconfigs/finalizers,verbs=update
 
 // Reconcile processes a BMConfig resource and reconciles the desired state with the actual state.
 // It handles both normal reconciliation and deletion reconciliation.

@@ -71,7 +71,7 @@ export const createBMConfigWithSecret = async (
   const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/bmconfigs`
 
   const bmConfigBody = {
-    apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
+    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
     kind: "BMConfig",
     metadata: {
       name: configName,

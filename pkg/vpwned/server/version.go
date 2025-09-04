@@ -576,7 +576,7 @@ func (s *VpwnedVersion) CleanupStep(ctx context.Context, in *api.CleanupStepRequ
 }
 
 func checkAndDeleteMigrationPlans(ctx context.Context, restConfig *rest.Config) (bool, string) {
-	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.stellaris-migrate.io", Version: "v1alpha1", Resource: "migrationplans"}
+	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "migrationplans"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err != nil {
 		return false, "Failed to create dynamic client"
@@ -608,7 +608,7 @@ func checkAndDeleteMigrationPlans(ctx context.Context, restConfig *rest.Config) 
 }
 
 func checkAndDeleteRollingMigrationPlans(ctx context.Context, restConfig *rest.Config) (bool, string) {
-	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.stellaris-migrate.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
+	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err != nil {
 		return false, "Failed to create dynamic client"
@@ -640,7 +640,7 @@ func checkAndDeleteRollingMigrationPlans(ctx context.Context, restConfig *rest.C
 }
 
 func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool, string) {
-	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.stellaris-migrate.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
+	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err != nil {
 		return false, "Failed to create dynamic client"
@@ -677,7 +677,7 @@ func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool,
 
 func checkAndDeleteSecret(ctx context.Context, kubeClient client.Client, restConfig *rest.Config, credType string) (bool, string) {
 	gvr := schema.GroupVersionResource{
-		Group:    "vjailbreak.k8s.stellaris-migrate.io",
+		Group:    "vjailbreak.k8s.pf9.io",
 		Version:  "v1alpha1",
 		Resource: credType,
 	}

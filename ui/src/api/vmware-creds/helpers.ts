@@ -28,7 +28,7 @@ export const createVmwareCredsJson = (
   }
 
   return {
-    apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
+    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
     kind: "VMwareCreds",
     metadata: {
       name: name || uuidv4(),

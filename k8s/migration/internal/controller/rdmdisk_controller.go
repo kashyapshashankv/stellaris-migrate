@@ -72,9 +72,9 @@ const (
 	RDMPhaseError = "Error"
 )
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=rdmdisks,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=rdmdisks/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=rdmdisks/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=rdmdisks,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=rdmdisks/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=rdmdisks/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

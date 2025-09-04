@@ -1,4 +1,4 @@
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: OpenstackCreds
 metadata:
   name: sapmo1
@@ -10,7 +10,7 @@ spec:
   OS_REGION_NAME: cspmo
   OS_TENANT_NAME: service
 ---
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: VMwareCreds
 metadata:
   name: pnapbmc1
@@ -21,7 +21,7 @@ spec:
   VCENTER_USERNAME: "some-username"  # Replace with actual username
   datacenter: "Datacenter1"  # Required field from CRD
 ---
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: NetworkMapping
 metadata:
   name: nwmap1
@@ -32,7 +32,7 @@ spec:
     - source: VM Network 2
       target: OpenstackNet-2
 ---
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: StorageMapping
 metadata:
   name: stmap1
@@ -41,7 +41,7 @@ spec:
     - source: vcenter-datastore-1
       target: __DEFAULT__
 ---
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: MigrationTemplate
 metadata:
   name: migration-template-sample
@@ -55,7 +55,7 @@ spec:
   destination:
     openstackRef: sapmo1
 ---
-apiVersion: vjailbreak.k8s.stellaris-migrate.io/v1alpha1
+apiVersion: vjailbreak.k8s.pf9.io/v1alpha1
 kind: MigrationPlan
 metadata:
   name: vm-migration-sample

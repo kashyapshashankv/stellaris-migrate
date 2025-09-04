@@ -7,7 +7,7 @@ export const createNetworkMappingJson = (params) => {
     networkMappings = [],
   } = params || {}
   return {
-    apiVersion: "vjailbreak.k8s.stellaris-migrate.io/v1alpha1",
+    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
     kind: "NetworkMapping",
     metadata: {
       name: name || uuidv4(),

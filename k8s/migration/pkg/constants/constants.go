@@ -52,37 +52,37 @@ const (
 	K8sMasterNodeAnnotation = "node-role.kubernetes.io/control-plane"
 
 	// VMwareCredsLabel is the label for vmware credentials
-	VMwareCredsLabel = "vjailbreak.k8s.stellaris-migrate.io/vmwarecreds" //nolint:gosec // not a password string
+	VMwareCredsLabel = "vjailbreak.k8s.pf9.io/vmwarecreds" //nolint:gosec // not a password string
 
 	// OpenstackCredsLabel is the label for openstack credentials
-	OpenstackCredsLabel = "vjailbreak.k8s.stellaris-migrate.io/openstackcreds" //nolint:gosec // not a password string
+	OpenstackCredsLabel = "vjailbreak.k8s.pf9.io/openstackcreds" //nolint:gosec // not a password string
 
 	// IsPCDCredsLabel is the label for pcd credentials
-	IsPCDCredsLabel = "vjailbreak.k8s.stellaris-migrate.io/is-pcd" //nolint:gosec // not a password string
+	IsPCDCredsLabel = "vjailbreak.k8s.pf9.io/is-pcd" //nolint:gosec // not a password string
 
 	// VMNameLabel is the label for vm name
-	VMNameLabel = "vjailbreak.k8s.stellaris-migrate.io/vm-name"
+	VMNameLabel = "vjailbreak.k8s.pf9.io/vm-name"
 
 	// RollingMigrationPlanFinalizer is the finalizer for rolling migration plan
-	RollingMigrationPlanFinalizer = "rollingmigrationplan.k8s.stellaris-migrate.io/finalizer"
+	RollingMigrationPlanFinalizer = "rollingmigrationplan.k8s.pf9.io/finalizer"
 
 	// BMConfigFinalizer is the finalizer for BMConfig
-	BMConfigFinalizer = "bmconfig.k8s.stellaris-migrate.io/finalizer"
+	BMConfigFinalizer = "bmconfig.k8s.pf9.io/finalizer"
 
 	// VMwareClusterLabel is the label for vmware cluster
-	VMwareClusterLabel = "vjailbreak.k8s.stellaris-migrate.io/vmware-cluster"
+	VMwareClusterLabel = "vjailbreak.k8s.pf9.io/vmware-cluster"
 
 	// ESXiNameLabel is the label for ESXi name
-	ESXiNameLabel = "vjailbreak.k8s.stellaris-migrate.io/esxi-name"
+	ESXiNameLabel = "vjailbreak.k8s.pf9.io/esxi-name"
 
 	// ClusterMigrationLabel is the label for cluster migration
-	ClusterMigrationLabel = "vjailbreak.k8s.stellaris-migrate.io/clustermigration"
+	ClusterMigrationLabel = "vjailbreak.k8s.pf9.io/clustermigration"
 
 	// RollingMigrationPlanLabel is the label for rolling migration plan
-	RollingMigrationPlanLabel = "vjailbreak.k8s.stellaris-migrate.io/rollingmigrationplan"
+	RollingMigrationPlanLabel = "vjailbreak.k8s.pf9.io/rollingmigrationplan"
 
 	// PauseMigrationLabel is the label for pausing rolling migration plan
-	PauseMigrationLabel = "vjailbreak.k8s.stellaris-migrate.io/pause"
+	PauseMigrationLabel = "vjailbreak.k8s.pf9.io/pause"
 
 	// UserDataSecretKey is the key for user data secret
 	UserDataSecretKey = "user-data"
@@ -100,19 +100,19 @@ const (
 	InternalIPAnnotation = "k3s.io/internal-ip"
 
 	// NumberOfDisksLabel is the label for number of disks
-	NumberOfDisksLabel = "vjailbreak.k8s.stellaris-migrate.io/disk-count"
+	NumberOfDisksLabel = "vjailbreak.k8s.pf9.io/disk-count"
 
 	// OpenstackCredsFinalizer is the finalizer for openstack credentials
-	OpenstackCredsFinalizer = "openstackcreds.k8s.stellaris-migrate.io/finalizer" //nolint:gosec // not a password string
+	OpenstackCredsFinalizer = "openstackcreds.k8s.pf9.io/finalizer" //nolint:gosec // not a password string
 
 	// ClusterMigrationFinalizer is the finalizer for cluster migration
-	ClusterMigrationFinalizer = "clustermigration.k8s.stellaris-migrate.io/finalizer"
+	ClusterMigrationFinalizer = "clustermigration.k8s.pf9.io/finalizer"
 
 	// ESXIMigrationFinalizer is the finalizer for ESXi migration
-	ESXIMigrationFinalizer = "esximigration.k8s.stellaris-migrate.io/finalizer"
+	ESXIMigrationFinalizer = "esximigration.k8s.pf9.io/finalizer"
 
 	// VMwareCredsFinalizer is the finalizer for vmware credentials
-	VMwareCredsFinalizer = "vmwarecreds.k8s.stellaris-migrate.io/finalizer" //nolint:gosec // not a password string
+	VMwareCredsFinalizer = "vmwarecreds.k8s.pf9.io/finalizer" //nolint:gosec // not a password string
 
 	// VjailbreakNodePhaseVMCreating is the phase for creating VM
 	VjailbreakNodePhaseVMCreating = vjailbreakv1alpha1.VjailbreakNodePhase("CreatingVM")
@@ -133,16 +133,16 @@ const (
 	VjailbreakMasterNodeName = "vjailbreak-master"
 
 	// VjailbreakNodeFinalizer is the finalizer for vjailbreak node
-	VjailbreakNodeFinalizer = "vjailbreak.k8s.stellaris-migrate.io/finalizer"
+	VjailbreakNodeFinalizer = "vjailbreak.k8s.pf9.io/finalizer"
 
 	// K3sTokenFileLocation is the location of the k3s token file
-	K3sTokenFileLocation = "/etc/stellaris-migrate/k3s/token" //nolint:gosec // not a password string
+	K3sTokenFileLocation = "/etc/pf9/k3s/token" //nolint:gosec // not a password string
 
 	// CredsRequeueAfter is the time to requeue after
 	CredsRequeueAfter = 1 * time.Minute
 
 	// ENVFileLocation is the location of the env file
-	ENVFileLocation = "/etc/stellaris-migrate/k3s.env"
+	ENVFileLocation = "/etc/pf9/k3s.env"
 
 	// MigrationTriggerDelay is the delay for migration trigger
 	MigrationTriggerDelay = 5 * time.Second

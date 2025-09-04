@@ -82,7 +82,7 @@ type Host struct {
 		HypervisorType string `json:"hypervisor_type"`
 	} `json:"hypervisor_info,omitempty"`
 	RawExtensionData json.RawMessage   `json:"-"`
-	CAPIExtension    stellaris-migrateCAPIExtensions `json:"-"`
+	CAPIExtension    PF9CAPIExtensions `json:"-"`
 	Extensions       struct {
 		IPAddress struct {
 			Status string   `json:"status"`
@@ -184,15 +184,15 @@ type RoleResponse struct {
 	Roles []string `json:"roles"`
 }
 
-// stellaris-migrateCAPIExtensions contains extended information about Platform9 Cluster API status
+// PF9CAPIExtensions contains extended information about Platform9 Cluster API status
 // and management state for a host or cluster.
-type stellaris-migrateCAPIExtensions struct {
+type PF9CAPIExtensions struct {
 	CapiManaged struct {
 		Status string `json:"status"`
 		Data   struct {
 			Managed bool `json:"managed"`
 		} `json:"data,omitempty"`
-	} `json:"stellaris-migrate_capi,omitempty"`
+	} `json:"pf9_capi,omitempty"`
 }
 
 // Type definition for payload to be sent to bundle generation request.

@@ -7,8 +7,8 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "v1/service";
-option java_package = "io.grpc.stellaris-migrate.api";
-option java_outer_classname = "stellaris-migrate";
+option java_package = "io.grpc.pf9.api";
+option java_outer_classname = "pf9";
 option java_multiple_files = true;
 
 enum PowerStatus {

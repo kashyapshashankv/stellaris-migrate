@@ -8,7 +8,7 @@ metadata:
   name: pcdcluster-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - pcdclusters
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - pcdclusters/status
   verbs:

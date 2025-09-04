@@ -510,7 +510,7 @@ func (c *HTTPClient) GetProjects(ctx context.Context, token string) ([]Project, 
 
 // GetAllTenantsAllUsers retrieves a mapping of all tenants to their associated users.
 func (c *HTTPClient) GetAllTenantsAllUsers(ctx context.Context, token string) ([]TenantUsersMap, error) {
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.endpoint+"/v3/stellaris-migrate-KSADM/all_tenants_all_users", nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, c.endpoint+"/v3/PF9-KSADM/all_tenants_all_users", nil)
 	if err != nil {
 		return nil, err
 	}

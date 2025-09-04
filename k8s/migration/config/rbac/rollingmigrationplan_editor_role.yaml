@@ -8,7 +8,7 @@ metadata:
   name: rollingmigrationplan-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - rollingmigrationplans
   verbs:
@@ -20,7 +20,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.stellaris-migrate.io
+  - vjailbreak.k8s.pf9.io
   resources:
   - rollingmigrationplans/status
   verbs:

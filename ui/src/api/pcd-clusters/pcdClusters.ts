@@ -14,7 +14,7 @@ export const getPCDClusters = async (
   const config = openstackCredName
     ? {
         params: {
-          labelSelector: `vjailbreak.k8s.stellaris-migrate.io/openstackcreds=${openstackCredName}`,
+          labelSelector: `vjailbreak.k8s.pf9.io/openstackcreds=${openstackCredName}`,
         },
       }
     : undefined

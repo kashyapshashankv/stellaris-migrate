@@ -53,12 +53,12 @@ func (h *Host) UnmarshalJSON(data []byte) error {
 	// The empty string case is handled in this function
 	// If the extension data is present as expected then this function will unmarshal it to extract
 	// just the capi_managed extension.
-	// To make other extensions available update the stellaris-migrateCAPIExtensions struct or directly use the RawExtensionData field.
+	// To make other extensions available update the PF9CAPIExtensions struct or directly use the RawExtensionData field.
 	type H Host
 	if err := json.Unmarshal(data, (*H)(h)); err != nil {
 		return err
 	}
-	h.CAPIExtension = stellaris-migrateCAPIExtensions{}
+	h.CAPIExtension = PF9CAPIExtensions{}
 	if len(h.RawExtensionData) == 0 {
 		return nil
 	}
@@ -427,13 +427,13 @@ func (r *Impl) GetRoles(ctx context.Context, hostID string) ([]string, error) {
 			{
 		    "id": "762b8cd2-f99c-4a71-8ab3-c178d2be977d",
 		    "roles": [
-		        "stellaris-migrate-neutron-base",
-		        "stellaris-migrate-ostackhost-neutron",
-		        "stellaris-migrate-neutron-ovn-controller",
-		        "stellaris-migrate-neutron-ovn-metadata-agent",
-		        "stellaris-migrate-ceilometer",
-		        "stellaris-migrate-support",
-		        "stellaris-migrate-glance-role"
+		        "pf9-neutron-base",
+		        "pf9-ostackhost-neutron",
+		        "pf9-neutron-ovn-controller",
+		        "pf9-neutron-ovn-metadata-agent",
+		        "pf9-ceilometer",
+		        "pf9-support",
+		        "pf9-glance-role"
 		    ],
 			...
 			}

@@ -64,7 +64,7 @@ type MigrationPlanReconciler struct {
 	ctxlog logr.Logger
 }
 
-var migrationPlanFinalizer = "migrationplan.vjailbreak.stellaris-migrate.io/finalizer"
+var migrationPlanFinalizer = "migrationplan.vjailbreak.pf9.io/finalizer"
 
 // The default image. This is replaced by Go linker flags in the Dockerfile
 var v2vimage = "platform9/v2v-helper:v0.1"
@@ -74,14 +74,14 @@ var v2vimage = "platform9/v2v-helper:v0.1"
 // +kubebuilder:rbac:groups=core,resources=configmaps,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=batch,resources=jobs,verbs=get;list;watch;create;update;patch;delete
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationplans,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationplans/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationplans/finalizers,verbs=update
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationtemplates,verbs=get;list;watch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationplans,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationplans/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationplans/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates,verbs=get;list;watch
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationtemplates,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationtemplates/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.stellaris-migrate.io,resources=migrationtemplates/finalizers,verbs=update
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates/finalizers,verbs=update
 
 // Reconcile reads that state of the cluster for a MigrationPlan object and makes necessary changes
 func (r *MigrationPlanReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_ ctrl.Result, reterr error) {
@@ -610,7 +610,7 @@ func (r *MigrationPlanReconciler) CreateJob(ctx context.Context,
 									{
 										ConfigMapRef: &corev1.ConfigMapEnvSource{
 											LocalObjectReference: corev1.LocalObjectReference{
-												Name: "stellaris-migrate-env",
+												Name: "pf9-env",
 											},
 										},
 									},
@@ -630,7 +630,7 @@ func (r *MigrationPlanReconciler) CreateJob(ctx context.Context,
 									},
 									{
 										Name:      "logs",
-										MountPath: "/var/log/stellaris-migrate",
+										MountPath: "/var/log/pf9",
 									},
 									{
 										Name:      "virtio-driver",
@@ -684,7 +684,7 @@ func (r *MigrationPlanReconciler) CreateJob(ctx context.Context,
 								Name: "logs",
 								VolumeSource: corev1.VolumeSource{
 									HostPath: &corev1.HostPathVolumeSource{
-										Path: "/var/log/stellaris-migrate",
+										Path: "/var/log/pf9",
 										Type: utils.NewHostPathType("DirectoryOrCreate"),
 									},
 								},

@@ -82,7 +82,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Network fix script completed" >> "$LOG_FILE
 	NamespaceMigrationSystem = "migration-system"
 	TrueString               = "true"
 
-	LogsDir = "/var/log/stellaris-migrate"
+	LogsDir = "/var/log/pf9"
 
 	EventMessageConvertingDisk                    = "Converting disk"
 	EventMessageWaitingForCutOverStart            = "Waiting for VM Cutover start time"

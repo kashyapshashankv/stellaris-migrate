@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vmwarecreds.vjailbreak.k8s.stellaris-migrate.io
+  name: vmwarecreds.vjailbreak.k8s.pf9.io
 spec:
-  group: vjailbreak.k8s.stellaris-migrate.io
+  group: vjailbreak.k8s.pf9.io
   names:
     kind: VMwareCreds
     listKind: VMwareCredsList

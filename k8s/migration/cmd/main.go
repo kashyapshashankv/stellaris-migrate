@@ -198,7 +198,7 @@ func GetManager(metricsAddr string,
 		WebhookServer:          webhookServer,
 		HealthProbeBindAddress: probeAddr,
 		LeaderElection:         enableLeaderElection,
-		LeaderElectionID:       "9cf7a6b4.k8s.stellaris-migrate.io",
+		LeaderElectionID:       "9cf7a6b4.k8s.pf9.io",
 	})
 }
 

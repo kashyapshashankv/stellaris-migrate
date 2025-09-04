@@ -24,7 +24,7 @@ export const getESXHosts = (esxiMigrations: ESXIMigration[]): ESXHost[] => {
   return esxiMigrations.map((esxiMigration) => ({
     id: esxiMigration.metadata.name,
     name: esxiMigration.spec.esxiName,
-    ip: esxiMigration.metadata?.labels?.["vjailbreak.k8s.stellaris-migrate.io/ip"] || "",
+    ip: esxiMigration.metadata?.labels?.["vjailbreak.k8s.pf9.io/ip"] || "",
     vms: esxiMigration.status?.vms || [],
     state: esxiMigration.status?.phase || "Unknown",
     statusMessage: esxiMigration.status?.message || "",

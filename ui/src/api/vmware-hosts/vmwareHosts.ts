@@ -15,12 +15,12 @@ export const getVMwareHosts = async (
   let labelSelector = ""
 
   if (vmwareCredName) {
-    labelSelector += `vjailbreak.k8s.stellaris-migrate.io/vmwarecreds=${vmwareCredName}`
+    labelSelector += `vjailbreak.k8s.pf9.io/vmwarecreds=${vmwareCredName}`
   }
 
   if (clusterName) {
     if (labelSelector) labelSelector += ","
-    labelSelector += `vjailbreak.k8s.stellaris-migrate.io/vmware-cluster=${clusterName}`
+    labelSelector += `vjailbreak.k8s.pf9.io/vmware-cluster=${clusterName}`
   }
 
   const config = labelSelector
