@@ -26,13 +26,14 @@ COPY manager manager
 # Stage 2: Runtime environment
 # Using same Fedora version for consistency and required runtime dependencies
 FROM fedora:42
+WORKDIR /tmp
+COPY rpms ./rpms
 
-WORKDIR /tmp/rpms
 
 
 # RUN sleep 5m
 
-COPY rpms /tmp/rpms/*
+WORKDIR /tmp/rpms
 
 # RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
 #     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
