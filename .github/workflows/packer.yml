@@ -432,11 +432,11 @@ jobs:
       #     echo "BUGSNAG_API_KEY=$(echo -n ${{ secrets.BUGSNAG_API_KEY }} | base64 -w 0)" >> $GITHUB_ENV
       #     echo "VJB_VERSION_TAG=$(echo -n ${{ needs.determine-release.outputs.tag }}| base64 -w 0)" >> $GITHUB_ENV
 
-      - name: Substitute image tags in analytics secret
-        uses: danielr1996/envsubst-action@1.0.0
-        with:
-          input: ./image_builder/configs/analytics-keys.yaml 
-          output: ./image_builder/deploy/analytics-keys.yaml
+      # - name: Substitute image tags in analytics secret
+      #   uses: danielr1996/envsubst-action@1.0.0
+      #   with:
+      #     input: ./image_builder/configs/analytics-keys.yaml 
+      #     output: ./image_builder/deploy/analytics-keys.yaml
 
       # - name: Setup Go
       #   uses: actions/setup-go@v5
