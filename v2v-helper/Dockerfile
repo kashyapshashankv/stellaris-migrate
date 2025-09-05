@@ -11,7 +11,7 @@ ENV RELEASE_VERSION=$RELEASE_VERSION
 # Install build dependencies
 # - golang: Required for building the application (Go 1.24.1 from Fedora 42)
 # - libnbd-devel: Development files for NBD (Network Block Device) support
-# RUN dnf install -y golang libnbd-devel
+RUN dnf install -y golang libnbd-devel
 
 
 
