@@ -62,8 +62,7 @@ RUN dnf install -y ./*.rpm && \
 # RUN curl -L -o virt-v2v-2.7.13-1.fc42.x86_64.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/virt-v2v-2.7.13-1.fc42.x86_64.rpm
 
 RUN dnf install -y /tmp/rpms/virt-v2v/virt-v2v-2.7.13-1.fc42.x86_64.rpm && \
-    dnf clean all && \
-    rm -rf /var/cache/dnf
+    dnf clean all
 
 # Copy the binary from builder stage to the runtime environment
 COPY --from=builder /workspace/manager /home/fedora/manager
