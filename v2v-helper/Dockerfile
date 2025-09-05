@@ -27,7 +27,6 @@ FROM fedora:42
 
 WORKDIR /tmp/rpms
 
-RUN --from=builder pwd
 
 RUN sleep 5m
 
