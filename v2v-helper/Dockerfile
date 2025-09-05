@@ -11,7 +11,7 @@ ENV RELEASE_VERSION=$RELEASE_VERSION
 # Install build dependencies
 # - golang: Required for building the application (Go 1.24.1 from Fedora 42)
 # - libnbd-devel: Development files for NBD (Network Block Device) support
-RUN dnf install -y golang libnbd-devel
+# RUN dnf install -y golang libnbd-devel
 
 
 
@@ -36,6 +36,8 @@ COPY rpms ./rpms
 # RUN sleep 5m
 
 WORKDIR /tmp/rpms
+
+RUN pwd && ls && cd virt-v2v && ls && pwd
 
 
 # RUN dnf install -y nbdkit-server-1.42.4-1.fc42.x86_64.rpm
