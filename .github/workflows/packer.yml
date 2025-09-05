@@ -156,36 +156,36 @@ jobs:
   #       with:
   #         go-version: stable
 
-  build-ui:
-    runs-on: self-hosted
-    needs: determine-release
+  # build-ui:
+  #   runs-on: self-hosted
+  #   needs: determine-release
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref }}
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ github.event.inputs.branch || github.ref }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Set environment variables
-        run: |
-          echo "UI_IMG=${{ needs.determine-release.outputs.ui_img }}" >> $GITHUB_ENV
+  #     - name: Set environment variables
+  #       run: |
+  #         echo "UI_IMG=${{ needs.determine-release.outputs.ui_img }}" >> $GITHUB_ENV
 
-      - name: Build UI image
-        run: make ui
+  #     - name: Build UI image
+  #       run: make ui
         
-      - name: Save UI image as tar file
-        run: |
-          docker save ${{ env.UI_IMG }} -o ui-image.tar
+  #     - name: Save UI image as tar file
+  #       run: |
+  #         docker save ${{ env.UI_IMG }} -o ui-image.tar
           
-      # - name: Upload UI image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-ui-docker-image
-      #     path: ui-image.tar
-      #     retention-days: 1
+  #     # - name: Upload UI image as artifact
+  #     #   uses: actions/upload-artifact@v4
+  #     #   with:
+  #     #     name: stellaris-migrate-ui-docker-image
+  #     #     path: ui-image.tar
+  #     #     retention-days: 1
 
   build-v2v-helper:
     runs-on: self-hosted
@@ -221,73 +221,73 @@ jobs:
       #     path: v2v-image.tar
       #     retention-days: 1
 
-  build-controller:
-    runs-on: self-hosted
-    needs: determine-release
+  # build-controller:
+  #   runs-on: self-hosted
+  #   needs: determine-release
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref }}
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ github.event.inputs.branch || github.ref }}
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: 'k8s/migration/go.mod'
+  #     - name: Setup Go
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version-file: 'k8s/migration/go.mod'
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Set environment variables
-        run: |
-          echo "CONTROLLER_IMG=${{ needs.determine-release.outputs.controller_img }}" >> $GITHUB_ENV
-          echo "V2V_IMG=${{ needs.determine-release.outputs.v2v_img }}" >> $GITHUB_ENV
+  #     - name: Set environment variables
+  #       run: |
+  #         echo "CONTROLLER_IMG=${{ needs.determine-release.outputs.controller_img }}" >> $GITHUB_ENV
+  #         echo "V2V_IMG=${{ needs.determine-release.outputs.v2v_img }}" >> $GITHUB_ENV
 
-      - name: Build controller image
-        run: make vjail-controller-only
+  #     - name: Build controller image
+  #       run: make vjail-controller-only
         
-      - name: Save controller image as tar file
-        run: |
-          docker save ${{ env.CONTROLLER_IMG }} -o controller-image.tar
+  #     - name: Save controller image as tar file
+  #       run: |
+  #         docker save ${{ env.CONTROLLER_IMG }} -o controller-image.tar
           
-      # - name: Upload controller image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-controller-docker-image
-      #     path: controller-image.tar
-      #     retention-days: 1
+  #     # - name: Upload controller image as artifact
+  #     #   uses: actions/upload-artifact@v4
+  #     #   with:
+  #     #     name: stellaris-migrate-controller-docker-image
+  #     #     path: controller-image.tar
+  #     #     retention-days: 1
 
-  build-vpwned:
-    runs-on: self-hosted
-    needs: determine-release
+  # build-vpwned:
+  #   runs-on: self-hosted
+  #   needs: determine-release
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref }}
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         ref: ${{ github.event.inputs.branch || github.ref }}
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v3
 
-      - name: Set environment variables
-        run: |
-          echo "VPWNED_IMG=${{ needs.determine-release.outputs.vpwned_img }}" >> $GITHUB_ENV
+  #     - name: Set environment variables
+  #       run: |
+  #         echo "VPWNED_IMG=${{ needs.determine-release.outputs.vpwned_img }}" >> $GITHUB_ENV
 
-      - name: Build vpwned image
-        run: make build-vpwned
+  #     - name: Build vpwned image
+  #       run: make build-vpwned
         
-      - name: Save vpwned image as tar file
-        run: |
-          docker save ${{ env.VPWNED_IMG }} -o vpwned-image.tar
+  #     - name: Save vpwned image as tar file
+  #       run: |
+  #         docker save ${{ env.VPWNED_IMG }} -o vpwned-image.tar
           
-      # - name: Upload vpwned image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-vpwned-docker-image
-      #     path: vpwned-image.tar
-      #     retention-days: 1
+  #     # - name: Upload vpwned image as artifact
+  #     #   uses: actions/upload-artifact@v4
+  #     #   with:
+  #     #     name: stellaris-migrate-vpwned-docker-image
+  #     #     path: vpwned-image.tar
+  #     #     retention-days: 1
 
   # push-images:
   #   runs-on: self-hosted
