@@ -27,6 +27,10 @@ FROM fedora:42
 
 WORKDIR /tmp/rpms
 
+RUN --from=builder pwd
+
+RUN sleep 5m
+
 RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
     curl -L -o libnbd.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/libnbd-1.22.2-1.fc42.x86_64.rpm && \
