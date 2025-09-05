@@ -32,7 +32,7 @@ WORKDIR /tmp/rpms
 
 # RUN sleep 5m
 
-COPY ../assets/rpms/ /tmp/rpms/*
+COPY rpms /tmp/rpms/*
 
 # RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
 #     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
@@ -49,11 +49,11 @@ RUN dnf install -y ./*.rpm && \
     rm -rf /tmp/rpms
 
 WORKDIR /tmp
-RUN curl -L -o virt-v2v-2.7.13-1.fc42.x86_64.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/virt-v2v-2.7.13-1.fc42.x86_64.rpm
+# RUN curl -L -o virt-v2v-2.7.13-1.fc42.x86_64.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/virt-v2v-2.7.13-1.fc42.x86_64.rpm
 
-RUN dnf install -y /tmp/virt-v2v-2.7.13-1.fc42.x86_64.rpm && \
-    dnf clean all && \
-    rm -rf /var/cache/dnf
+# RUN dnf install -y /tmp/virt-v2v-2.7.13-1.fc42.x86_64.rpm && \
+#     dnf clean all && \
+#     rm -rf /var/cache/dnf
 
 # Copy the binary from builder stage to the runtime environment
 COPY --from=builder /workspace/manager /home/fedora/manager
