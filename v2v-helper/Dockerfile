@@ -30,35 +30,15 @@ WORKDIR /tmp
 COPY rpms ./rpms
 
 
-
-
-
-# RUN sleep 5m
-
 WORKDIR /tmp/rpms
 
 RUN pwd && ls && cd virt-v2v && ls && pwd
 
 
-# RUN dnf install -y nbdkit-server-1.42.4-1.fc42.x86_64.rpm
-
-# RUN dnf install -y nbdkit-server-1.42.4-1.fc42.x86_64.rpm
-
-# RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
-#     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
-#     curl -L -o libnbd.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/libnbd-1.22.2-1.fc42.x86_64.rpm && \
-#     curl -L -o nbdkit-server.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-server-1.42.4-1.fc42.x86_64.rpm && \
-#     curl -L -o nbdkit-basic-plugins.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-plugins-1.42.4-1.fc42.x86_64.rpm && \
-#     curl -L -o nbdkit-basic-filters.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-filters-1.42.4-1.fc42.x86_64.rpm && \
-#     dnf install -y ./*.rpm && \
-#     dnf clean all && \
-#     rm -rf /tmp/rpms
 
 RUN dnf install -y ./*.rpm && \
     dnf clean all 
 
-# WORKDIR /tmp/rpms/virt-v2v
-# RUN curl -L -o virt-v2v-2.7.13-1.fc42.x86_64.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/virt-v2v-2.7.13-1.fc42.x86_64.rpm
 
 RUN dnf install -y /tmp/rpms/virt-v2v/virt-v2v-2.7.13-1.fc42.x86_64.rpm && \
     dnf clean all && \

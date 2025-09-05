@@ -146,16 +146,6 @@ jobs:
           echo "vpwned_img=${{ env.VPWNED_IMG }}:${TAG}" >> $GITHUB_OUTPUT
           echo "Final tag generated: ${TAG}"
 
-  # install-dependencies:
-  #   runs-on: self-hosted
-  #   needs: determine-release
-
-  #   steps:
-  #     - name: Install Go Dependency
-  #       uses: actions/setup-go@v5
-  #       with:
-  #         go-version: stable
-
   build-ui:
     runs-on: self-hosted
     needs: determine-release
@@ -180,12 +170,12 @@ jobs:
         run: |
           docker save ${{ env.UI_IMG }} -o ui-image.tar
           
-      # - name: Upload UI image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-ui-docker-image
-      #     path: ui-image.tar
-      #     retention-days: 1
+      - name: Upload UI image as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stellaris-migrate-ui-docker-image
+          path: ui-image.tar
+          retention-days: 1
 
   build-v2v-helper:
     runs-on: self-hosted
@@ -217,7 +207,7 @@ jobs:
       - name: Upload v2v-helper image as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: stellaris-migrate-v2v-docker-image
+          name: stellaris-migrate-v2v-helper-docker-image
           path: v2v-image.tar
           retention-days: 1
 
@@ -251,12 +241,12 @@ jobs:
         run: |
           docker save ${{ env.CONTROLLER_IMG }} -o controller-image.tar
           
-      # - name: Upload controller image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-controller-docker-image
-      #     path: controller-image.tar
-      #     retention-days: 1
+      - name: Upload controller image as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stellaris-migrate-controller-docker-image
+          path: controller-image.tar
+          retention-days: 1
 
   build-vpwned:
     runs-on: self-hosted
@@ -282,12 +272,12 @@ jobs:
         run: |
           docker save ${{ env.VPWNED_IMG }} -o vpwned-image.tar
           
-      # - name: Upload vpwned image as artifact
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: stellaris-migrate-vpwned-docker-image
-      #     path: vpwned-image.tar
-      #     retention-days: 1
+      - name: Upload vpwned image as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stellaris-migrate-vpwned-docker-image
+          path: vpwned-image.tar
+          retention-days: 1
 
   # push-images:
   #   runs-on: self-hosted
