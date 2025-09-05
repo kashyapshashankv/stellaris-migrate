@@ -13,6 +13,8 @@ ENV RELEASE_VERSION=$RELEASE_VERSION
 # - libnbd-devel: Development files for NBD (Network Block Device) support
 RUN dnf install -y golang libnbd-devel
 
+
+
 # Set up build workspace
 WORKDIR /workspace
 
@@ -28,15 +30,21 @@ FROM fedora:42
 WORKDIR /tmp/rpms
 
 
-RUN sleep 5m
+# RUN sleep 5m
 
-RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
-    curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
-    curl -L -o libnbd.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/libnbd-1.22.2-1.fc42.x86_64.rpm && \
-    curl -L -o nbdkit-server.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-server-1.42.4-1.fc42.x86_64.rpm && \
-    curl -L -o nbdkit-basic-plugins.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-plugins-1.42.4-1.fc42.x86_64.rpm && \
-    curl -L -o nbdkit-basic-filters.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-filters-1.42.4-1.fc42.x86_64.rpm && \
-    dnf install -y ./*.rpm && \
+COPY ../assets/rpms/ /tmp/rpms/*
+
+# RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
+#     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
+#     curl -L -o libnbd.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/libnbd-1.22.2-1.fc42.x86_64.rpm && \
+#     curl -L -o nbdkit-server.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-server-1.42.4-1.fc42.x86_64.rpm && \
+#     curl -L -o nbdkit-basic-plugins.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-plugins-1.42.4-1.fc42.x86_64.rpm && \
+#     curl -L -o nbdkit-basic-filters.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-basic-filters-1.42.4-1.fc42.x86_64.rpm && \
+#     dnf install -y ./*.rpm && \
+#     dnf clean all && \
+#     rm -rf /tmp/rpms
+
+RUN dnf install -y ./*.rpm && \
     dnf clean all && \
     rm -rf /tmp/rpms
 
