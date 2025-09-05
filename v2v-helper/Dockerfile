@@ -31,9 +31,16 @@ COPY rpms ./rpms
 
 
 
+
+
 # RUN sleep 5m
 
 WORKDIR /tmp/rpms
+
+
+# RUN dnf install -y nbdkit-server-1.42.4-1.fc42.x86_64.rpm
+
+# RUN dnf install -y nbdkit-server-1.42.4-1.fc42.x86_64.rpm
 
 # RUN curl -L -o nbdkit.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-1.42.4-1.fc42.x86_64.rpm && \
 #     curl -L -o nbdkit-vddk.rpm https://github.com/platform9/vjailbreak/raw/refs/heads/main/assets/rpms/nbdkit-vddk-plugin-1.42.4-1.fc42.x86_64.rpm && \
