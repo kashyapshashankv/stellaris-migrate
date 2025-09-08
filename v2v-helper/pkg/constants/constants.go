@@ -126,5 +126,5 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Network fix script completed" >> "$LOG_FILE
 	PopulateVMwareMachineFlavors = true
 
 	// VjailbreakSettingsConfigMapName is the name of the vjailbreak settings configmap
-	VjailbreakSettingsConfigMapName = "vjailbreak-settings"
+	VjailbreakSettingsConfigMapName = "stellaris-migrate-settings"
 )

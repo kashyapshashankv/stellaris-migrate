@@ -69,8 +69,8 @@ build {
   }
 
   provisioner "file" {
-    source      = "${path.root}/configs/vjailbreak-settings.yaml"
-    destination = "/tmp/vjailbreak-settings.yaml"
+    source      = "${path.root}/configs/stellaris-migrate-settings.yaml"
+    destination = "/tmp/stellaris-migrate-settings.yaml"
   }
 
   provisioner "file" {
@@ -96,7 +96,7 @@ build {
     "sudo mv /tmp/rsyncd.conf /etc/stellaris/rsyncd.conf",
     "sudo mv /tmp/daemonset.yaml /etc/stellaris/yamls/daemonset.yaml",
     "sudo mv /tmp/env /etc/stellaris/env",
-    "sudo mv /tmp/vjailbreak-settings.yaml /etc/stellaris/yamls/vjailbreak-settings.yaml",
+    "sudo mv /tmp/stellaris-migrate-settings.yaml /etc/stellaris/yamls/stellaris-migrate-settings.yaml",
     "sudo mv /tmp/opensource.txt /home/ubuntu/opensource.txt",
     "sudo chmod +x /etc/stellaris/install.sh",
     "sudo chown root:root /etc/stellaris/k3s.env",

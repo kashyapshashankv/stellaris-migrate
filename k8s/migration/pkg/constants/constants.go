@@ -196,7 +196,7 @@ const (
 	CleanupVolumesAfterConvertFailure = true
 
 	// VjailbreakSettingsConfigMapName is the name of the vjailbreak settings configmap
-	VjailbreakSettingsConfigMapName = "vjailbreak-settings"
+	VjailbreakSettingsConfigMapName = "stellaris-migrate-settings"
 )
 
 // CloudInitScript contains the cloud-init script for VM initialization
