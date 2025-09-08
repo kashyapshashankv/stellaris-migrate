@@ -298,7 +298,7 @@ jobs:
         if: ${{ !env.ACT }}
         uses: actions/download-artifact@v4
         with:
-          name: stellaris-migrate-v2v-docker-image
+          name: stellaris-migrate-v2v-helper-docker-image
           path: ./docker-images
           
       - name: Download Controller image artifact
