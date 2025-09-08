@@ -8,7 +8,7 @@ metadata:
   name: vmwaremachine-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - vmwaremachines
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - vmwaremachines/status
   verbs:

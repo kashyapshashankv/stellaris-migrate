@@ -81,7 +81,7 @@ func DiscoverCurrentCRs(ctx context.Context, kubeClient client.Client) ([]CRInfo
 func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConfig *rest.Config, targetVersion string) (*ValidationResult, error) {
 	result := &ValidationResult{}
 
-	gvr := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "migrationplans"}
+	gvr := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "migrationplans"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err == nil {
 		unstructuredList, err := dynamicClient.Resource(gvr).Namespace("migration-system").List(ctx, metav1.ListOptions{})
@@ -90,7 +90,7 @@ func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConf
 		}
 	}
 
-	gvr = schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
+	gvr = schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
 	dynamicClient, err = dynamic.NewForConfig(restConfig)
 	if err == nil {
 		unstructuredList, err := dynamicClient.Resource(gvr).Namespace("migration-system").List(ctx, metav1.ListOptions{})
@@ -123,7 +123,7 @@ func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConf
 		result.OpenStackCredsDeleted = false
 	}
 	gvr = schema.GroupVersionResource{
-		Group:    "vjailbreak.k8s.pf9.io",
+		Group:    "migrate.k8s.stellaris.io",
 		Version:  "v1alpha1",
 		Resource: "vjailbreaknodes",
 	}
@@ -568,7 +568,7 @@ func CleanupResources(ctx context.Context, kubeClient client.Client, restConfig 
 		return fmt.Errorf("failed to create dynamic client: %w", err)
 	}
 
-	gvrMigrationPlans := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "migrationplans"}
+	gvrMigrationPlans := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "migrationplans"}
 	mpList, err := dynamicClient.Resource(gvrMigrationPlans).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err == nil {
 		for _, item := range mpList.Items {
@@ -577,7 +577,7 @@ func CleanupResources(ctx context.Context, kubeClient client.Client, restConfig 
 		log.Println("Deleted MigrationPlans.")
 	}
 
-	gvrRollingPlans := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
+	gvrRollingPlans := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "rollingmigrationplans"}
 	rmpList, err := dynamicClient.Resource(gvrRollingPlans).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err == nil {
 		for _, item := range rmpList.Items {
@@ -586,7 +586,7 @@ func CleanupResources(ctx context.Context, kubeClient client.Client, restConfig 
 		log.Println("Deleted RollingMigrationPlans.")
 	}
 
-	gvrNodes := schema.GroupVersionResource{Group: "vjailbreak.k8s.pf9.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
+	gvrNodes := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
 	nodeList, err := dynamicClient.Resource(gvrNodes).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err == nil {
 		for _, item := range nodeList.Items {

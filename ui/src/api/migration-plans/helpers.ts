@@ -46,7 +46,7 @@ export const createMigrationPlanJson = (params) => {
   }
   
   return {
-    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
+    apiVersion: "migrate.k8s.stellaris.io/v1alpha1",
     kind: "MigrationPlan",
     metadata: {
       name: name || uuidv4(),

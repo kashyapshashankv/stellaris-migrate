@@ -142,7 +142,7 @@ export const useClusterData = (
         async (cluster: PCDCluster) => {
           const clusterName = cluster.spec.clusterName
           const openstackCredName =
-            cluster.metadata.labels?.["vjailbreak.k8s.pf9.io/openstackcreds"] ||
+            cluster.metadata.labels?.["migrate.k8s.stellaris.io/openstackcreds"] ||
             ""
 
           let tenantName = ""

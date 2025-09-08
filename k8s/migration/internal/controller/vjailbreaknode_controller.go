@@ -43,9 +43,9 @@ type VjailbreakNodeReconciler struct {
 	Local  bool
 }
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=vjailbreaknodes,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=vjailbreaknodes/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=vjailbreaknodes/finalizers,verbs=update
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes/finalizers,verbs=update
 // +kubebuilder:rbac:groups=core,resources=nodes,verbs=get;list;watch;delete
 
 // Reconcile handles the reconciliation of VjailbreakNode resources

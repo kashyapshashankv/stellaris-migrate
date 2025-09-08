@@ -8,7 +8,7 @@ metadata:
   name: vjailbreaknode-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - vjailbreaknodes
   verbs:
@@ -20,7 +20,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - vjailbreaknodes/status
   verbs:

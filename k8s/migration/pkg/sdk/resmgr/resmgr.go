@@ -427,13 +427,13 @@ func (r *Impl) GetRoles(ctx context.Context, hostID string) ([]string, error) {
 			{
 		    "id": "762b8cd2-f99c-4a71-8ab3-c178d2be977d",
 		    "roles": [
-		        "pf9-neutron-base",
-		        "pf9-ostackhost-neutron",
-		        "pf9-neutron-ovn-controller",
-		        "pf9-neutron-ovn-metadata-agent",
-		        "pf9-ceilometer",
-		        "pf9-support",
-		        "pf9-glance-role"
+		        "stellaris-neutron-base",
+		        "stellaris-ostackhost-neutron",
+		        "stellaris-neutron-ovn-controller",
+		        "stellaris-neutron-ovn-metadata-agent",
+		        "stellaris-ceilometer",
+		        "stellaris-support",
+		        "stellaris-glance-role"
 		    ],
 			...
 			}

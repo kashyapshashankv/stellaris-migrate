@@ -40,7 +40,7 @@ export const createOpenstackCredsJson = (params: OpenstackCredsParams) => {
   }
 
   return {
-    apiVersion: "vjailbreak.k8s.pf9.io/v1alpha1",
+    apiVersion: "migrate.k8s.stellaris.io/v1alpha1",
     kind: "OpenstackCreds",
     metadata: {
       name: name || uuidv4(),

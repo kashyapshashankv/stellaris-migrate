@@ -8,7 +8,7 @@ metadata:
   name: storagemapping-viewer-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - storagemappings
   verbs:
@@ -16,7 +16,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - storagemappings/status
   verbs:

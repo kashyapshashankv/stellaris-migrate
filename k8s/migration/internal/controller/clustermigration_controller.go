@@ -42,9 +42,9 @@ type ClusterMigrationReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=clustermigrations,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=clustermigrations/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=clustermigrations/finalizers,verbs=update
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=clustermigrations,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=clustermigrations/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=clustermigrations/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

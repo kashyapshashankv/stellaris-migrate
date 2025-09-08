@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: storagemappings.vjailbreak.k8s.pf9.io
+  name: storagemappings.migrate.k8s.stellaris.io
 spec:
-  group: vjailbreak.k8s.pf9.io
+  group: migrate.k8s.stellaris.io
   names:
     kind: StorageMapping
     listKind: StorageMappingList

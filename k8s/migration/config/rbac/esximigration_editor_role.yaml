@@ -8,7 +8,7 @@ metadata:
   name: esximigration-editor-role
 rules:
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - esximigrations
   verbs:
@@ -20,7 +20,7 @@ rules:
   - update
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - esximigrations/status
   verbs:

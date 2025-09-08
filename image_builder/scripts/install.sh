@@ -4,7 +4,7 @@ set -x
 
 # Define the log function for easy logging
 log() {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a /var/log/pf9-install.log
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a /var/log/stellaris-install.log
 }
 
 # Function to check if the last command succeeded
@@ -22,8 +22,8 @@ sleep 20
 export PATH="/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 
 # Load environment variables from k3s.env
-if [ -f "/etc/pf9/k3s.env" ]; then
-  source "/etc/pf9/k3s.env"
+if [ -f "/etc/stellaris/k3s.env" ]; then
+  source "/etc/stellaris/k3s.env"
 else
   log "ERROR: k3s.env file not found. Exiting."
   exit 1
@@ -93,7 +93,7 @@ if [ "$IS_MASTER" == "true" ]; then
   log "Setting up K3s Master..."
 
   # Install K3s master with the specific version
-  INSTALL_K3S_SKIP_DOWNLOAD=true /etc/pf9/k3s-setup/k3s-install.sh --disable traefik
+  INSTALL_K3S_SKIP_DOWNLOAD=true /etc/stellaris/k3s-setup/k3s-install.sh --disable traefik
   check_command "Installing K3s master"
 
   # Wait for K3s to be ready
@@ -105,14 +105,14 @@ if [ "$IS_MASTER" == "true" ]; then
   check_command "Moving kubeconfig"
 
   # Load images
-  log "Loading all the images in /etc/pf9/images..."
-  for img in /etc/pf9/images/*.tar; do
+  log "Loading all the images in /etc/stellaris/images..."
+  for img in /etc/stellaris/images/*.tar; do
     sudo ctr --address /run/k3s/containerd/containerd.sock -n k8s.io images import "$img"
     check_command "Loading image: $img"
   done
 
   # Using helm to install nginx-ingress-controller.
-  helm install nginx-ingress /etc/pf9/ingress-nginx --namespace nginx-ingress --create-namespace 
+  helm install nginx-ingress /etc/stellaris/ingress-nginx --namespace nginx-ingress --create-namespace 
   check_command "Installing NGINX Ingress Controller"
 
   # Wait for NGINX Ingress Controller to be ready
@@ -121,28 +121,28 @@ if [ "$IS_MASTER" == "true" ]; then
 
   # Apply monitoring manifests
   log "Applying kube-prometheus manifests..."
-  sudo kubectl --request-timeout=300s apply --server-side -f /etc/pf9/yamls/kube-prometheus/manifests/setup
+  sudo kubectl --request-timeout=300s apply --server-side -f /etc/stellaris/yamls/kube-prometheus/manifests/setup
   check_command "Applying kube-prometheus setup manifests"
 
   sudo kubectl wait --for condition=Established --all CustomResourceDefinition --namespace=monitoring --timeout=300s
   check_command "Waiting for CustomResourceDefinitions to be established"
 
-  sudo kubectl --request-timeout=300s apply -f /etc/pf9/yamls/kube-prometheus/manifests/
+  sudo kubectl --request-timeout=300s apply -f /etc/stellaris/yamls/kube-prometheus/manifests/
   check_command "Applying kube-prometheus manifests"
 
-  sudo kubectl --request-timeout=300s apply -f /etc/pf9/yamls/
+  sudo kubectl --request-timeout=300s apply -f /etc/stellaris/yamls/
   check_command "Applying additional manifests"
 
   log "K3s master setup completed"
 
   # Start the rsync daemon
-  kubectl apply -f /etc/pf9/yamls/daemonset.yaml
+  kubectl apply -f /etc/stellaris/yamls/daemonset.yaml
   check_command "Installing rsync daemon"
 
   log "Rsync daemon started successfully."
 
   # Create a config map from env file. 
-  kubectl create configmap pf9-env -n migration-system --from-file=/etc/pf9/env
+  kubectl create configmap stellaris-env -n migration-system --from-file=/etc/stellaris/env
   check_command "Creating config map from env file"
   log "Config map created successfully."
 
@@ -164,7 +164,7 @@ else
   log "K3S_TOKEN: $K3S_TOKEN"
 
   # Install K3s worker
-  K3S_URL=$K3S_URL K3S_TOKEN=$K3S_TOKEN INSTALL_K3S_SKIP_DOWNLOAD=true /etc/pf9/k3s-setup/k3s-install.sh
+  K3S_URL=$K3S_URL K3S_TOKEN=$K3S_TOKEN INSTALL_K3S_SKIP_DOWNLOAD=true /etc/stellaris/k3s-setup/k3s-install.sh
   check_command "Installing K3s worker"
 
   # wait until ctr becomes responsive
@@ -172,8 +172,8 @@ else
   check_command "Waiting for k3s worker to come up"
   
   # Load images
-  log "Loading all the images in /etc/pf9/images..."
-  for img in /etc/pf9/images/*.tar; do
+  log "Loading all the images in /etc/stellaris/images..."
+  for img in /etc/stellaris/images/*.tar; do
     sudo ctr --address /run/k3s/containerd/containerd.sock -n k8s.io images import "$img"
     check_command "Loading image: $img"
   done
@@ -184,7 +184,7 @@ else
 fi
 
 # Remove cron job to ensure this runs only once 
-crontab -l | grep -v '@reboot /etc/pf9/install.sh' | crontab -
+crontab -l | grep -v '@reboot /etc/stellaris/install.sh' | crontab -
 check_command "Removing cron job"
 
 # End of script

@@ -6,7 +6,7 @@ export interface GetMigrationsList {
 }
 
 export enum APIVersion {
-  VjailbreakK8SPf9IoV1Alpha1 = "vjailbreak.k8s.pf9.io/v1alpha1",
+  VjailbreakK8SPf9IoV1Alpha1 = "migrate.k8s.stellaris.io/v1alpha1",
 }
 
 export interface Migration {

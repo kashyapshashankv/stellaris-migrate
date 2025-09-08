@@ -39,9 +39,9 @@ type MigrationTemplateReconciler struct {
 	ctxlog logr.Logger
 }
 
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=vjailbreak.k8s.pf9.io,resources=migrationtemplates/finalizers,verbs=update
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=migrationtemplates,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=migrationtemplates/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=migrationtemplates/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

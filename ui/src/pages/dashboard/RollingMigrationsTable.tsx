@@ -462,7 +462,7 @@ export default function RollingMigrationsTable({
         rollingMigrationPlans.forEach(plan => {
             if (plan.metadata?.name) {
                 const filteredESXIMigrations = esxiMigrations.filter(esxi =>
-                    esxi.metadata?.labels?.['vjailbreak.k8s.pf9.io/rollingmigrationplan'] === plan.metadata.name
+                    esxi.metadata?.labels?.['migrate.k8s.stellaris.io/rollingmigrationplan'] === plan.metadata.name
                 );
 
                 const esxHosts = getESXHosts(filteredESXIMigrations);
@@ -480,7 +480,7 @@ export default function RollingMigrationsTable({
         rollingMigrationPlans.forEach(plan => {
             if (plan.metadata?.name) {
                 result[plan.metadata.name] = migrations.filter(migration =>
-                    migration.metadata?.labels?.['vjailbreak.k8s.pf9.io/rollingmigrationplan']?.includes(plan.metadata.name)
+                    migration.metadata?.labels?.['migrate.k8s.stellaris.io/rollingmigrationplan']?.includes(plan.metadata.name)
                 );
             }
         });

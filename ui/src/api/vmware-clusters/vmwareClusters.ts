@@ -14,7 +14,7 @@ export const getVMwareClusters = async (
   const config = vmwareCredName
     ? {
         params: {
-          labelSelector: `vjailbreak.k8s.pf9.io/vmwarecreds=${vmwareCredName}`,
+          labelSelector: `migrate.k8s.stellaris.io/vmwarecreds=${vmwareCredName}`,
         },
       }
     : undefined

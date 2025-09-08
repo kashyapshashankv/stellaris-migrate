@@ -2,7 +2,7 @@
 password: password
 chpasswd: { expire: False }
 write_files:
-  - path: /etc/pf9/host_id.conf
+  - path: /etc/stellaris/host_id.conf
     content: |
       [hostagent]
       host_id = HOST_ID
