@@ -20,9 +20,9 @@ import (
 	"time"
 	"unicode"
 
-	"v2v-helper/pkg/constants"
-	"v2v-helper/pkg/utils"
-	"v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 )
 
 //go:generate mockgen -source=../virtv2v/virtv2vops.go -destination=../virtv2v/virtv2vops_mock.go -package=virtv2v

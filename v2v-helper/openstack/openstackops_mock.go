@@ -13,8 +13,8 @@ import (
 	servers "github.com/gophercloud/gophercloud/openstack/compute/v2/servers"
 	networks "github.com/gophercloud/gophercloud/openstack/networking/v2/networks"
 	ports "github.com/gophercloud/gophercloud/openstack/networking/v2/ports"
-	utils "v2v-helper/pkg/utils"
-	vm "v2v-helper/vm"
+	utils "github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
+	vm "github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 )
 
 // MockOpenstackOperations is a mock of OpenstackOperations interface.

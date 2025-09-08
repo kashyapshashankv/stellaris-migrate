@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"v2v-helper/nbd"
-	"v2v-helper/openstack"
-	"v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/nbd"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/openstack"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 
 	"github.com/golang/mock/gomock"
 	"github.com/gophercloud/gophercloud/openstack/blockstorage/v3/volumes"

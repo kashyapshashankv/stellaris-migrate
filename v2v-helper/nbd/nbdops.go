@@ -15,7 +15,7 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
-	"v2v-helper/pkg/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
 
 	"golang.org/x/sys/unix"
 
