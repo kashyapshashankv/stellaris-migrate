@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	pcd "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/pcd"
 )
 
@@ -37,7 +37,7 @@ func ParseCredentialsFromEnv() (Credentials, error) {
 
 // ParseCredentialsFromOpenstackCreds converts OpenStackCredsInfo to keystone Credentials.
 // This allows using OpenStack credentials stored in a Kubernetes CRD to authenticate with Keystone.
-func ParseCredentialsFromOpenstackCreds(openstackCreds vjailbreakv1alpha1.OpenStackCredsInfo) (Credentials, error) {
+func ParseCredentialsFromOpenstackCreds(openstackCreds migratev1alpha1.OpenStackCredsInfo) (Credentials, error) {
 	return Credentials{
 		Username: openstackCreds.Username,
 		Password: openstackCreds.Password,
@@ -59,7 +59,7 @@ func CreateFromEnv() (Client, error) {
 
 // CreateFromOpenstackCreds creates a new Keystone client using OpenStackCredsInfo.
 // It uses the OpenStack credentials to construct the Keystone endpoint and client.
-func CreateFromOpenstackCreds(openstackCreds vjailbreakv1alpha1.OpenStackCredsInfo) (Client, error) {
+func CreateFromOpenstackCreds(openstackCreds migratev1alpha1.OpenStackCredsInfo) (Client, error) {
 	// TODO support overriding it
 	pcdInfo, err := pcd.ParseInfoFromOpenstackCreds(openstackCreds)
 	if err != nil {

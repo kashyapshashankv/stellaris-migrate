@@ -47,7 +47,7 @@ const InfoSection = styled("div")(({ theme }) => ({
 }))
 
 const gettingStartedLinks = [
-  { text: "Quick Start guide to vJailbreak", url: "#" },
+  { text: "Quick Start guide to Stellaris Migrate", url: "#" },
   { text: "Supported VMware and Destination Platforms", url: "#" },
   { text: "How is Data Copied?", url: "#" },
   { text: "How is the VM converted?", url: "#" },
@@ -69,9 +69,9 @@ export default function Onboarding() {
       )}
       <Container>
         <CircularLogoContainer>
-          <img src="/logo.png" alt="vJailbreak Logo" />
+          <img src="/logo.png" alt="Stellaris Migrate Logo" />
         </CircularLogoContainer>
-        <Typography variant="h2">vJailbreak</Typography>
+        <Typography variant="h2">Stellaris Migrate</Typography>
         <Typography variant="body1">
           Ready to migrate from VMware to OpenStack? <br />
           Click below to start moving your VMware workloads to OpenStack with

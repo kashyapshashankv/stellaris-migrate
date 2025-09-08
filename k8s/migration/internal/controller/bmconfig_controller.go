@@ -22,7 +22,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	scope "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	providers "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
@@ -51,7 +51,7 @@ func (r *BMConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_
 	ctxlog := log.FromContext(ctx).WithName(constants.BMConfigControllerName)
 	ctxlog.Info(fmt.Sprintf("Reconciling BMConfig '%s'", req.Name))
 
-	bmConfig := &vjailbreakv1alpha1.BMConfig{}
+	bmConfig := &migratev1alpha1.BMConfig{}
 	if err := r.Get(ctx, req.NamespacedName, bmConfig); err != nil {
 		if apierrors.IsNotFound(err) {
 			ctxlog.Info("Received ignorable event for a recently deleted bmconfig.")
@@ -137,6 +137,6 @@ func (r *BMConfigReconciler) reconcileNormal(ctx context.Context, scope *scope.B
 // SetupWithManager sets up the controller with the Manager.
 func (r *BMConfigReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.BMConfig{}).
+		For(&migratev1alpha1.BMConfig{}).
 		Complete(r)
 }

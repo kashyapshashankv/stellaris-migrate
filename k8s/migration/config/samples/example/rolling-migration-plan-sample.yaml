@@ -5,7 +5,7 @@ metadata:
   namespace: migration-system
   labels:
     app.kubernetes.io/name: migration
-    app.kubernetes.io/part-of: vjailbreak
+    app.kubernetes.io/part-of: stellaris-migrate
 spec:
   # Sequence of vCenter clusters to be migrated
   clusterSequence:

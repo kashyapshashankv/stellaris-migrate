@@ -30,30 +30,30 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 )
 
-// VjailbreakNodeReconciler reconciles a VjailbreakNode object
-type VjailbreakNodeReconciler struct {
+// StellarisMigrateNodeReconciler reconciles a StellarisMigrateNode object
+type StellarisMigrateNodeReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 	Local  bool
 }
 
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=vjailbreaknodes/finalizers,verbs=update
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes/finalizers,verbs=update
 // +kubebuilder:rbac:groups=core,resources=nodes,verbs=get;list;watch;delete
 
-// Reconcile handles the reconciliation of VjailbreakNode resources
-func (r *VjailbreakNodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_ ctrl.Result, reterr error) {
-	log := log.FromContext(ctx).WithName(constants.VjailbreakNodeControllerName)
+// Reconcile handles the reconciliation of StellarisMigrateNode resources
+func (r *StellarisMigrateNodeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_ ctrl.Result, reterr error) {
+	log := log.FromContext(ctx).WithName(constants.StellarisMigrateNodeControllerName)
 
-	// Fetch the VjailbreakNode instance.
-	vjailbreakNode := vjailbreakv1alpha1.VjailbreakNode{}
+	// Fetch the StellarisMigrateNode instance.
+	vjailbreakNode := migratev1alpha1.StellarisMigrateNode{}
 	client := r.Client
 	err := client.Get(ctx, req.NamespacedName, &vjailbreakNode)
 	if err != nil {
@@ -62,16 +62,16 @@ func (r *VjailbreakNodeReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 		}
 		return ctrl.Result{}, err
 	}
-	vjailbreakNodeScope, err := scope.NewVjailbreakNodeScope(scope.VjailbreakNodeScopeParams{
+	vjailbreakNodeScope, err := scope.NewStellarisMigrateNodeScope(scope.StellarisMigrateNodeScopeParams{
 		Logger:         log,
 		Client:         r.Client,
-		VjailbreakNode: &vjailbreakNode,
+		StellarisMigrateNode: &vjailbreakNode,
 	})
 	if err != nil {
-		return ctrl.Result{}, errors.Wrap(err, "failed to create vjailbreak node scope")
+		return ctrl.Result{}, errors.Wrap(err, "failed to create stellaris-migrate node scope")
 	}
 
-	// Always close the scope when exiting this function such that we can persist any VjailbreakNode changes.
+	// Always close the scope when exiting this function such that we can persist any StellarisMigrateNode changes.
 	defer func() {
 		if err := vjailbreakNodeScope.Close(); err != nil && reterr == nil {
 			reterr = err
@@ -79,34 +79,34 @@ func (r *VjailbreakNodeReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 	}()
 
 	// Quick path for just updating ActiveMigrations if node is ready
-	if vjailbreakNode.Status.Phase == constants.VjailbreakNodePhaseNodeReady {
+	if vjailbreakNode.Status.Phase == constants.StellarisMigrateNodePhaseNodeReady {
 		result, err := r.updateActiveMigrations(ctx, vjailbreakNodeScope)
 		if err != nil {
 			return result, errors.Wrap(err, "failed to update active migrations")
 		}
 	}
 
-	// Handle deleted VjailbreakNode
+	// Handle deleted StellarisMigrateNode
 	if !vjailbreakNode.DeletionTimestamp.IsZero() {
 		return r.reconcileDelete(ctx, vjailbreakNodeScope)
 	}
 
-	// Handle regular VjailbreakNode reconcile
+	// Handle regular StellarisMigrateNode reconcile
 	return r.reconcileNormal(ctx, vjailbreakNodeScope)
 }
 
-// reconcileNormal handles regular VjailbreakNode reconcile
+// reconcileNormal handles regular StellarisMigrateNode reconcile
 //
 //nolint:unparam //future use
-func (r *VjailbreakNodeReconciler) reconcileNormal(ctx context.Context,
-	scope *scope.VjailbreakNodeScope) (ctrl.Result, error) {
+func (r *StellarisMigrateNodeReconciler) reconcileNormal(ctx context.Context,
+	scope *scope.StellarisMigrateNodeScope) (ctrl.Result, error) {
 	log := scope.Logger
-	log.Info("Reconciling VjailbreakNode")
+	log.Info("Reconciling StellarisMigrateNode")
 	var vmip string
 	var node *corev1.Node
 
-	vjNode := scope.VjailbreakNode
-	controllerutil.AddFinalizer(vjNode, constants.VjailbreakNodeFinalizer)
+	vjNode := scope.StellarisMigrateNode
+	controllerutil.AddFinalizer(vjNode, constants.StellarisMigrateNodeFinalizer)
 
 	if vjNode.Spec.NodeRole == constants.NodeRoleMaster {
 		err := utils.UpdateMasterNodeImageID(ctx, r.Client, r.Local)
@@ -117,7 +117,7 @@ func (r *VjailbreakNodeReconciler) reconcileNormal(ctx context.Context,
 		return ctrl.Result{RequeueAfter: 1 * time.Minute}, nil
 	}
 
-	vjNode.Status.Phase = constants.VjailbreakNodePhaseVMCreating
+	vjNode.Status.Phase = constants.StellarisMigrateNodePhaseVMCreating
 
 	uuid, err := utils.GetOpenstackVMByName(ctx, vjNode.Name, r.Client)
 	if err != nil {
@@ -135,10 +135,10 @@ func (r *VjailbreakNodeReconciler) reconcileNormal(ctx context.Context,
 			vjNode.Status.OpenstackUUID = uuid
 			vjNode.Status.VMIP = vmip
 
-			// Update the VjailbreakNode status
+			// Update the StellarisMigrateNode status
 			err = r.Client.Status().Update(ctx, vjNode)
 			if err != nil {
-				return ctrl.Result{}, errors.Wrap(err, "failed to update vjailbreak node status")
+				return ctrl.Result{}, errors.Wrap(err, "failed to update stellaris-migrate node status")
 			}
 		}
 		node, err = utils.GetNodeByName(ctx, r.Client, vjNode.Name)
@@ -149,17 +149,17 @@ func (r *VjailbreakNodeReconciler) reconcileNormal(ctx context.Context,
 			}
 			return ctrl.Result{}, errors.Wrap(err, "failed to get node by name")
 		}
-		vjNode.Status.Phase = constants.VjailbreakNodePhaseVMCreated
+		vjNode.Status.Phase = constants.StellarisMigrateNodePhaseVMCreated
 		for _, condition := range node.Status.Conditions {
 			if condition.Type == "Ready" {
-				vjNode.Status.Phase = constants.VjailbreakNodePhaseNodeReady
+				vjNode.Status.Phase = constants.StellarisMigrateNodePhaseNodeReady
 				break
 			}
 		}
-		// Update the VjailbreakNode status
+		// Update the StellarisMigrateNode status
 		err = r.Client.Status().Update(ctx, vjNode)
 		if err != nil {
-			return ctrl.Result{}, errors.Wrap(err, "failed to update vjailbreak node status")
+			return ctrl.Result{}, errors.Wrap(err, "failed to update stellaris-migrate node status")
 		}
 
 		return ctrl.Result{RequeueAfter: 1 * time.Minute}, nil
@@ -172,74 +172,74 @@ func (r *VjailbreakNodeReconciler) reconcileNormal(ctx context.Context,
 	}
 
 	vjNode.Status.OpenstackUUID = uuid
-	vjNode.Status.Phase = constants.VjailbreakNodePhaseVMCreated
+	vjNode.Status.Phase = constants.StellarisMigrateNodePhaseVMCreated
 	vjNode.Status.VMIP = vmip
 
-	// Update the VjailbreakNode status
+	// Update the StellarisMigrateNode status
 	err = r.Client.Status().Update(ctx, vjNode)
 	if err != nil {
-		return ctrl.Result{}, errors.Wrap(err, "failed to update vjailbreak node status")
+		return ctrl.Result{}, errors.Wrap(err, "failed to update stellaris-migrate node status")
 	}
 
 	log.Info("Successfully created openstack vm for worker node", "vmid", vmid)
 	return ctrl.Result{}, nil
 }
 
-// reconcileDelete handles deleted VjailbreakNode
+// reconcileDelete handles deleted StellarisMigrateNode
 //
 //nolint:unparam //future use
-func (r *VjailbreakNodeReconciler) reconcileDelete(ctx context.Context,
-	scope *scope.VjailbreakNodeScope) (ctrl.Result, error) {
+func (r *StellarisMigrateNodeReconciler) reconcileDelete(ctx context.Context,
+	scope *scope.StellarisMigrateNodeScope) (ctrl.Result, error) {
 	log := scope.Logger
-	log.Info("Reconciling VjailbreakNode Delete")
+	log.Info("Reconciling StellarisMigrateNode Delete")
 
-	if scope.VjailbreakNode.Spec.NodeRole == constants.NodeRoleMaster {
-		controllerutil.RemoveFinalizer(scope.VjailbreakNode, constants.VjailbreakNodeFinalizer)
+	if scope.StellarisMigrateNode.Spec.NodeRole == constants.NodeRoleMaster {
+		controllerutil.RemoveFinalizer(scope.StellarisMigrateNode, constants.StellarisMigrateNodeFinalizer)
 		return ctrl.Result{}, nil
 	}
 
-	scope.VjailbreakNode.Status.Phase = constants.VjailbreakNodePhaseDeleting
-	// Update the VjailbreakNode status
-	err := r.Client.Status().Update(ctx, scope.VjailbreakNode)
+	scope.StellarisMigrateNode.Status.Phase = constants.StellarisMigrateNodePhaseDeleting
+	// Update the StellarisMigrateNode status
+	err := r.Client.Status().Update(ctx, scope.StellarisMigrateNode)
 	if err != nil {
-		return ctrl.Result{}, errors.Wrap(err, "failed to update vjailbreak node status")
+		return ctrl.Result{}, errors.Wrap(err, "failed to update stellaris-migrate node status")
 	}
 
-	uuid, err := utils.GetOpenstackVMByName(ctx, scope.VjailbreakNode.Name, r.Client)
+	uuid, err := utils.GetOpenstackVMByName(ctx, scope.StellarisMigrateNode.Name, r.Client)
 	if err != nil {
 		return ctrl.Result{}, errors.Wrap(err, "failed to get openstack vm by name")
 	}
 
 	if uuid == "" {
-		log.Info("node already deleted", "name", scope.VjailbreakNode.Name)
-		controllerutil.RemoveFinalizer(scope.VjailbreakNode, constants.VjailbreakNodeFinalizer)
+		log.Info("node already deleted", "name", scope.StellarisMigrateNode.Name)
+		controllerutil.RemoveFinalizer(scope.StellarisMigrateNode, constants.StellarisMigrateNodeFinalizer)
 		return ctrl.Result{}, nil
 	}
 
-	err = utils.DeleteOpenstackVM(ctx, scope.VjailbreakNode.Status.OpenstackUUID, r.Client)
+	err = utils.DeleteOpenstackVM(ctx, scope.StellarisMigrateNode.Status.OpenstackUUID, r.Client)
 	if err != nil {
 		return ctrl.Result{}, errors.Wrap(err, "failed to delete openstack vm")
 	}
 
-	err = utils.DeleteNodeByName(ctx, r.Client, scope.VjailbreakNode.Name)
+	err = utils.DeleteNodeByName(ctx, r.Client, scope.StellarisMigrateNode.Name)
 	if err != nil && !apierrors.IsNotFound(err) {
 		return ctrl.Result{}, errors.Wrap(err, "failed to delete node by name")
 	}
-	controllerutil.RemoveFinalizer(scope.VjailbreakNode, constants.VjailbreakNodeFinalizer)
+	controllerutil.RemoveFinalizer(scope.StellarisMigrateNode, constants.StellarisMigrateNodeFinalizer)
 	return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *VjailbreakNodeReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *StellarisMigrateNodeReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.VjailbreakNode{}).
+		For(&migratev1alpha1.StellarisMigrateNode{}).
 		Complete(r)
 }
 
 // updateActiveMigrations efficiently updates just the ActiveMigrations field
-func (r *VjailbreakNodeReconciler) updateActiveMigrations(ctx context.Context,
-	scope *scope.VjailbreakNodeScope) (ctrl.Result, error) {
-	vjNode := scope.VjailbreakNode
+func (r *StellarisMigrateNodeReconciler) updateActiveMigrations(ctx context.Context,
+	scope *scope.StellarisMigrateNodeScope) (ctrl.Result, error) {
+	vjNode := scope.StellarisMigrateNode
 
 	// Get active migrations happening on the node
 	activeMigrations, err := utils.GetActiveMigrations(ctx, vjNode.Name, r.Client)
@@ -252,7 +252,7 @@ func (r *VjailbreakNodeReconciler) updateActiveMigrations(ctx context.Context,
 
 	err = r.Client.Status().Patch(ctx, vjNode, patch)
 	if err != nil {
-		return ctrl.Result{}, errors.Wrap(err, "failed to patch vjailbreak node status")
+		return ctrl.Result{}, errors.Wrap(err, "failed to patch stellaris-migrate node status")
 	}
 
 	// Always requeue after one minute

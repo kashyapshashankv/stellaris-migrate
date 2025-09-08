@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,8 +15,8 @@ import (
 type ClusterMigrationScopeParams struct {
 	Logger               logr.Logger
 	Client               client.Client
-	ClusterMigration     *vjailbreakv1alpha1.ClusterMigration
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	ClusterMigration     *migratev1alpha1.ClusterMigration
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // NewClusterMigrationScope creates a new ClusterMigrationScope from the supplied parameters.
@@ -38,8 +38,8 @@ func NewClusterMigrationScope(params ClusterMigrationScopeParams) (*ClusterMigra
 type ClusterMigrationScope struct {
 	logr.Logger
 	Client               client.Client
-	ClusterMigration     *vjailbreakv1alpha1.ClusterMigration
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	ClusterMigration     *migratev1alpha1.ClusterMigration
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // Close closes the current scope persisting the ClusterMigration configuration and status.

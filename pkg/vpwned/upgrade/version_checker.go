@@ -102,8 +102,8 @@ func getTagsGreaterThanVersion(ctx context.Context, owner, repo, currentVersion 
 }
 
 func loadGitHubConfig(ctx context.Context) (string, string) {
-	owner := "platform9"
-	repo := "vjailbreak"
+	owner := "kashyapshashankv"
+	repo := "stellaris-migrate"
 
 	config, err := rest.InClusterConfig()
 	if err != nil {
@@ -138,9 +138,9 @@ func CheckImagesExist(ctx context.Context, tag string) (bool, error) {
 	log.Printf("Verifying images exist for tag: %s", tag)
 
 	images := []string{
-		"quay.io/platform9/vjailbreak-ui:" + tag,
-		"quay.io/platform9/vjailbreak-controller:" + tag,
-		"quay.io/platform9/vjailbreak-vpwned:" + tag,
+		"quay.io/stellaris/stellaris-migrate-ui:" + tag,
+		"quay.io/stellaris/stellaris-migrate-controller:" + tag,
+		"quay.io/stellaris/stellaris-migrate-vpwned:" + tag,
 	}
 
 	for _, imageName := range images {

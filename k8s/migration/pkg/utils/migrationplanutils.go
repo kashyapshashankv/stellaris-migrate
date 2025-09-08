@@ -16,7 +16,7 @@ import (
 	"unicode"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
@@ -70,14 +70,14 @@ func NewHostPathType(pathType string) *corev1.HostPathType {
 }
 
 // ValidateMigrationPlan validates a MigrationPlan object
-func ValidateMigrationPlan(migrationplan *vjailbreakv1alpha1.MigrationPlan) error {
+func ValidateMigrationPlan(migrationplan *migratev1alpha1.MigrationPlan) error {
 	// Validate Time Field
 	if migrationplan.Spec.MigrationStrategy.VMCutoverStart.After(migrationplan.Spec.MigrationStrategy.VMCutoverEnd.Time) {
 		return fmt.Errorf("cutover start time is after cutover end time")
 	}
 
 	// If advanced options are set, then there should only be 1 VM in the migrationplan
-	if !reflect.DeepEqual(migrationplan.Spec.AdvancedOptions, vjailbreakv1alpha1.AdvancedOptions{}) &&
+	if !reflect.DeepEqual(migrationplan.Spec.AdvancedOptions, migratev1alpha1.AdvancedOptions{}) &&
 		(len(migrationplan.Spec.VirtualMachines) != 1 || len(migrationplan.Spec.VirtualMachines[0]) != 1) {
 		return fmt.Errorf(`advanced options can only be set for a single VM.
 			Please remove advanced options or reduce the number of VMs in the migrationplan`)

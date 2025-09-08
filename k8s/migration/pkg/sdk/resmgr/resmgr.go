@@ -14,7 +14,7 @@ import (
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 // Resmgr defines the interface for interacting with Platform9 Resource Manager service.
@@ -29,7 +29,7 @@ type Resmgr interface {
 	RemoveRoles(ctx context.Context, hostID string, roles []string) error
 	GetRoles(ctx context.Context, hostID string) ([]string, error)
 	AssignHypervisor(ctx context.Context, hostID string, clusterName string) error
-	ListHostConfig(ctx context.Context) ([]vjailbreakv1alpha1.HostConfig, error)
+	ListHostConfig(ctx context.Context) ([]migratev1alpha1.HostConfig, error)
 	AssignHostConfig(ctx context.Context, hostID string, hostConfigID string) error
 	HostExists(ctx context.Context, hostID string) (bool, error)
 }
@@ -488,7 +488,7 @@ func (r *Impl) ListClusters(ctx context.Context) ([]Cluster, error) {
 
 // ListHostConfig retrieves the role configuration for a specific host.
 // It returns the list of roles currently assigned to the host identified by hostUUID.
-func (r *Impl) ListHostConfig(ctx context.Context) ([]vjailbreakv1alpha1.HostConfig, error) {
+func (r *Impl) ListHostConfig(ctx context.Context) ([]migratev1alpha1.HostConfig, error) {
 	url := fmt.Sprintf("%s/resmgr/v2/hostconfigs", r.url)
 	req, err := r.getResmgrReq(ctx, url, http.MethodGet, nil)
 	if err != nil {
@@ -514,7 +514,7 @@ func (r *Impl) ListHostConfig(ctx context.Context) ([]vjailbreakv1alpha1.HostCon
 		return nil, fmt.Errorf("failed to query the resmgr to list host config: (%d) %s", resp.StatusCode, string(body))
 	}
 
-	var hostConfig []vjailbreakv1alpha1.HostConfig
+	var hostConfig []migratev1alpha1.HostConfig
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&hostConfig)
 	if err != nil {

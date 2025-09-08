@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,7 +15,7 @@ import (
 type BMConfigScopeParams struct {
 	Logger   logr.Logger
 	Client   client.Client
-	BMConfig *vjailbreakv1alpha1.BMConfig
+	BMConfig *migratev1alpha1.BMConfig
 }
 
 // NewBMConfigScope creates a new BMConfigScope from the supplied parameters.
@@ -36,7 +36,7 @@ func NewBMConfigScope(params BMConfigScopeParams) (*BMConfigScope, error) {
 type BMConfigScope struct {
 	logr.Logger
 	Client   client.Client
-	BMConfig *vjailbreakv1alpha1.BMConfig
+	BMConfig *migratev1alpha1.BMConfig
 }
 
 // Close closes the current scope persisting the BMConfig configuration and status.

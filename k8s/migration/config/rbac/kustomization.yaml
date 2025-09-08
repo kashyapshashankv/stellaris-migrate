@@ -31,8 +31,8 @@ resources:
 - esximigration_viewer_role.yaml
 - rollingmigrationplan_editor_role.yaml
 - rollingmigrationplan_viewer_role.yaml
-- vjailbreaknode_editor_role.yaml
-- vjailbreaknode_viewer_role.yaml
+- stellarismigratenode_editor_role.yaml
+- stellarismigratenode_viewer_role.yaml
 - migrationtemplate_editor_role.yaml
 - migrationtemplate_viewer_role.yaml
 - migrationplan_editor_role.yaml

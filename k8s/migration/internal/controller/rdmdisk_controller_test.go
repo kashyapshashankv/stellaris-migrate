@@ -27,7 +27,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 var _ = Describe("RDMDisk Controller", func() {
@@ -40,13 +40,13 @@ var _ = Describe("RDMDisk Controller", func() {
 			Name:      resourceName,
 			Namespace: "default",
 		}
-		rdmdisk := &vjailbreakv1alpha1.RDMDisk{}
+		rdmdisk := &migratev1alpha1.RDMDisk{}
 
 		BeforeEach(func() {
 			By("creating the custom resource for the Kind RDMDisk")
 			err := k8sClient.Get(ctx, typeNamespacedName, rdmdisk)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.RDMDisk{
+				resource := &migratev1alpha1.RDMDisk{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -57,7 +57,7 @@ var _ = Describe("RDMDisk Controller", func() {
 		})
 
 		AfterEach(func() {
-			resource := &vjailbreakv1alpha1.RDMDisk{}
+			resource := &migratev1alpha1.RDMDisk{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 
@@ -80,9 +80,9 @@ var _ = Describe("RDMDisk Controller", func() {
 
 	Context("When validating RDMDisk fields", func() {
 		It("should return an error if required fields are missing", func() {
-			rdmDisk := &vjailbreakv1alpha1.RDMDisk{
-				Spec: vjailbreakv1alpha1.RDMDiskSpec{
-					OpenstackVolumeRef: vjailbreakv1alpha1.OpenstackVolumeRef{},
+			rdmDisk := &migratev1alpha1.RDMDisk{
+				Spec: migratev1alpha1.RDMDiskSpec{
+					OpenstackVolumeRef: migratev1alpha1.OpenstackVolumeRef{},
 				},
 			}
 
@@ -92,9 +92,9 @@ var _ = Describe("RDMDisk Controller", func() {
 		})
 
 		It("should pass validation if all required fields are present", func() {
-			rdmDisk := &vjailbreakv1alpha1.RDMDisk{
-				Spec: vjailbreakv1alpha1.RDMDiskSpec{
-					OpenstackVolumeRef: vjailbreakv1alpha1.OpenstackVolumeRef{
+			rdmDisk := &migratev1alpha1.RDMDisk{
+				Spec: migratev1alpha1.RDMDiskSpec{
+					OpenstackVolumeRef: migratev1alpha1.OpenstackVolumeRef{
 						VolumeRef: map[string]string{
 							"sourceKey": "sourceValue",
 						},

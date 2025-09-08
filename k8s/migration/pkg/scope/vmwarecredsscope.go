@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,7 +15,7 @@ import (
 type VMwareCredsScopeParams struct {
 	Logger      logr.Logger
 	Client      client.Client
-	VMwareCreds *vjailbreakv1alpha1.VMwareCreds
+	VMwareCreds *migratev1alpha1.VMwareCreds
 }
 
 // NewVMwareCredsScope creates a new VMwareCredsScope from the supplied parameters.
@@ -36,7 +36,7 @@ func NewVMwareCredsScope(params VMwareCredsScopeParams) (*VMwareCredsScope, erro
 type VMwareCredsScope struct {
 	logr.Logger
 	Client      client.Client
-	VMwareCreds *vjailbreakv1alpha1.VMwareCreds
+	VMwareCreds *migratev1alpha1.VMwareCreds
 }
 
 // Close closes the current scope persisting the VMwareCreds configuration and status.

@@ -20,7 +20,7 @@ package controller
 import (
 	"context"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
 )
@@ -37,12 +37,12 @@ type NetworkMappingReconciler struct {
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 func (r *NetworkMappingReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	networkmapping := &vjailbreakv1alpha1.NetworkMapping{}
+	networkmapping := &migratev1alpha1.NetworkMapping{}
 	networkmapping.Name = req.Name
 	networkmapping.Namespace = req.Namespace
 
 	return r.ReconcileMapping(ctx, networkmapping, func() error {
-		networkmapping.Status = vjailbreakv1alpha1.NetworkMappingStatus{}
+		networkmapping.Status = migratev1alpha1.NetworkMappingStatus{}
 		return r.Status().Update(ctx, networkmapping)
 	})
 }
@@ -52,7 +52,7 @@ func (r *NetworkMappingReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	r.Client = mgr.GetClient()
 	r.Scheme = mgr.GetScheme()
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.NetworkMapping{}).
+		For(&migratev1alpha1.NetworkMapping{}).
 		WithEventFilter(predicate.GenerationChangedPredicate{}).
 		Complete(r)
 }

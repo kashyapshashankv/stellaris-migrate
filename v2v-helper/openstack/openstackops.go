@@ -1,5 +1,3 @@
-// Copyright © 2024 The vjailbreak authors
-
 package openstack
 
 import (
@@ -42,7 +40,7 @@ type OpenstackOperations interface {
 	GetNetwork(networkname string) (*networks.Network, error)
 	GetPort(portID string) (*ports.Port, error)
 	CreatePort(networkid *networks.Network, mac, ip, vmname string, securityGroups []string) (*ports.Port, error)
-	CreateVM(flavor *flavors.Flavor, networkIDs, portIDs []string, vminfo vm.VMInfo, availabilityZone string, securityGroups []string, vjailbreakSettings utils.VjailbreakSettings, useFlavorless bool) (*servers.Server, error)
+	CreateVM(flavor *flavors.Flavor, networkIDs, portIDs []string, vminfo vm.VMInfo, availabilityZone string, securityGroups []string, migrateSettings utils.VjailbreakSettings, useFlavorless bool) (*servers.Server, error)
 	GetSecurityGroupIDs(groupNames []string, projectName string) ([]string, error)
 	DeleteVolume(volumeID string) error
 	FindDevice(volumeID string) (string, error)

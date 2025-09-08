@@ -9,7 +9,7 @@ set -euo pipefail
 TAG=$1
 
 REGISTRY="quay.io"
-REPO="platform9"
+REPO="stellaris"
 kube_state_metrics="registry.k8s.io/kube-state-metrics/kube-state-metrics:v2.13.0"
 prometheus_adapter="registry.k8s.io/prometheus-adapter/prometheus-adapter:v0.12.0"
 prometheus="quay.io/prometheus/prometheus:v2.54.1"
@@ -22,10 +22,10 @@ prometheus_config_reloader="quay.io/prometheus-operator/prometheus-config-reload
 prometheus_operator="quay.io/prometheus-operator/prometheus-operator:v0.76.0"
 configmap_reload="ghcr.io/jimmidyson/configmap-reload:v0.13.1"
 grafana="docker.io/grafana/grafana:11.2.0"
-v2v_helper="quay.io/platform9/vjailbreak-v2v-helper:$TAG"
-controller="quay.io/platform9/vjailbreak-controller:$TAG"
-ui="quay.io/platform9/vjailbreak-ui:$TAG"
-vpwned="quay.io/platform9/vjailbreak-vpwned:$TAG"
+v2v_helper="quay.io/stellaris/stellaris-migrate-v2v-helper:$TAG"
+controller="quay.io/stellaris/stellaris-migrate-controller:$TAG"
+ui="quay.io/stellaris/stellaris-migrate-ui:$TAG"
+vpwned="quay.io/stellaris/stellaris-migrate-vpwned:$TAG"
 virtiowin="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso"
 # TODO(suhas): Create a seperate repository for alpine image in quay
 alpine="quay.io/platform9/vjailbreak:alpine"

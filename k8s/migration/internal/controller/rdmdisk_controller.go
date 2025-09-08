@@ -32,7 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 )
@@ -83,7 +83,7 @@ func (r *RDMDiskReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 	ctxlog := log.FromContext(ctx).WithName(constants.RDMDiskControllerName)
 
 	// Get the RDMDisk resource
-	rdmDisk := &vjailbreakv1alpha1.RDMDisk{}
+	rdmDisk := &migratev1alpha1.RDMDisk{}
 	if err := r.Get(ctx, req.NamespacedName, rdmDisk); err != nil {
 		if client.IgnoreNotFound(err) != nil {
 			ctxlog.Error(err, "unable to fetch RDMDisk")
@@ -114,7 +114,7 @@ func (r *RDMDiskReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 }
 
 // handleInitialPhase handles the initial phase of RDMDisk reconciliation
-func (r *RDMDiskReconciler) handleInitialPhase(ctx context.Context, rdmDisk *vjailbreakv1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
+func (r *RDMDiskReconciler) handleInitialPhase(ctx context.Context, rdmDisk *migratev1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
 	mostRecentValidationFailedCondition := getMostRecentValidationFailedCondition(rdmDisk.Status.Conditions)
 	if mostRecentValidationFailedCondition != nil {
 		lastTransitionTime := mostRecentValidationFailedCondition.LastTransitionTime.Time
@@ -155,7 +155,7 @@ func (r *RDMDiskReconciler) handleInitialPhase(ctx context.Context, rdmDisk *vja
 }
 
 // handleAvailablePhase handles the Available phase of RDMDisk reconciliation
-func (r *RDMDiskReconciler) handleAvailablePhase(ctx context.Context, rdmDisk *vjailbreakv1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
+func (r *RDMDiskReconciler) handleAvailablePhase(ctx context.Context, rdmDisk *migratev1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
 	if rdmDisk.Spec.ImportToCinder {
 		rdmDisk.Status.Phase = RDMPhaseManaging
 		updateStatusCondition(rdmDisk, metav1.Condition{
@@ -174,7 +174,7 @@ func (r *RDMDiskReconciler) handleAvailablePhase(ctx context.Context, rdmDisk *v
 }
 
 // handleManagingPhase handles the managing phase of RDMDisk reconciliation
-func (r *RDMDiskReconciler) handleManagingPhase(ctx context.Context, req ctrl.Request, rdmDisk *vjailbreakv1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
+func (r *RDMDiskReconciler) handleManagingPhase(ctx context.Context, req ctrl.Request, rdmDisk *migratev1alpha1.RDMDisk, log logr.Logger) (ctrl.Result, error) {
 	if rdmDisk.Spec.ImportToCinder && rdmDisk.Status.CinderVolumeID == "" {
 		rdmDiskObj := vm.RDMDisk{
 			DiskName:          rdmDisk.Name,
@@ -182,7 +182,7 @@ func (r *RDMDiskReconciler) handleManagingPhase(ctx context.Context, req ctrl.Re
 			CinderBackendPool: rdmDisk.Spec.OpenstackVolumeRef.CinderBackendPool,
 			VolumeType:        rdmDisk.Spec.OpenstackVolumeRef.VolumeType,
 		}
-		openstackcreds := &vjailbreakv1alpha1.OpenstackCreds{}
+		openstackcreds := &migratev1alpha1.OpenstackCreds{}
 		openstackCredsName := client.ObjectKey{
 			Namespace: req.Namespace,
 			Name:      rdmDisk.Spec.OpenstackVolumeRef.OpenstackCreds,
@@ -229,13 +229,13 @@ func (r *RDMDiskReconciler) handleManagingPhase(ctx context.Context, req ctrl.Re
 // SetupWithManager sets up the controller with the Manager.
 func (r *RDMDiskReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.RDMDisk{}).
+		For(&migratev1alpha1.RDMDisk{}).
 		Named("rdmdisk").
 		Complete(r)
 }
 
 // ValidateRDMDiskFields validates all required fields for migration
-func ValidateRDMDiskFields(rdmDisk *vjailbreakv1alpha1.RDMDisk) error {
+func ValidateRDMDiskFields(rdmDisk *migratev1alpha1.RDMDisk) error {
 	if len(rdmDisk.Spec.OpenstackVolumeRef.VolumeRef) == 0 {
 		return fmt.Errorf("OpenstackVolumeRef.source is required")
 	}
@@ -254,7 +254,7 @@ func ValidateRDMDiskFields(rdmDisk *vjailbreakv1alpha1.RDMDisk) error {
 }
 
 // handleError updates the RDMDisk status with the provided error details and logs the error.
-func handleError(ctx context.Context, r client.Client, rdmDisk *vjailbreakv1alpha1.RDMDisk, phase string, conditionType string, reason string, err error) error {
+func handleError(ctx context.Context, r client.Client, rdmDisk *migratev1alpha1.RDMDisk, phase string, conditionType string, reason string, err error) error {
 	log := log.FromContext(ctx)
 	log.Error(err, fmt.Sprintf("Failed during phase: %s", phase))
 	rdmDisk.Status.Phase = phase
@@ -286,6 +286,6 @@ func getMostRecentValidationFailedCondition(conditions []metav1.Condition) *meta
 }
 
 // Refactor status condition updates into a helper function
-func updateStatusCondition(rdmDisk *vjailbreakv1alpha1.RDMDisk, condition metav1.Condition) {
+func updateStatusCondition(rdmDisk *migratev1alpha1.RDMDisk, condition metav1.Condition) {
 	meta.SetStatusCondition(&rdmDisk.Status.Conditions, condition)
 }

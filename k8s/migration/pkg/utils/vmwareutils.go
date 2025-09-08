@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	scope "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	"github.com/vmware/govmomi/object"
@@ -73,7 +73,7 @@ func createVMwareHost(ctx context.Context, scope *scope.VMwareCredsScope, host V
 		return "", errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
 
-	vmwareHost := vjailbreakv1alpha1.VMwareHost{
+	vmwareHost := migratev1alpha1.VMwareHost{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      hostk8sName,
 			Namespace: namespace,
@@ -82,13 +82,13 @@ func createVMwareHost(ctx context.Context, scope *scope.VMwareCredsScope, host V
 				constants.VMwareCredsLabel:   credName,
 			},
 		},
-		Spec: vjailbreakv1alpha1.VMwareHostSpec{
+		Spec: migratev1alpha1.VMwareHostSpec{
 			Name:         host.Name,
 			HardwareUUID: host.HardwareUUID,
 			ClusterName:  clusterName,
 		},
 	}
-	existingHost := vjailbreakv1alpha1.VMwareHost{}
+	existingHost := migratev1alpha1.VMwareHost{}
 	if err := scope.Client.Get(ctx, client.ObjectKey{Name: hostk8sName, Namespace: namespace}, &existingHost); err == nil {
 		if existingHost.Spec.Name != host.Name || existingHost.Spec.HardwareUUID != host.HardwareUUID || existingHost.Spec.ClusterName != clusterName {
 			existingHost.Spec = vmwareHost.Spec
@@ -116,7 +116,7 @@ func createVMwareCluster(ctx context.Context, scope *scope.VMwareCredsScope, clu
 		return errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
 
-	vmwareCluster := vjailbreakv1alpha1.VMwareCluster{
+	vmwareCluster := migratev1alpha1.VMwareCluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      clusterk8sName,
 			Namespace: scope.Namespace(),
@@ -124,7 +124,7 @@ func createVMwareCluster(ctx context.Context, scope *scope.VMwareCredsScope, clu
 				constants.VMwareCredsLabel: scope.Name(),
 			},
 		},
-		Spec: vjailbreakv1alpha1.VMwareClusterSpec{
+		Spec: migratev1alpha1.VMwareClusterSpec{
 			Name: cluster.Name,
 		},
 	}
@@ -140,7 +140,7 @@ func createVMwareCluster(ctx context.Context, scope *scope.VMwareCredsScope, clu
 	}
 
 	// Create the cluster
-	existingCluster := vjailbreakv1alpha1.VMwareCluster{}
+	existingCluster := migratev1alpha1.VMwareCluster{}
 	if err := scope.Client.Get(ctx, client.ObjectKey{Name: clusterk8sName, Namespace: scope.Namespace()}, &existingCluster); err == nil {
 		if existingCluster.Spec.Name != cluster.Name {
 			existingCluster.Spec = vmwareCluster.Spec
@@ -212,12 +212,12 @@ func DeleteStaleVMwareClustersAndHosts(ctx context.Context, scope *scope.VMwareC
 		hosts = append(hosts, cluster.Hosts...)
 	}
 
-	existingClusters := vjailbreakv1alpha1.VMwareClusterList{}
+	existingClusters := migratev1alpha1.VMwareClusterList{}
 	if err := scope.Client.List(ctx, &existingClusters, client.MatchingLabels{constants.VMwareCredsLabel: scope.Name()}); err != nil {
 		return errors.Wrap(err, "failed to list vmware clusters")
 	}
 
-	existingHosts := vjailbreakv1alpha1.VMwareHostList{}
+	existingHosts := migratev1alpha1.VMwareHostList{}
 	if err := scope.Client.List(ctx, &existingHosts, client.MatchingLabels{constants.VMwareCredsLabel: scope.Name()}); err != nil {
 		return errors.Wrap(err, "failed to list vmware hosts")
 	}
@@ -264,9 +264,9 @@ func DeleteStaleVMwareClustersAndHosts(ctx context.Context, scope *scope.VMwareC
 
 // FilterVMwareHostsForCluster returns a list of VMwareHost resources associated with the specified cluster
 // It filters the hosts by the VMwareClusterLabel matching the provided cluster name
-func FilterVMwareHostsForCluster(ctx context.Context, k8sClient client.Client, clusterName string) ([]vjailbreakv1alpha1.VMwareHost, error) {
+func FilterVMwareHostsForCluster(ctx context.Context, k8sClient client.Client, clusterName string) ([]migratev1alpha1.VMwareHost, error) {
 	// List all VMwareHost resources
-	vmwareHosts := &vjailbreakv1alpha1.VMwareHostList{}
+	vmwareHosts := &migratev1alpha1.VMwareHostList{}
 
 	// Filter VMwareHost resources by cluster name
 	if err := k8sClient.List(ctx, vmwareHosts, client.MatchingLabels{constants.VMwareClusterLabel: clusterName}); err != nil {
@@ -319,7 +319,7 @@ func CreateDummyClusterForStandAloneESX(ctx context.Context, scope *scope.VMware
 	if err != nil {
 		return errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
-	vmwareCluster := vjailbreakv1alpha1.VMwareCluster{
+	vmwareCluster := migratev1alpha1.VMwareCluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      k8sClusterName,
 			Namespace: constants.NamespaceMigrationSystem,
@@ -327,7 +327,7 @@ func CreateDummyClusterForStandAloneESX(ctx context.Context, scope *scope.VMware
 				constants.VMwareCredsLabel: scope.Name(),
 			},
 		},
-		Spec: vjailbreakv1alpha1.VMwareClusterSpec{
+		Spec: migratev1alpha1.VMwareClusterSpec{
 			Name: constants.VMwareClusterNameStandAloneESX,
 		},
 	}

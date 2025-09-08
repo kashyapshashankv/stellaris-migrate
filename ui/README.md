@@ -1,4 +1,4 @@
-# vJailbreak UI
+# Stellaris Migrate UI
 
 ## Running the App Locally in Development Mode
 

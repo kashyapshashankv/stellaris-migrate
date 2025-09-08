@@ -5,7 +5,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -16,7 +16,7 @@ import (
 type MigrationPlanScopeParams struct {
 	Logger        logr.Logger
 	Client        client.Client
-	MigrationPlan *vjailbreakv1alpha1.MigrationPlan
+	MigrationPlan *migratev1alpha1.MigrationPlan
 }
 
 // NewMigrationPlanScope creates a new MigrationPlanScope from the supplied parameters.
@@ -37,7 +37,7 @@ func NewMigrationPlanScope(params MigrationPlanScopeParams) (*MigrationPlanScope
 type MigrationPlanScope struct {
 	logr.Logger
 	Client        client.Client
-	MigrationPlan *vjailbreakv1alpha1.MigrationPlan
+	MigrationPlan *migratev1alpha1.MigrationPlan
 }
 
 // Close closes the current scope persisting the MigrationPlan configuration and status.

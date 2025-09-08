@@ -589,7 +589,7 @@ spec:
           including validation, data transfer, disk conversion, and cutover phases. Migration resources
           provide detailed status monitoring, error handling, and manual intervention points like
           cutover initiation. Each Migration is associated with a MigrationPlan and executes on a specific
-          VjailbreakNode agent, tracking progress via status updates and condition changes.
+          StellarisMigrateNode agent, tracking progress via status updates and condition changes.
         properties:
           apiVersion:
             description: |-
@@ -1876,14 +1876,14 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vjailbreaknodes.migrate.k8s.stellaris.io
+  name: stellaris-migrate-nodes.migrate.k8s.stellaris.io
 spec:
   group: migrate.k8s.stellaris.io
   names:
-    kind: VjailbreakNode
-    listKind: VjailbreakNodeList
-    plural: vjailbreaknodes
-    singular: vjailbreaknode
+    kind: StellarisMigrateNode
+    listKind: StellarisMigrateNodeList
+    plural: stellaris-migrate-nodes
+    singular: stellarismigratenode
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -1897,7 +1897,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: |-
-          VjailbreakNode is the Schema for the vjailbreaknodes API that represents
+          StellarisMigrateNode is the Schema for the stellaris-migrate-nodes API that represents
           a node in the migration infrastructure with configuration, resource limits,
           and statistics for monitoring migration progress
         properties:
@@ -1919,7 +1919,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: Spec defines the desired state of VjailbreakNode
+            description: Spec defines the desired state of StellarisMigrateNode
             properties:
               nodeRole:
                 description: NodeRole is the role assigned to the node (e.g., "worker",
@@ -1983,7 +1983,7 @@ spec:
             - openstackImageID
             type: object
           status:
-            description: Status defines the observed state of VjailbreakNode
+            description: Status defines the observed state of StellarisMigrateNode
             properties:
               activeMigrations:
                 description: |-
@@ -2758,7 +2758,7 @@ rules:
   - rdmdisks
   - rollingmigrationplans
   - storagemappings
-  - vjailbreaknodes
+  - stellaris-migrate-nodes
   - vmwareclusters
   - vmwarecreds
   - vmwarehosts
@@ -2786,7 +2786,7 @@ rules:
   - rdmdisks/finalizers
   - rollingmigrationplans/finalizers
   - storagemappings/finalizers
-  - vjailbreaknodes/finalizers
+  - stellaris-migrate-nodes/finalizers
   - vmwarecreds/finalizers
   verbs:
   - update
@@ -2806,7 +2806,7 @@ rules:
   - rdmdisks/status
   - rollingmigrationplans/status
   - storagemappings/status
-  - vjailbreaknodes/status
+  - stellaris-migrate-nodes/status
   - vmwarecreds/status
   - vmwaremachines/status
   verbs:
@@ -3341,12 +3341,12 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: migration
-  name: migration-vjailbreaknode-editor-role
+  name: migration-stellarismigratenode-editor-role
 rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes
+  - stellaris-migrate-nodes
   verbs:
   - create
   - delete
@@ -3358,7 +3358,7 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes/status
+  - stellaris-migrate-nodes/status
   verbs:
   - get
 ---
@@ -3368,12 +3368,12 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: migration
-  name: migration-vjailbreaknode-viewer-role
+  name: migration-stellarismigratenode-viewer-role
 rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes
+  - stellaris-migrate-nodes
   verbs:
   - get
   - list
@@ -3381,7 +3381,7 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes/status
+  - stellaris-migrate-nodes/status
   verbs:
   - get
 ---
@@ -3666,7 +3666,7 @@ spec:
         - --health-probe-bind-address=:8081
         command:
         - /manager
-        image: quay.io/platform9/vjailbreak-controller:v0.3.3
+        image: quay.io/stellaris/stellaris-migrate-controller:0.0.1
         imagePullPolicy: IfNotPresent
         lifecycle:
           preStop:
@@ -3746,7 +3746,7 @@ spec:
         app: vpwned-sdk
     spec:
       containers:
-      - image: quay.io/platform9/vjailbreak-vpwned:v0.3.3
+      - image: quay.io/stellaris/stellaris-migrate-vpwned:0.0.1
         imagePullPolicy: IfNotPresent
         name: vpwned
         ports:

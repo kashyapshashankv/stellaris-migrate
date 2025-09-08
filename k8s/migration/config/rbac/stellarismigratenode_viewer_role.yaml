@@ -1,16 +1,16 @@
-# permissions for end users to view vjailbreaknodes.
+# permissions for end users to view stellaris-migrate-nodes.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: migration
     app.kubernetes.io/managed-by: kustomize
-  name: vjailbreaknode-viewer-role
+  name: stellarismigratenode-viewer-role
 rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes
+  - stellaris-migrate-nodes
   verbs:
   - get
   - list
@@ -18,6 +18,6 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes/status
+  - stellaris-migrate-nodes/status
   verbs:
   - get

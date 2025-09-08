@@ -61,7 +61,7 @@ export const createRollingMigrationPlanJson = (
       namespace: namespace,
       labels: {
         "app.kubernetes.io/name": "migration",
-        "app.kubernetes.io/part-of": "vjailbreak",
+        "app.kubernetes.io/part-of": "stellaris-migrate",
       },
     },
     spec,

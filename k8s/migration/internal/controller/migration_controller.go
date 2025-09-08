@@ -39,7 +39,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
@@ -70,7 +70,7 @@ const migrationFinalizer = "migration.migrate.k8s.stellaris.io/finalizer"
 func (r *MigrationReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_ ctrl.Result, reterr error) {
 	ctxlog := log.FromContext(ctx).WithName(constants.MigrationControllerName)
 
-	migration := &vjailbreakv1alpha1.Migration{}
+	migration := &migratev1alpha1.Migration{}
 
 	if err := r.Get(ctx, req.NamespacedName, migration); err != nil {
 		if apierrors.IsNotFound(err) {
@@ -146,8 +146,8 @@ func (r *MigrationReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		return ctrl.Result{}, err
 	}
 
-	if constants.VMMigrationStatesEnum[migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseValidating] {
-		migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseValidating
+	if constants.VMMigrationStatesEnum[migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseValidating] {
+		migration.Status.Phase = migratev1alpha1.VMMigrationPhaseValidating
 	}
 	// Check if the pod is in a valid state only then continue
 	if pod.Status.Phase != corev1.PodRunning && pod.Status.Phase != corev1.PodFailed && pod.Status.Phase != corev1.PodSucceeded {
@@ -174,8 +174,8 @@ func (r *MigrationReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		return ctrl.Result{}, err
 	}
 
-	if string(migration.Status.Phase) != string(vjailbreakv1alpha1.VMMigrationPhaseFailed) &&
-		string(migration.Status.Phase) != string(vjailbreakv1alpha1.VMMigrationPhaseSucceeded) {
+	if string(migration.Status.Phase) != string(migratev1alpha1.VMMigrationPhaseFailed) &&
+		string(migration.Status.Phase) != string(migratev1alpha1.VMMigrationPhaseSucceeded) {
 		return ctrl.Result{RequeueAfter: 30 * time.Second}, nil
 	}
 
@@ -183,7 +183,7 @@ func (r *MigrationReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 }
 
 // reconcileDelete handles the cleanup logic when Migration object is deleted.
-func (r *MigrationReconciler) reconcileDelete(ctx context.Context, migration *vjailbreakv1alpha1.Migration) error {
+func (r *MigrationReconciler) reconcileDelete(ctx context.Context, migration *migratev1alpha1.Migration) error {
 	ctxlog := log.FromContext(ctx).WithName(constants.MigrationControllerName)
 	ctxlog.Info("Reconciling deletion of Migration, resetting VMwareMachine status", "MigrationName", migration.Name)
 
@@ -205,7 +205,7 @@ func (r *MigrationReconciler) reconcileDelete(ctx context.Context, migration *vj
 		return nil
 	}
 
-	vmwMachine := &vjailbreakv1alpha1.VMwareMachine{}
+	vmwMachine := &migratev1alpha1.VMwareMachine{}
 	err = r.Get(ctx, types.NamespacedName{Name: vmwMachineName, Namespace: migration.GetNamespace()}, vmwMachine)
 	if err != nil {
 		if apierrors.IsNotFound(err) {
@@ -229,7 +229,7 @@ func (r *MigrationReconciler) reconcileDelete(ctx context.Context, migration *vj
 // SetupWithManager sets up the controller with the Manager.
 func (r *MigrationReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.Migration{}).
+		For(&migratev1alpha1.Migration{}).
 		Owns(&corev1.Pod{}, builder.WithPredicates(
 			predicate.Funcs{
 				UpdateFunc: func(e event.UpdateEvent) bool {
@@ -269,57 +269,57 @@ func (r *MigrationReconciler) SetupMigrationPhase(ctx context.Context, scope *sc
 		return err
 	}
 
-	IgnoredPhases := []vjailbreakv1alpha1.VMMigrationPhase{
-		vjailbreakv1alpha1.VMMigrationPhaseValidating,
-		vjailbreakv1alpha1.VMMigrationPhasePending}
+	IgnoredPhases := []migratev1alpha1.VMMigrationPhase{
+		migratev1alpha1.VMMigrationPhaseValidating,
+		migratev1alpha1.VMMigrationPhasePending}
 
 loop:
 	for i := range events.Items {
 		switch {
 		// In reverse order, because the events are sorted by timestamp latest to oldest
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageMigrationSucessful) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseSucceeded]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseSucceeded
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseSucceeded]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseSucceeded
 			if err := r.markMigrationSuccessful(ctx, scope); err != nil {
 				return err
 			}
 			break loop
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageWaitingForAdminCutOver) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseAwaitingAdminCutOver]:
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseAwaitingAdminCutOver]:
 			// Only stay in AwaitingAdminCutOver if cutover hasn't been triggered yet
 			if pod.Labels["startCutover"] != "yes" {
-				scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseAwaitingAdminCutOver
+				scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseAwaitingAdminCutOver
 				break loop
 			}
 			// Admin cutover was triggered, reset to a lower phase so it can progress normally
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseCopying
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseCopying
 
 			// If startCutover is "yes", don't set phase here - let it progress to next phase
 			// by continuing to check other events
 			continue
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageWaitingForCutOverStart) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseAwaitingCutOverStartTime]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseAwaitingCutOverStartTime
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseAwaitingCutOverStartTime]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseAwaitingCutOverStartTime
 			break loop
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageConvertingDisk) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseConvertingDisk]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseConvertingDisk
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseConvertingDisk]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseConvertingDisk
 			break loop
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageCopyingChangedBlocksWithIteration) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseCopyingChangedBlocks]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseCopyingChangedBlocks
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseCopyingChangedBlocks]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseCopyingChangedBlocks
 			break loop
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageCopyingDisk) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseCopying]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseCopying
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseCopying]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseCopying
 			break loop
 		case strings.Contains(events.Items[i].Message, openstackconst.EventMessageWaitingForDataCopyStart) &&
-			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[vjailbreakv1alpha1.VMMigrationPhaseAwaitingDataCopyStart]:
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseAwaitingDataCopyStart
+			constants.VMMigrationStatesEnum[scope.Migration.Status.Phase] <= constants.VMMigrationStatesEnum[migratev1alpha1.VMMigrationPhaseAwaitingDataCopyStart]:
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseAwaitingDataCopyStart
 			break loop
 		case strings.Contains(strings.TrimSpace(events.Items[i].Message), openstackconst.EventMessageMigrationFailed) ||
 			strings.Contains(strings.TrimSpace(events.Items[i].Message), openstackconst.EventMessageFailed):
-			scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseFailed
+			scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseFailed
 			break loop
 		case slices.Contains(IgnoredPhases, scope.Migration.Status.Phase):
 			break loop
@@ -332,7 +332,7 @@ loop:
 
 // Extracted function to handle successful migration updates
 func (r *MigrationReconciler) markMigrationSuccessful(ctx context.Context, scope *scope.MigrationScope) error {
-	scope.Migration.Status.Phase = vjailbreakv1alpha1.VMMigrationPhaseSucceeded
+	scope.Migration.Status.Phase = migratev1alpha1.VMMigrationPhaseSucceeded
 	vmwareCredsName, err := utils.GetVMwareCredsNameFromMigration(ctx, r.Client, scope.Migration)
 	if err != nil {
 		return errors.Wrap(err, "failed to get vmware credentials name")
@@ -342,7 +342,7 @@ func (r *MigrationReconciler) markMigrationSuccessful(ctx context.Context, scope
 		return errors.Wrap(err, "failed to get vmware machine name")
 	}
 
-	vmwvm := &vjailbreakv1alpha1.VMwareMachine{}
+	vmwvm := &migratev1alpha1.VMwareMachine{}
 	if err := r.Get(ctx, types.NamespacedName{Name: name, Namespace: scope.Migration.Namespace}, vmwvm); err != nil {
 		return errors.Wrap(err, "failed to get vmware machine")
 	}

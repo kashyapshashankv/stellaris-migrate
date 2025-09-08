@@ -146,7 +146,7 @@ func (m *MaasClient) ReleaseMachine(ctx context.Context, machine *entity.Machine
 		return errors.New("release: client not initialized")
 	}
 	_, err := m.Client.Machine.Release(machine.SystemID, &entity.MachineReleaseParams{
-		Comment: "vJailbreak: Releasing machine for re-deployment",
+		Comment: "Stellaris Migrate: Releasing machine for re-deployment",
 		Erase:   eraseDisk,
 	})
 	if err != nil {
@@ -162,7 +162,7 @@ func (m *MaasClient) DeployMachine(ctx context.Context, machine *entity.Machine,
 	}
 	logrus.Debugf("Deploying machine %s with cloud-init script %s and OS release %s", machine.Hostname, cloudInitScript, OSRelease)
 	_, err := m.Client.Machine.Deploy(machine.SystemID, &entity.MachineDeployParams{
-		Comment:      "vJailbreak: Deploying machine with cloud-init script",
+		Comment:      "Stellaris Migrate: Deploying machine with cloud-init script",
 		UserData:     cloudInitScript,
 		DistroSeries: OSRelease,
 	})
@@ -223,7 +223,7 @@ func (m *MaasClient) Reclaim(ctx context.Context, req api.ReclaimBMRequest) erro
 		// Release the machine
 		logrus.Infof("%s Releasing machine %s", ctx, systemID)
 		_, err = m.Client.Machine.Release(systemID, &entity.MachineReleaseParams{
-			Comment: "vJailbreak: Releasing machine for re-deployment",
+			Comment: "Stellaris Migrate: Releasing machine for re-deployment",
 			Erase:   eraseDisk,
 		})
 		if err != nil {
@@ -242,7 +242,7 @@ func (m *MaasClient) Reclaim(ctx context.Context, req api.ReclaimBMRequest) erro
 	// Deploy the machine again
 	logrus.Infof("%s Deploying machine %s", ctx, systemID)
 	_, err = m.Client.Machine.Deploy(systemID, &entity.MachineDeployParams{
-		Comment:      "vJailbreak: Deploying machine with cloud-init script",
+		Comment:      "Stellaris Migrate: Deploying machine with cloud-init script",
 		UserData:     cloudInitScript,
 		DistroSeries: bootSource.Release,
 	})

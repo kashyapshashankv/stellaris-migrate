@@ -30,7 +30,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	scope "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
@@ -54,7 +54,7 @@ func (r *VMwareCredsReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	ctxlog := log.FromContext(ctx)
 
 	// Get the VMwareCreds object
-	vmwcreds := &vjailbreakv1alpha1.VMwareCreds{}
+	vmwcreds := &migratev1alpha1.VMwareCreds{}
 	if err := r.Get(ctx, req.NamespacedName, vmwcreds); err != nil {
 		if apierrors.IsNotFound(err) {
 			ctxlog.Info("Received ignorable event for a recently deleted VMWareCreds.")
@@ -153,6 +153,6 @@ func (r *VMwareCredsReconciler) reconcileDelete(ctx context.Context, scope *scop
 // SetupWithManager sets up the controller with the Manager.
 func (r *VMwareCredsReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.VMwareCreds{}).
+		For(&migratev1alpha1.VMwareCreds{}).
 		Complete(r)
 }

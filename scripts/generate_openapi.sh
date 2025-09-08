@@ -25,7 +25,7 @@ echo "Building OpenAPI document..."
 cat > "$OUTPUT_OPENAPI" <<EOF
 openapi: 3.0.0
 info:
-  title: vJailbreak API's
+  title: Stellaris Migrate API's
   version: $VERSION
 paths:
 EOF

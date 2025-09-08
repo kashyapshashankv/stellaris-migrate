@@ -21,14 +21,14 @@ import (
 
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 )
 
-var _ = ginkgo.Describe("VjailbreakNode Controller", func() {
+var _ = ginkgo.Describe("StellarisMigrateNode Controller", func() {
 	ginkgo.Context("When reconciling a resource", func() {
 		const resourceName = "test-resource"
 
@@ -38,13 +38,13 @@ var _ = ginkgo.Describe("VjailbreakNode Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		vjailbreaknode := &vjailbreakv1alpha1.VjailbreakNode{}
+		stellarismigratenode := &migratev1alpha1.StellarisMigrateNode{}
 
 		ginkgo.BeforeEach(func() {
-			ginkgo.By("creating the custom resource for the Kind VjailbreakNode")
-			err := k8sClient.Get(ctx, typeNamespacedName, vjailbreaknode)
+			ginkgo.By("creating the custom resource for the Kind StellarisMigrateNode")
+			err := k8sClient.Get(ctx, typeNamespacedName, stellarismigratenode)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.VjailbreakNode{
+				resource := &migratev1alpha1.StellarisMigrateNode{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -57,17 +57,17 @@ var _ = ginkgo.Describe("VjailbreakNode Controller", func() {
 
 		ginkgo.AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &vjailbreakv1alpha1.VjailbreakNode{}
+			resource := &migratev1alpha1.StellarisMigrateNode{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 
-			ginkgo.By("Cleanup the specific resource instance VjailbreakNode")
+			ginkgo.By("Cleanup the specific resource instance StellarisMigrateNode")
 			gomega.Expect(k8sClient.Delete(ctx, resource)).To(gomega.Succeed())
 		})
 
 		ginkgo.It("should successfully reconcile the resource", func() {
 			ginkgo.By("Reconciling the created resource")
-			controllerReconciler := &VjailbreakNodeReconciler{
+			controllerReconciler := &StellarisMigrateNodeReconciler{
 				Client: k8sClient,
 				Scheme: k8sClient.Scheme(),
 			}

@@ -18,12 +18,12 @@ endif
 VERSION = $(RELEASE_VER)-$(GIT_SHA)
 
 export REGISTRY ?= quay.io
-export REPO ?= platform9
+export REPO ?= stellaris
 export TAG ?= $(VERSION)
-export UI_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-ui:${TAG}
+export UI_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-ui:${TAG}
 export V2V_IMG ?= ${REGISTRY}/${REPO}/v2v-helper:${TAG}
-export CONTROLLER_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-controller:${TAG}
-export VPWNED_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-vpwned:${TAG}
+export CONTROLLER_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-controller:${TAG}
+export VPWNED_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-vpwned:${TAG}
 export RELEASE_VERSION ?= $(VERSION)
 export KUBECONFIG ?= ~/.kube/config
 export CONTAINER_TOOL ?= docker
@@ -42,16 +42,16 @@ v2v-helper:
 test-v2v-helper:
 	cd v2v-helper && CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go test ./... -v
 
-.PHONY: vjail-controller
-vjail-controller: v2v-helper
+.PHONY: stellaris-migrate-controller
+stellaris-migrate-controller: v2v-helper
 	make -C k8s/migration/ docker-build
 
-.PHONY: vjail-controller-only
-vjail-controller-only:
+.PHONY: stellaris-migrate-controller-only
+stellaris-migrate-controller-only:
 	make -C k8s/migration/ docker-build
 
 .PHONY: generate-manifests
-generate-manifests: vjail-controller ui
+generate-manifests: stellaris-migrate-controller ui
 	rm -rf image_builder/deploy && mkdir -p image_builder/deploy && chmod 755 image_builder/deploy
 	envsubst < ui/deploy/ui.yaml > image_builder/deploy/01ui.yaml
 	envsubst < image_builder/configs/version-config.yaml > image_builder/deploy/version-config.yaml
@@ -69,7 +69,7 @@ build-installer:
 docker-build-image: generate-manifests
 	rm -rf artifacts/ && mkdir artifacts/
 	cp -r k8s/kube-prometheus image_builder/deploy/
-	docker build --platform linux/amd64 --output=artifacts/ -t vjailbreak-image:local image_builder/ 
+	docker build --platform linux/amd64 --output=artifacts/ -t stellaris-migrate-image:local image_builder/ 
 
 .PHONY: lint
 lint:
@@ -78,7 +78,7 @@ lint:
 .PHONY: build-image
 build-image: generate-manifests
 	rm -rf artifacts/ && mkdir artifacts/
-	docker build --platform linux/amd64 --output=artifacts/ -t vjailbreak-image:local image_builder/ 
+	docker build --platform linux/amd64 --output=artifacts/ -t stellaris-migrate-image:local image_builder/ 
 
 run-local:
 	cd k8s/migration/cmd/ && go run main.go --kubeconfig ${KUBECONFIG} --local true

@@ -1,5 +1,3 @@
-// Copyright 2024 The vjailbreak authors
-
 package vm
 
 import (

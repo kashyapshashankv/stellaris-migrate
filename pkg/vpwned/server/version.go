@@ -44,7 +44,7 @@ type UpgradeProgress struct {
 	EndTime        *time.Time
 }
 
-const progressConfigMapName = "vjailbreak-upgrade-progress"
+const progressConfigMapName = "stellaris-migrate-upgrade-progress"
 
 var (
 	upgradeProgress *UpgradeProgress
@@ -54,19 +54,19 @@ var (
 			Namespace:     "migration-system",
 			Name:          "migration-controller-manager",
 			ContainerName: "manager",
-			ImagePrefix:   "quay.io/platform9/vjailbreak-controller",
+			ImagePrefix:   "quay.io/stellaris/stellaris-migrate-controller",
 		},
 		{
 			Namespace:     "migration-system",
 			Name:          "migration-vpwned-sdk",
 			ContainerName: "vpwned",
-			ImagePrefix:   "quay.io/platform9/vjailbreak-vpwned",
+			ImagePrefix:   "quay.io/stellaris/stellaris-migrate-vpwned",
 		},
 		{
 			Namespace:     "migration-system",
-			Name:          "vjailbreak-ui",
-			ContainerName: "vjailbreak-ui-container",
-			ImagePrefix:   "quay.io/platform9/vjailbreak-ui",
+			Name:          "stellaris-migrate-ui",
+			ContainerName: "stellaris-migrate-ui-container",
+			ImagePrefix:   "quay.io/stellaris/stellaris-migrate-ui",
 		},
 	}
 )
@@ -260,7 +260,7 @@ func (s *VpwnedVersion) InitiateUpgrade(ctx context.Context, in *api.UpgradeRequ
 
 				var uiConfig DeploymentConfig
 				for _, cfg := range deploymentConfigs {
-					if cfg.Name == "vjailbreak-ui" {
+					if cfg.Name == "stellaris-migrate-ui" {
 						uiConfig = cfg
 						break
 					}
@@ -640,7 +640,7 @@ func checkAndDeleteRollingMigrationPlans(ctx context.Context, restConfig *rest.C
 }
 
 func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool, string) {
-	gvr := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
+	gvr := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellaris-migrate-nodes"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err != nil {
 		return false, "Failed to create dynamic client"
@@ -648,11 +648,11 @@ func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool,
 
 	list, err := dynamicClient.Resource(gvr).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err != nil {
-		return false, "Failed to list VjailbreakNodes"
+		return false, "Failed to list StellarisMigrateNodes"
 	}
 
 	for _, item := range list.Items {
-		if item.GetName() == "vjailbreak-master" {
+		if item.GetName() == "stellaris-migrate-master" {
 			continue
 		}
 		_ = dynamicClient.Resource(gvr).Namespace("migration-system").Delete(ctx, item.GetName(), metav1.DeleteOptions{})
@@ -663,10 +663,10 @@ func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool,
 	for start := time.Now(); time.Since(start) < timeout; {
 		list, err := dynamicClient.Resource(gvr).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 		if err != nil {
-			return false, "Failed to re-list VjailbreakNodes"
+			return false, "Failed to re-list StellarisMigrateNodes"
 		}
 
-		if len(list.Items) == 0 || (len(list.Items) == 1 && list.Items[0].GetName() == "vjailbreak-master") {
+		if len(list.Items) == 0 || (len(list.Items) == 1 && list.Items[0].GetName() == "stellaris-migrate-master") {
 			return true, "Agents scaled down"
 		}
 		time.Sleep(interval)

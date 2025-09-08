@@ -7,5 +7,5 @@ data:
   version: ${TAG}
   upgradeAvailable: "false"
   upgradeVersion: ""
-  githubOwner: ""  # Optional: Defaults to "platform9" if not set
-  githubRepo: "" # Optional: Defaults to "vjailbreak" if not set
+  githubOwner: ""  # Optional: Defaults to "kashyapshashankv" if not set
+  githubRepo: "" # Optional: Defaults to "stellaris-migrate" if not set

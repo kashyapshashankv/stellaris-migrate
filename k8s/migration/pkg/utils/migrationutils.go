@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -19,13 +19,13 @@ import (
 // MigrationUtils defines the interface for migration utility functions.
 type MigrationUtils interface {
 	// CreateValidatedCondition creates a validated condition for the migration.
-	CreateValidatedCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
+	CreateValidatedCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
 
 	// CreateDataCopyCondition creates a data copy condition for the migration.
-	CreateDataCopyCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
+	CreateDataCopyCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
 
 	// CreateMigratingCondition creates a migrated condition for the migration.
-	CreateMigratingCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
+	CreateMigratingCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition
 
 	// SetCutoverLabel sets the cutover label based on the initiateCutover flag.
 	SetCutoverLabel(initiateCutover bool, currentLabel string) string
@@ -34,7 +34,7 @@ type MigrationUtils interface {
 	SplitEventStringOnComma(input string) (string, string)
 
 	// GetSatusConditions returns the status conditions of the migration.
-	GetSatusConditions(migration *vjailbreakv1alpha1.Migration) []corev1.PodCondition
+	GetSatusConditions(migration *migratev1alpha1.Migration) []corev1.PodCondition
 
 	// GetConditonIndex returns the index of the condition in the conditions slice.
 	GetConditonIndex(conditions []corev1.PodCondition, conditionType corev1.PodConditionType, reasons ...string) int
@@ -50,7 +50,7 @@ type MigrationUtils interface {
 }
 
 // CreateValidatedCondition creates a validated condition for a migration
-func CreateValidatedCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
+func CreateValidatedCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
 	existingConditions := migration.Status.Conditions
 	for i := 0; i < len(eventList.Items); i++ {
 		if eventList.Items[i].Reason != constants.MigrationReason || eventList.Items[i].Message != "Creating volumes in OpenStack" {
@@ -75,7 +75,7 @@ func CreateValidatedCondition(migration *vjailbreakv1alpha1.Migration, eventList
 }
 
 // CreateDataCopyCondition creates a data copy condition for a migration
-func CreateDataCopyCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
+func CreateDataCopyCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
 	existingConditions := migration.Status.Conditions
 	for i := 0; i < len(eventList.Items); i++ {
 		if eventList.Items[i].Reason != constants.MigrationReason || !strings.Contains(eventList.Items[i].Message, "Copying disk") {
@@ -100,7 +100,7 @@ func CreateDataCopyCondition(migration *vjailbreakv1alpha1.Migration, eventList 
 }
 
 // CreateMigratingCondition creates a migrating condition for a migration
-func CreateMigratingCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
+func CreateMigratingCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
 	existingConditions := migration.Status.Conditions
 	for i := 0; i < len(eventList.Items); i++ {
 		if eventList.Items[i].Reason != constants.MigrationReason || eventList.Items[i].Message != "Converting disk" {
@@ -125,7 +125,7 @@ func CreateMigratingCondition(migration *vjailbreakv1alpha1.Migration, eventList
 
 // CreateFailedCondition creates or updates a failed condition for a migration based on events.
 // It analyzes event logs to identify failure reasons and updates the migration's status conditions accordingly.
-func CreateFailedCondition(migration *vjailbreakv1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
+func CreateFailedCondition(migration *migratev1alpha1.Migration, eventList *corev1.EventList) []corev1.PodCondition {
 	existingConditions := migration.Status.Conditions
 	for i := 0; i < len(eventList.Items); i++ {
 		if eventList.Items[i].Reason != constants.MigrationReason || !strings.Contains(eventList.Items[i].Message, "failed to") {
@@ -169,7 +169,7 @@ func SplitEventStringOnComma(input string) (reason, message string) {
 }
 
 // GetSatusConditions returns the status conditions of a migration
-func GetSatusConditions(migration *vjailbreakv1alpha1.Migration) []corev1.PodCondition {
+func GetSatusConditions(migration *migratev1alpha1.Migration) []corev1.PodCondition {
 	// GetSatusConditions returns the status conditions of a migration
 	return migration.Status.Conditions
 }

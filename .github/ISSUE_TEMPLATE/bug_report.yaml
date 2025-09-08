@@ -1,5 +1,5 @@
 name: 🐛 Bug Report
-description: Report a bug encountered while using vJailbreak
+description: Report a bug encountered while using Stellaris Migrate
 body:
   - type: textarea
     id: problem
@@ -22,7 +22,7 @@ body:
     id: env_version
     attributes:
       label: Environment
-      placeholder: "The version of vJailbreak or controllers used in the environment."
+      placeholder: "The version of Stellaris Migrate or controllers used in the environment."
     validations:
       required: true
 

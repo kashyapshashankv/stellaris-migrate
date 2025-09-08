@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,7 +15,7 @@ import (
 type OpenstackCredsScopeParams struct {
 	Logger         logr.Logger
 	Client         client.Client
-	OpenstackCreds *vjailbreakv1alpha1.OpenstackCreds
+	OpenstackCreds *migratev1alpha1.OpenstackCreds
 }
 
 // NewOpenstackCredsScope creates a new OpenstackCredsScope from the supplied parameters.
@@ -36,7 +36,7 @@ func NewOpenstackCredsScope(params OpenstackCredsScopeParams) (*OpenstackCredsSc
 type OpenstackCredsScope struct {
 	logr.Logger
 	Client         client.Client
-	OpenstackCreds *vjailbreakv1alpha1.OpenstackCreds
+	OpenstackCreds *migratev1alpha1.OpenstackCreds
 }
 
 // Close closes the current scope persisting the OpenstackCreds configuration and status.

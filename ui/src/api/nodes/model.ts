@@ -1,13 +1,13 @@
 export interface NodeList {
   apiVersion: string
   items: NodeItem[]
-  kind: "VjailbreakNodeList"
+  kind: "StellarisMigrateNodeList"
   metadata: NodeListMetadata
 }
 
 export interface NodeItem {
   apiVersion: string
-  kind: "VjailbreakNode"
+  kind: "StellarisMigrateNode"
   metadata: ItemMetadata
   spec: Spec
   status?: Status

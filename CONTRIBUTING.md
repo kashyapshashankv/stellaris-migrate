@@ -1,6 +1,6 @@
-# Contributing to vJailbreak
+# Contributing to Stellaris Migrate
 
-Thank you for your interest in contributing to vJailbreak! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to Stellaris Migrate! This document provides guidelines and instructions for contributing to the project.
 
 ## Code of Conduct
 
@@ -19,7 +19,7 @@ By participating in this project, you agree to abide by our code of conduct. Ple
 
 ### Prerequisites
 
-The same prerequisites apply for development as for using vJailbreak:
+The same prerequisites apply for development as for using Stellaris Migrate:
 
 - VMware vCenter with appropriate permissions
 - OpenStack-compliant cloud target 
@@ -31,7 +31,7 @@ The same prerequisites apply for development as for using vJailbreak:
 1. Clone the repository:
    ```bash
    git clone https://github.com/kashyapshashankv/stellaris-migrate.git
-   cd vjailbreak
+   cd stellaris-migrate
    ```
 
 2. Install dependencies:
@@ -74,6 +74,6 @@ If you find a bug or have a feature request:
 
 ## License
 
-By contributing to vJailbreak, you agree that your contributions will be licensed under the project's [Business Source License 1.1](LICENSE).
+By contributing to Stellaris Migrate, you agree that your contributions will be licensed under the project's [Business Source License 1.1](LICENSE).
 
-Thank you for contributing to vJailbreak!
+Thank you for contributing to Stellaris Migrate!

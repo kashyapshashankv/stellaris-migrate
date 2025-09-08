@@ -1,9 +1,9 @@
 apiVersion: migrate.k8s.stellaris.io/v1alpha1
-kind: VjailbreakNode
+kind: StellarisMigrateNode
 metadata:
   labels:
     app.kubernetes.io/name: migration
     app.kubernetes.io/managed-by: kustomize
-  name: vjailbreaknode-sample
+  name: stellarismigratenode-sample
 spec:
   # TODO(user): Add fields here

@@ -1,5 +1,3 @@
-// Copyright © 2024 The vjailbreak authors
-
 package migrate
 
 import (
@@ -308,11 +306,11 @@ func (migobj *Migrate) LiveReplicateDisks(ctx context.Context, vminfo vm.VMInfo)
 		}
 	}
 
-	vcenterSettings, err := utils.GetVjailbreakSettings(ctx, migobj.K8sClient)
+	vcenterSettings, err := utils.GetMigrateSettings(ctx, migobj.K8sClient)
 	if err != nil {
 		return vminfo, errors.Wrap(err, "failed to get vcenter settings")
 	}
-	utils.PrintLog(fmt.Sprintf("Fetched vjailbreak settings for Changed Blocks Copy Iteration Threshold: %d", vcenterSettings.ChangedBlocksCopyIterationThreshold))
+	utils.PrintLog(fmt.Sprintf("Fetched stellaris-migrate settings for Changed Blocks Copy Iteration Threshold: %d", vcenterSettings.ChangedBlocksCopyIterationThreshold))
 
 	// Check if migration has admin cutover if so don't copy any more changed blocks
 	adminInitiatedCutover := migobj.CheckIfAdminCutoverSelected()
@@ -855,22 +853,22 @@ func (migobj *Migrate) CreateTargetInstance(vminfo vm.VMInfo) error {
 		}
 	}
 
-	// Get vjailbreak settings
-	vjailbreakSettings, err := utils.GetVjailbreakSettings(context.Background(), migobj.K8sClient)
+	// Get stellaris-migrate settings
+	migrateSettings, err := utils.GetMigrateSettings(context.Background(), migobj.K8sClient)
 	if err != nil {
-		return errors.Wrap(err, "failed to get vjailbreak settings")
+		return errors.Wrap(err, "failed to get stellaris-migrate settings")
 	}
-	utils.PrintLog(fmt.Sprintf("Fetched vjailbreak settings for VM active wait retry limit: %d, VM active wait interval seconds: %d", vjailbreakSettings.VMActiveWaitRetryLimit, vjailbreakSettings.VMActiveWaitIntervalSeconds))
+	utils.PrintLog(fmt.Sprintf("Fetched stellaris-migrate settings for VM active wait retry limit: %d, VM active wait interval seconds: %d", migrateSettings.VMActiveWaitRetryLimit, migrateSettings.VMActiveWaitIntervalSeconds))
 
 	// Create a new VM in OpenStack
-	newVM, err := openstackops.CreateVM(flavor, networkids, portids, vminfo, migobj.TargetAvailabilityZone, securityGroupIDs, *vjailbreakSettings, migobj.UseFlavorless)
+	newVM, err := openstackops.CreateVM(flavor, networkids, portids, vminfo, migobj.TargetAvailabilityZone, securityGroupIDs, *migrateSettings, migobj.UseFlavorless)
 	if err != nil {
 		return errors.Wrap(err, "failed to create VM")
 	}
 
 	// Wait for VM to become active
-	for i := 0; i < vjailbreakSettings.VMActiveWaitRetryLimit; i++ {
-		migobj.logMessage(fmt.Sprintf("Waiting for VM to become active: %d/%d retries\n", i+1, vjailbreakSettings.VMActiveWaitRetryLimit))
+	for i := 0; i < migrateSettings.VMActiveWaitRetryLimit; i++ {
+		migobj.logMessage(fmt.Sprintf("Waiting for VM to become active: %d/%d retries\n", i+1, migrateSettings.VMActiveWaitRetryLimit))
 		active, err := openstackops.WaitUntilVMActive(newVM.ID)
 		if err != nil {
 			return errors.Wrap(err, "failed to wait for VM to become active")
@@ -878,10 +876,10 @@ func (migobj *Migrate) CreateTargetInstance(vminfo vm.VMInfo) error {
 		if active {
 			break
 		}
-		if i == vjailbreakSettings.VMActiveWaitRetryLimit-1 {
-			return errors.Errorf("VM is not active after %d retries", vjailbreakSettings.VMActiveWaitRetryLimit)
+		if i == migrateSettings.VMActiveWaitRetryLimit-1 {
+			return errors.Errorf("VM is not active after %d retries", migrateSettings.VMActiveWaitRetryLimit)
 		}
-		time.Sleep(time.Duration(vjailbreakSettings.VMActiveWaitIntervalSeconds) * time.Second)
+		time.Sleep(time.Duration(migrateSettings.VMActiveWaitIntervalSeconds) * time.Second)
 	}
 
 	migobj.logMessage(fmt.Sprintf("VM created successfully: ID: %s", newVM.ID))
@@ -1152,7 +1150,7 @@ func (migobj *Migrate) MigrateVM(ctx context.Context) error {
 		vminfo.RDMDisks[idx].VolumeId = volumeID
 	}
 
-	vcenterSettings, err := utils.GetVjailbreakSettings(ctx, migobj.K8sClient)
+	vcenterSettings, err := utils.GetMigrateSettings(ctx, migobj.K8sClient)
 	if err != nil {
 		return errors.Wrap(err, "failed to get vcenter settings")
 	}

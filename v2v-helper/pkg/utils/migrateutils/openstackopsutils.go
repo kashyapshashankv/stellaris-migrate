@@ -434,7 +434,7 @@ func (osclient *OpenStackClients) CreatePort(network *networks.Network, mac, ip,
 	return port, nil
 }
 
-func (osclient *OpenStackClients) CreateVM(flavor *flavors.Flavor, networkIDs, portIDs []string, vminfo vm.VMInfo, availabilityZone string, securityGroups []string, vjailbreakSettings utils.VjailbreakSettings, useFlavorless bool) (*servers.Server, error) {
+func (osclient *OpenStackClients) CreateVM(flavor *flavors.Flavor, networkIDs, portIDs []string, vminfo vm.VMInfo, availabilityZone string, securityGroups []string, migrateSettings utils.VjailbreakSettings, useFlavorless bool) (*servers.Server, error) {
 	uuid := ""
 	bootableDiskIndex := 0
 	for idx, disk := range vminfo.VMDisks {
@@ -506,7 +506,7 @@ func (osclient *OpenStackClients) CreateVM(flavor *flavors.Flavor, networkIDs, p
 		return nil, fmt.Errorf("failed to create server: %s", err)
 	}
 
-	err = servers.WaitForStatus(osclient.ComputeClient, server.ID, "ACTIVE", vjailbreakSettings.VMActiveWaitRetryLimit*vjailbreakSettings.VMActiveWaitIntervalSeconds)
+	err = servers.WaitForStatus(osclient.ComputeClient, server.ID, "ACTIVE", migrateSettings.VMActiveWaitRetryLimit*migrateSettings.VMActiveWaitIntervalSeconds)
 	if err != nil {
 		return nil, fmt.Errorf("failed to wait for server to become active: %s", err)
 	}

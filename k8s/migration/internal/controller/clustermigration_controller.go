@@ -31,7 +31,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	k8stypes "k8s.io/apimachinery/pkg/types"
 )
@@ -52,7 +52,7 @@ func (r *ClusterMigrationReconciler) Reconcile(ctx context.Context, req ctrl.Req
 	ctxlog := log.FromContext(ctx).WithName(constants.ClusterMigrationControllerName)
 	ctxlog.Info("Starting reconciliation", "clustermigration", req.NamespacedName)
 
-	clusterMigration := &vjailbreakv1alpha1.ClusterMigration{}
+	clusterMigration := &migratev1alpha1.ClusterMigration{}
 	if err := r.Get(ctx, req.NamespacedName, clusterMigration); err != nil {
 		if apierrors.IsNotFound(err) {
 			ctxlog.Info("Resource not found, likely deleted", "clustermigration", req.NamespacedName)
@@ -63,7 +63,7 @@ func (r *ClusterMigrationReconciler) Reconcile(ctx context.Context, req ctrl.Req
 	}
 	ctxlog.V(1).Info("Retrieved ClusterMigration resource", "clustermigration", req.NamespacedName, "resourceVersion", clusterMigration.ResourceVersion)
 
-	rollingMigrationPlan := &vjailbreakv1alpha1.RollingMigrationPlan{}
+	rollingMigrationPlan := &migratev1alpha1.RollingMigrationPlan{}
 	rollingMigrationPlanKey := client.ObjectKey{Namespace: clusterMigration.Namespace, Name: clusterMigration.Spec.RollingMigrationPlanRef.Name}
 	ctxlog.V(1).Info("Fetching referenced RollingMigrationPlan", "rollingMigrationPlan", rollingMigrationPlanKey)
 	if err := r.Get(ctx, rollingMigrationPlanKey, rollingMigrationPlan); err != nil {
@@ -115,18 +115,18 @@ func (r *ClusterMigrationReconciler) reconcileNormal(ctx context.Context, scope 
 	}
 	switch clusterMigration.Status.Phase {
 	case "":
-		log.Info("Initializing ClusterMigration phase", "newPhase", vjailbreakv1alpha1.ClusterMigrationPhasePending)
-		clusterMigration.Status.Phase = vjailbreakv1alpha1.ClusterMigrationPhasePending
-	case vjailbreakv1alpha1.ClusterMigrationPhaseSucceeded:
+		log.Info("Initializing ClusterMigration phase", "newPhase", migratev1alpha1.ClusterMigrationPhasePending)
+		clusterMigration.Status.Phase = migratev1alpha1.ClusterMigrationPhasePending
+	case migratev1alpha1.ClusterMigrationPhaseSucceeded:
 		log.Info("Cluster migration already succeeded")
 		return ctrl.Result{}, nil
-	case vjailbreakv1alpha1.ClusterMigrationPhaseFailed:
+	case migratev1alpha1.ClusterMigrationPhaseFailed:
 		log.Info("Cluster migration already failed")
 		return ctrl.Result{}, nil
 	}
 
 	if utils.IsClusterMigrationPaused(ctx, clusterMigration.Name, scope.Client) {
-		clusterMigration.Status.Phase = vjailbreakv1alpha1.ClusterMigrationPhasePaused
+		clusterMigration.Status.Phase = migratev1alpha1.ClusterMigrationPhasePaused
 		if err := scope.Client.Status().Update(ctx, clusterMigration); err != nil {
 			return ctrl.Result{}, errors.Wrap(err, "failed to update cluster migration status")
 		}
@@ -169,16 +169,16 @@ func (r *ClusterMigrationReconciler) reconcileNormal(ctx context.Context, scope 
 		log.Info("Retrieved ESXIMigration", "esxiName", esxi, "esximigration", esxiMigration.Name, "phase", esxiMigration.Status.Phase)
 
 		switch esxiMigration.Status.Phase {
-		case vjailbreakv1alpha1.ESXIMigrationPhaseFailed:
+		case migratev1alpha1.ESXIMigrationPhaseFailed:
 			log.Info("ESXIMigration failed, updating ClusterMigration status", "esxiName", esxi, "message", esxiMigration.Status.Message)
-			err = r.UpdateClusterMigrationStatus(ctx, scope, vjailbreakv1alpha1.ClusterMigrationPhaseFailed, esxiMigration.Status.Message, esxi)
+			err = r.UpdateClusterMigrationStatus(ctx, scope, migratev1alpha1.ClusterMigrationPhaseFailed, esxiMigration.Status.Message, esxi)
 			if err != nil {
-				log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", vjailbreakv1alpha1.ClusterMigrationPhaseFailed)
+				log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", migratev1alpha1.ClusterMigrationPhaseFailed)
 				return ctrl.Result{}, errors.Wrap(err, "failed to update cluster migration status")
 			}
 			log.Info("Successfully updated ClusterMigration status to failed")
 			return ctrl.Result{}, nil
-		case vjailbreakv1alpha1.ESXIMigrationPhaseSucceeded:
+		case migratev1alpha1.ESXIMigrationPhaseSucceeded:
 			if i == len(clusterMigration.Spec.ESXIMigrationSequence)-1 {
 				if i == 0 {
 					err = handleVMMigrations(ctx, scope)
@@ -188,9 +188,9 @@ func (r *ClusterMigrationReconciler) reconcileNormal(ctx context.Context, scope 
 					}
 				}
 				log.Info("All ESXIMigrations succeeded, updating ClusterMigration status to succeeded")
-				err = r.UpdateClusterMigrationStatus(ctx, scope, vjailbreakv1alpha1.ClusterMigrationPhaseSucceeded, "All ESXIMigrations succeeded", "")
+				err = r.UpdateClusterMigrationStatus(ctx, scope, migratev1alpha1.ClusterMigrationPhaseSucceeded, "All ESXIMigrations succeeded", "")
 				if err != nil {
-					log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", vjailbreakv1alpha1.ClusterMigrationPhaseSucceeded)
+					log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", migratev1alpha1.ClusterMigrationPhaseSucceeded)
 					return ctrl.Result{}, errors.Wrap(err, "failed to update cluster migration status")
 				}
 				log.Info("Successfully updated ClusterMigration status to succeeded")
@@ -198,16 +198,16 @@ func (r *ClusterMigrationReconciler) reconcileNormal(ctx context.Context, scope 
 			}
 			log.Info("ESXIMigration succeeded, continuing to next ESXi", "esxiName", esxi)
 			continue
-		case vjailbreakv1alpha1.ESXIMigrationPhaseWaiting,
-			vjailbreakv1alpha1.ESXIMigrationPhaseWaitingForVMsToBeMoved,
-			vjailbreakv1alpha1.ESXIMigrationPhaseAssigningRole,
-			vjailbreakv1alpha1.ESXIMigrationPhaseConvertingToPCDHost,
-			vjailbreakv1alpha1.ESXIMigrationPhaseCordoned,
-			vjailbreakv1alpha1.ESXIMigrationPhaseInMaintenanceMode:
+		case migratev1alpha1.ESXIMigrationPhaseWaiting,
+			migratev1alpha1.ESXIMigrationPhaseWaitingForVMsToBeMoved,
+			migratev1alpha1.ESXIMigrationPhaseAssigningRole,
+			migratev1alpha1.ESXIMigrationPhaseConvertingToPCDHost,
+			migratev1alpha1.ESXIMigrationPhaseCordoned,
+			migratev1alpha1.ESXIMigrationPhaseInMaintenanceMode:
 			log.Info("ESXIMigration is running, updating ClusterMigration status", "esxiName", esxi)
-			err = r.UpdateClusterMigrationStatus(ctx, scope, vjailbreakv1alpha1.ClusterMigrationPhaseRunning, esxiMigration.Status.Message, esxi)
+			err = r.UpdateClusterMigrationStatus(ctx, scope, migratev1alpha1.ClusterMigrationPhaseRunning, esxiMigration.Status.Message, esxi)
 			if err != nil {
-				log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", vjailbreakv1alpha1.ClusterMigrationPhaseRunning)
+				log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", migratev1alpha1.ClusterMigrationPhaseRunning)
 				return ctrl.Result{}, errors.Wrap(err, "failed to update cluster migration status")
 			}
 			log.Info("Successfully updated ClusterMigration status to running")
@@ -216,9 +216,9 @@ func (r *ClusterMigrationReconciler) reconcileNormal(ctx context.Context, scope 
 		}
 
 		log.Info("ESXIMigration is in another state, updating ClusterMigration status to pending", "esxiName", esxi, "esxiPhase", esxiMigration.Status.Phase)
-		err = r.UpdateClusterMigrationStatus(ctx, scope, vjailbreakv1alpha1.ClusterMigrationPhasePending, esxiMigration.Status.Message, esxi)
+		err = r.UpdateClusterMigrationStatus(ctx, scope, migratev1alpha1.ClusterMigrationPhasePending, esxiMigration.Status.Message, esxi)
 		if err != nil {
-			log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", vjailbreakv1alpha1.ClusterMigrationPhasePending)
+			log.Error(err, "Failed to update ClusterMigration status", "desiredPhase", migratev1alpha1.ClusterMigrationPhasePending)
 			return ctrl.Result{}, errors.Wrap(err, "failed to update cluster migration status")
 		}
 		log.Info("Successfully updated ClusterMigration status to pending")
@@ -265,13 +265,13 @@ func (r *ClusterMigrationReconciler) reconcileDelete(ctx context.Context, scope 
 // SetupWithManager sets up the controller with the Manager.
 func (r *ClusterMigrationReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.ClusterMigration{}).
+		For(&migratev1alpha1.ClusterMigration{}).
 		Complete(r)
 }
 
 // UpdateClusterMigrationStatus updates the status, message, and current ESXi host for a ClusterMigration resource.
 // It logs the status change and persists the update to the Kubernetes API server.
-func (r *ClusterMigrationReconciler) UpdateClusterMigrationStatus(ctx context.Context, scope *scope.ClusterMigrationScope, status vjailbreakv1alpha1.ClusterMigrationPhase, message, currentESXi string) error {
+func (r *ClusterMigrationReconciler) UpdateClusterMigrationStatus(ctx context.Context, scope *scope.ClusterMigrationScope, status migratev1alpha1.ClusterMigrationPhase, message, currentESXi string) error {
 	log := scope.Logger
 	log.V(1).Info("Updating ClusterMigration status",
 		"previousPhase", scope.ClusterMigration.Status.Phase,
@@ -288,7 +288,7 @@ func (r *ClusterMigrationReconciler) UpdateClusterMigrationStatus(ctx context.Co
 // It aggregates the state of all ESXi migrations to determine the overall cluster migration status.
 func (r *ClusterMigrationReconciler) CheckAndUpdateClusterMigrationStatus(ctx context.Context, scope *scope.ClusterMigrationScope) error {
 	log := scope.Logger
-	esxiMigrationList := &vjailbreakv1alpha1.ESXIMigrationList{}
+	esxiMigrationList := &migratev1alpha1.ESXIMigrationList{}
 	if err := r.List(ctx, esxiMigrationList, client.InNamespace(scope.ClusterMigration.Namespace),
 		client.MatchingLabels{constants.ClusterMigrationLabel: scope.ClusterMigration.Name}); err != nil {
 		return err
@@ -296,7 +296,7 @@ func (r *ClusterMigrationReconciler) CheckAndUpdateClusterMigrationStatus(ctx co
 
 	// for _, esxiMigration := range esxiMigrationList.Items {
 	// 	switch esxiMigration.Status.Phase {
-	// 	case vjailbreakv1alpha1.ESXIMigrationPhasePending:
+	// 	case migratev1alpha1.ESXIMigrationPhasePending:
 
 	// 	}
 	// }
@@ -322,7 +322,7 @@ func handleVMMigrations(ctx context.Context, scope *scope.ClusterMigrationScope)
 		// We disable selection of other VMs from the UI to prevent this.
 		// TODO(vPwned): Add backend validation to prevent this.
 		// This is potentially a problem when we support multiple clusters.
-		migrationTemplate := &vjailbreakv1alpha1.MigrationTemplate{}
+		migrationTemplate := &migratev1alpha1.MigrationTemplate{}
 		if err := scope.Client.Get(ctx, k8stypes.NamespacedName{
 			Name:      scope.RollingMigrationPlan.Spec.MigrationTemplate,
 			Namespace: constants.NamespaceMigrationSystem},
@@ -356,7 +356,7 @@ func countSuccessfulESXIMigrations(ctx context.Context, scope *scope.ClusterMigr
 			log.Error(err, "Failed to get ESXIMigration", "esxiName", esxi)
 			return 0, errors.Wrap(err, "failed to get esxi migration")
 		}
-		if esxiMigration.Status.Phase == vjailbreakv1alpha1.ESXIMigrationPhaseSucceeded {
+		if esxiMigration.Status.Phase == migratev1alpha1.ESXIMigrationPhaseSucceeded {
 			count++
 		}
 	}

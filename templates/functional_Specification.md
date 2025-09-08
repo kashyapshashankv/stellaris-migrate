@@ -1,5 +1,5 @@
 # Software Requirements Specification
-## For vJailbreak
+## For Stellaris Migrate
 
 Version 0.1  
 Prepared by <author>  

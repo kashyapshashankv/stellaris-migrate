@@ -21,7 +21,7 @@ import (
 
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -37,13 +37,13 @@ var _ = ginkgo.Describe("OpenstackCreds Controller", func() {
 			Name:      resourceName,
 			Namespace: "default",
 		}
-		openstackcreds := &vjailbreakv1alpha1.OpenstackCreds{}
+		openstackcreds := &migratev1alpha1.OpenstackCreds{}
 
 		ginkgo.BeforeEach(func() {
 			ginkgo.By("creating the custom resource for the Kind OpenstackCreds")
 			err := k8sClient.Get(ctx, typeNamespacedName, openstackcreds)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.OpenstackCreds{
+				resource := &migratev1alpha1.OpenstackCreds{
 					ObjectMeta: metav1.ObjectMeta{
 						Name: resourceName,
 					},
@@ -53,7 +53,7 @@ var _ = ginkgo.Describe("OpenstackCreds Controller", func() {
 		})
 
 		ginkgo.AfterEach(func() {
-			resource := &vjailbreakv1alpha1.OpenstackCreds{}
+			resource := &migratev1alpha1.OpenstackCreds{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 

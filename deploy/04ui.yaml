@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vjailbreak-ui
+  name: stellaris-migrate-ui
   namespace: migration-system
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vjailbreak-ui
+      app: stellaris-migrate-ui
   template:
     metadata:
       labels:
-        app: vjailbreak-ui
+        app: stellaris-migrate-ui
     spec:
       serviceAccountName: migration-controller-manager
       containers:
-        - name: vjailbreak-ui-container
-          image: platform9/vjailbreak-ui:v0.1
+        - name: stellaris-migrate-ui-container
+          image: steallaris/stellaris-migrate-ui:v0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: vjailbreak-ui-service
+  name: stellaris-migrate-ui-service
   namespace: migration-system
 spec:
   selector:
-    app: vjailbreak-ui
+    app: stellaris-migrate-ui
   type: ClusterIP
   ports:
     - protocol: TCP
@@ -38,7 +38,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vjailbreak-ui-ingress
+  name: stellaris-migrate-ui-ingress
   namespace: migration-system
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
@@ -51,14 +51,14 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: vjailbreak-ui-service
+            name: stellaris-migrate-ui-service
             port:
               number: 80
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: vjailbreak-api-ingress
+  name: stellaris-migrate-api-ingress
   namespace: default
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"

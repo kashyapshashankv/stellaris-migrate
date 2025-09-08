@@ -163,7 +163,7 @@ export const UpgradeModal = ({ show, onClose }) => {
   return (
     <React.Fragment>
       <Dialog open={show} onClose={upgradeInProgress ? undefined : onClose} maxWidth="xs" fullWidth>
-        <DialogTitle>Upgrade vJailbreak</DialogTitle>
+        <DialogTitle>Upgrade Stellaris Migrate</DialogTitle>
         <DialogContent>
           <Box mb={2}>
             <Select

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -22,7 +22,7 @@ import (
 // CanEnterMaintenanceMode checks if an ESXi host can successfully enter maintenance mode
 // with all VMs automatically migrating off to other hosts. It checks host, VM, and cluster
 // settings that could block automatic VM migration.
-func CanEnterMaintenanceMode(ctx context.Context, scope *scope.RollingMigrationPlanScope, vmwcreds *vjailbreakv1alpha1.VMwareCreds, hostName string, config RollingMigartionValidationConfig) (bool, string, error) {
+func CanEnterMaintenanceMode(ctx context.Context, scope *scope.RollingMigrationPlanScope, vmwcreds *migratev1alpha1.VMwareCreds, hostName string, config RollingMigartionValidationConfig) (bool, string, error) {
 	// List of VMs that cannot migrate
 	blockedVMs := make([]string, 0)
 	k8sClient := scope.Client
@@ -171,7 +171,7 @@ func CanEnterMaintenanceMode(ctx context.Context, scope *scope.RollingMigrationP
 
 // GetMaintenanceModeOptions creates a maintenance mode specification for the specified ESXi host
 // It configures appropriate options based on the host's capabilities, including VSAN settings
-func GetMaintenanceModeOptions(ctx context.Context, k8sClient client.Client, vmwcreds *vjailbreakv1alpha1.VMwareCreds, hostName string) (*types.HostMaintenanceSpec, error) {
+func GetMaintenanceModeOptions(ctx context.Context, k8sClient client.Client, vmwcreds *migratev1alpha1.VMwareCreds, hostName string) (*types.HostMaintenanceSpec, error) {
 	// Connect to vCenter
 	c, err := ValidateVMwareCreds(ctx, k8sClient, vmwcreds)
 	if err != nil {
@@ -304,7 +304,7 @@ func CheckVMForMaintenanceMode(vm mo.VirtualMachine) string {
 }
 
 // GetValidationConfigMapForRollingMigrationPlan retrieves the validation config map for a rolling migration plan
-func GetValidationConfigMapForRollingMigrationPlan(ctx context.Context, k8sClient client.Client, rollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan) (*corev1.ConfigMap, error) {
+func GetValidationConfigMapForRollingMigrationPlan(ctx context.Context, k8sClient client.Client, rollingMigrationPlan *migratev1alpha1.RollingMigrationPlan) (*corev1.ConfigMap, error) {
 	var rollingMigrationPlanValidationConfig corev1.ConfigMap
 	if err := k8sClient.Get(ctx, k8stypes.NamespacedName{Name: getRollingMigrationPlanValidationConfigFromConfigMapName(rollingMigrationPlan.Name), Namespace: constants.NamespaceMigrationSystem}, &rollingMigrationPlanValidationConfig); err != nil {
 		return nil, err
@@ -347,7 +347,7 @@ func getRollingMigrationPlanValidationConfigFromConfigMapName(rollingMigrationPl
 }
 
 // CreateDefaultValidationConfigMapForRollingMigrationPlan creates a default validation config map for a rolling migration plan
-func CreateDefaultValidationConfigMapForRollingMigrationPlan(ctx context.Context, k8sClient client.Client, rollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan) (*corev1.ConfigMap, error) {
+func CreateDefaultValidationConfigMapForRollingMigrationPlan(ctx context.Context, k8sClient client.Client, rollingMigrationPlan *migratev1alpha1.RollingMigrationPlan) (*corev1.ConfigMap, error) {
 	data := map[string]string{
 		"CheckDRSEnabled":                         trueString,
 		"CheckDRSIsFullyAutomated":                trueString,

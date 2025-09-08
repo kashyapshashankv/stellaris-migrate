@@ -27,7 +27,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 var _ = Describe("BMConfig Controller", func() {
@@ -40,13 +40,13 @@ var _ = Describe("BMConfig Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		bmconfig := &vjailbreakv1alpha1.BMConfig{}
+		bmconfig := &migratev1alpha1.BMConfig{}
 
 		BeforeEach(func() {
 			By("creating the custom resource for the Kind BMConfig")
 			err := k8sClient.Get(ctx, typeNamespacedName, bmconfig)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.BMConfig{
+				resource := &migratev1alpha1.BMConfig{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -59,7 +59,7 @@ var _ = Describe("BMConfig Controller", func() {
 
 		AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &vjailbreakv1alpha1.BMConfig{}
+			resource := &migratev1alpha1.BMConfig{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 

@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/resmgr"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -20,7 +20,7 @@ import (
 )
 
 // SyncPCDInfo syncs PCD info from resmgr
-func SyncPCDInfo(ctx context.Context, k8sClient client.Client, openstackCreds vjailbreakv1alpha1.OpenstackCreds) error {
+func SyncPCDInfo(ctx context.Context, k8sClient client.Client, openstackCreds migratev1alpha1.OpenstackCreds) error {
 	OpenStackCredentials, err := GetOpenstackCredsInfo(ctx, k8sClient, openstackCreds.Name)
 	if err != nil {
 		return errors.Wrap(err, "failed to get openstack credentials")
@@ -88,7 +88,7 @@ func SyncPCDInfo(ctx context.Context, k8sClient client.Client, openstackCreds vj
 }
 
 // CreatePCDHostFromResmgrHost creates a PCDHost from resmgr Host
-func CreatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, host resmgr.Host, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
+func CreatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, host resmgr.Host, openstackCreds *migratev1alpha1.OpenstackCreds) error {
 	pcdHost := generatePCDHostFromResmgrHost(openstackCreds, host)
 	if err := k8sClient.Create(ctx, &pcdHost); err != nil {
 		return errors.Wrap(err, "failed to create PCD host")
@@ -97,7 +97,7 @@ func CreatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, h
 }
 
 // CreatePCDClusterFromResmgrCluster creates a PCDCluster from resmgr Cluster
-func CreatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Client, cluster resmgr.Cluster, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
+func CreatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Client, cluster resmgr.Cluster, openstackCreds *migratev1alpha1.OpenstackCreds) error {
 	pcdCluster, err := generatePCDClusterFromResmgrCluster(openstackCreds, cluster)
 	if err != nil {
 		return errors.Wrap(err, "failed to generate PCD cluster")
@@ -109,12 +109,12 @@ func CreatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Cli
 }
 
 // CreateDummyPCDClusterForStandAlonePCDHosts creates a PCDCluster for no cluster
-func CreateDummyPCDClusterForStandAlonePCDHosts(ctx context.Context, k8sClient client.Client, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
+func CreateDummyPCDClusterForStandAlonePCDHosts(ctx context.Context, k8sClient client.Client, openstackCreds *migratev1alpha1.OpenstackCreds) error {
 	k8sClusterName, err := GetK8sCompatibleVMWareObjectName(constants.PCDClusterNameNoCluster, openstackCreds.Name)
 	if err != nil {
 		return errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
-	pcdCluster := vjailbreakv1alpha1.PCDCluster{
+	pcdCluster := migratev1alpha1.PCDCluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      k8sClusterName,
 			Namespace: constants.NamespaceMigrationSystem,
@@ -122,7 +122,7 @@ func CreateDummyPCDClusterForStandAlonePCDHosts(ctx context.Context, k8sClient c
 				constants.OpenstackCredsLabel: openstackCreds.Name,
 			},
 		},
-		Spec: vjailbreakv1alpha1.PCDClusterSpec{
+		Spec: migratev1alpha1.PCDClusterSpec{
 			ClusterName:                   constants.PCDClusterNameNoCluster,
 			Description:                   "",
 			Hosts:                         []string{},
@@ -130,7 +130,7 @@ func CreateDummyPCDClusterForStandAlonePCDHosts(ctx context.Context, k8sClient c
 			EnableAutoResourceRebalancing: false,
 			RebalancingFrequencyMins:      0,
 		},
-		Status: vjailbreakv1alpha1.PCDClusterStatus{
+		Status: migratev1alpha1.PCDClusterStatus{
 			AggregateID: 0,
 			CreatedAt:   "",
 			UpdatedAt:   "",
@@ -143,12 +143,12 @@ func CreateDummyPCDClusterForStandAlonePCDHosts(ctx context.Context, k8sClient c
 }
 
 // DeleteEntryForNoPCDCluster deletes the PCDCluster for null cluster
-func DeleteEntryForNoPCDCluster(ctx context.Context, k8sClient client.Client, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
+func DeleteEntryForNoPCDCluster(ctx context.Context, k8sClient client.Client, openstackCreds *migratev1alpha1.OpenstackCreds) error {
 	k8sClusterName, err := GetK8sCompatibleVMWareObjectName(constants.PCDClusterNameNoCluster, openstackCreds.Name)
 	if err != nil {
 		return errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
-	pcdCluster := vjailbreakv1alpha1.PCDCluster{
+	pcdCluster := migratev1alpha1.PCDCluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      k8sClusterName,
 			Namespace: constants.NamespaceMigrationSystem,
@@ -164,9 +164,9 @@ func DeleteEntryForNoPCDCluster(ctx context.Context, k8sClient client.Client, op
 }
 
 // UpdatePCDHostFromResmgrHost updates an existing PCDHost with data from resmgr Host
-func UpdatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, host resmgr.Host, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
+func UpdatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, host resmgr.Host, openstackCreds *migratev1alpha1.OpenstackCreds) error {
 	pcdHost := generatePCDHostFromResmgrHost(openstackCreds, host)
-	oldPCDHost := vjailbreakv1alpha1.PCDHost{}
+	oldPCDHost := migratev1alpha1.PCDHost{}
 	if err := k8sClient.Get(ctx, client.ObjectKey{Name: host.ID, Namespace: constants.NamespaceMigrationSystem}, &oldPCDHost); err != nil {
 		return errors.Wrap(err, "failed to get PCD host")
 	}
@@ -182,8 +182,8 @@ func UpdatePCDHostFromResmgrHost(ctx context.Context, k8sClient client.Client, h
 }
 
 // UpdatePCDClusterFromResmgrCluster updates an existing PCDCluster with data from resmgr Cluster
-func UpdatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Client, cluster resmgr.Cluster, openstackCreds *vjailbreakv1alpha1.OpenstackCreds) error {
-	oldPCDCluster := vjailbreakv1alpha1.PCDCluster{}
+func UpdatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Client, cluster resmgr.Cluster, openstackCreds *migratev1alpha1.OpenstackCreds) error {
+	oldPCDCluster := migratev1alpha1.PCDCluster{}
 
 	k8sClusterName, err := GetK8sCompatibleVMWareObjectName(cluster.Name, openstackCreds.Name)
 	if err != nil {
@@ -208,9 +208,9 @@ func UpdatePCDClusterFromResmgrCluster(ctx context.Context, k8sClient client.Cli
 	return nil
 }
 
-func generatePCDHostFromResmgrHost(openstackCreds *vjailbreakv1alpha1.OpenstackCreds, host resmgr.Host) vjailbreakv1alpha1.PCDHost {
+func generatePCDHostFromResmgrHost(openstackCreds *migratev1alpha1.OpenstackCreds, host resmgr.Host) migratev1alpha1.PCDHost {
 	// Create a new PCDHost
-	interfaces := []vjailbreakv1alpha1.PCDHostInterface{}
+	interfaces := []migratev1alpha1.PCDHostInterface{}
 	for name, itface := range host.Extensions.Interfaces.Data.IfaceInfo {
 		// Collect all IP addresses from the interface
 		ipAddresses := []string{}
@@ -219,13 +219,13 @@ func generatePCDHostFromResmgrHost(openstackCreds *vjailbreakv1alpha1.OpenstackC
 		}
 
 		// Create the interface with all IPs and the MAC address
-		interfaces = append(interfaces, vjailbreakv1alpha1.PCDHostInterface{
+		interfaces = append(interfaces, migratev1alpha1.PCDHostInterface{
 			IPAddresses: ipAddresses,
 			MACAddress:  itface.MAC,
 			Name:        name,
 		})
 	}
-	pcdHost := vjailbreakv1alpha1.PCDHost{
+	pcdHost := migratev1alpha1.PCDHost{
 		ObjectMeta: metav1.ObjectMeta{
 			// Use the host ID as the name to ensure uniqueness
 			Name:      host.ID,
@@ -235,7 +235,7 @@ func generatePCDHostFromResmgrHost(openstackCreds *vjailbreakv1alpha1.OpenstackC
 				constants.OpenstackCredsLabel: openstackCreds.Name,
 			},
 		},
-		Spec: vjailbreakv1alpha1.PCDHostSpec{
+		Spec: migratev1alpha1.PCDHostSpec{
 			HostName:      host.Info.Hostname,
 			HostID:        host.ID,
 			HostState:     host.RoleStatus,
@@ -245,7 +245,7 @@ func generatePCDHostFromResmgrHost(openstackCreds *vjailbreakv1alpha1.OpenstackC
 			OSInfo:        host.Info.OSInfo,
 			Interfaces:    interfaces,
 		},
-		Status: vjailbreakv1alpha1.PCDHostStatus{
+		Status: migratev1alpha1.PCDHostStatus{
 			Responding: host.Info.Responding,
 			RoleStatus: host.RoleStatus,
 		},
@@ -253,12 +253,12 @@ func generatePCDHostFromResmgrHost(openstackCreds *vjailbreakv1alpha1.OpenstackC
 	return pcdHost
 }
 
-func generatePCDClusterFromResmgrCluster(openstackCreds *vjailbreakv1alpha1.OpenstackCreds, cluster resmgr.Cluster) (*vjailbreakv1alpha1.PCDCluster, error) {
+func generatePCDClusterFromResmgrCluster(openstackCreds *migratev1alpha1.OpenstackCreds, cluster resmgr.Cluster) (*migratev1alpha1.PCDCluster, error) {
 	k8sClusterName, err := GetK8sCompatibleVMWareObjectName(cluster.Name, openstackCreds.Name)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to convert cluster name to k8s name")
 	}
-	return &vjailbreakv1alpha1.PCDCluster{
+	return &migratev1alpha1.PCDCluster{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      k8sClusterName,
 			Namespace: constants.NamespaceMigrationSystem,
@@ -266,7 +266,7 @@ func generatePCDClusterFromResmgrCluster(openstackCreds *vjailbreakv1alpha1.Open
 				constants.OpenstackCredsLabel: openstackCreds.Name,
 			},
 		},
-		Spec: vjailbreakv1alpha1.PCDClusterSpec{
+		Spec: migratev1alpha1.PCDClusterSpec{
 			ClusterName:                   cluster.Name,
 			Description:                   cluster.Description,
 			Hosts:                         cluster.Hostlist,
@@ -274,7 +274,7 @@ func generatePCDClusterFromResmgrCluster(openstackCreds *vjailbreakv1alpha1.Open
 			EnableAutoResourceRebalancing: cluster.AutoResourceRebalancing.Enabled,
 			RebalancingFrequencyMins:      cluster.AutoResourceRebalancing.RebalancingFrequencyMins,
 		},
-		Status: vjailbreakv1alpha1.PCDClusterStatus{
+		Status: migratev1alpha1.PCDClusterStatus{
 			AggregateID: cluster.AggregateID,
 			CreatedAt:   cluster.CreatedAt,
 			UpdatedAt:   cluster.UpdatedAt,
@@ -283,7 +283,7 @@ func generatePCDClusterFromResmgrCluster(openstackCreds *vjailbreakv1alpha1.Open
 }
 
 // DeleteStalePCDHosts removes PCDHost resources that no longer exist in the upstream resmgr
-func DeleteStalePCDHosts(ctx context.Context, k8sClient client.Client, openstackCreds vjailbreakv1alpha1.OpenstackCreds) error {
+func DeleteStalePCDHosts(ctx context.Context, k8sClient client.Client, openstackCreds migratev1alpha1.OpenstackCreds) error {
 	OpenStackCredentials, err := GetOpenstackCredsInfo(ctx, k8sClient, openstackCreds.Name)
 	if err != nil {
 		return errors.Wrap(err, "failed to get openstack credentials")
@@ -306,7 +306,7 @@ func DeleteStalePCDHosts(ctx context.Context, k8sClient client.Client, openstack
 	}
 	for _, host := range downstreamHostList {
 		if !containsString(upstreamHostNames, host.Spec.HostID) {
-			if err := k8sClient.Delete(ctx, &vjailbreakv1alpha1.PCDHost{
+			if err := k8sClient.Delete(ctx, &migratev1alpha1.PCDHost{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      host.Name,
 					Namespace: constants.NamespaceMigrationSystem,
@@ -320,7 +320,7 @@ func DeleteStalePCDHosts(ctx context.Context, k8sClient client.Client, openstack
 }
 
 // DeleteStalePCDClusters removes PCDCluster resources that no longer exist in the upstream resmgr
-func DeleteStalePCDClusters(ctx context.Context, k8sClient client.Client, openstackCreds vjailbreakv1alpha1.OpenstackCreds) error {
+func DeleteStalePCDClusters(ctx context.Context, k8sClient client.Client, openstackCreds migratev1alpha1.OpenstackCreds) error {
 	OpenStackCredentials, err := GetOpenstackCredsInfo(ctx, k8sClient, openstackCreds.Name)
 	if err != nil {
 		return errors.Wrap(err, "failed to get openstack credentials")
@@ -347,7 +347,7 @@ func DeleteStalePCDClusters(ctx context.Context, k8sClient client.Client, openst
 	}
 	for _, cluster := range downstreamClusterList {
 		if !containsString(upstreamClusterNames, cluster.Spec.ClusterName) {
-			if err := k8sClient.Delete(ctx, &vjailbreakv1alpha1.PCDCluster{
+			if err := k8sClient.Delete(ctx, &migratev1alpha1.PCDCluster{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      cluster.Name,
 					Namespace: constants.NamespaceMigrationSystem,
@@ -361,8 +361,8 @@ func DeleteStalePCDClusters(ctx context.Context, k8sClient client.Client, openst
 }
 
 // nolint:unparam
-func filterPCDClustersOnOpenstackCreds(ctx context.Context, k8sClient client.Client, openstackCreds vjailbreakv1alpha1.OpenstackCreds) ([]vjailbreakv1alpha1.PCDCluster, error) {
-	clusterList := vjailbreakv1alpha1.PCDClusterList{}
+func filterPCDClustersOnOpenstackCreds(ctx context.Context, k8sClient client.Client, openstackCreds migratev1alpha1.OpenstackCreds) ([]migratev1alpha1.PCDCluster, error) {
+	clusterList := migratev1alpha1.PCDClusterList{}
 	err := k8sClient.List(ctx, &clusterList, &client.ListOptions{
 		Namespace: constants.NamespaceMigrationSystem,
 		LabelSelector: labels.SelectorFromSet(labels.Set{
@@ -376,8 +376,8 @@ func filterPCDClustersOnOpenstackCreds(ctx context.Context, k8sClient client.Cli
 }
 
 // nolint:unparam
-func filterPCDHostsOnOpenstackCreds(ctx context.Context, k8sClient client.Client, openstackCreds vjailbreakv1alpha1.OpenstackCreds) ([]vjailbreakv1alpha1.PCDHost, error) {
-	hostList := vjailbreakv1alpha1.PCDHostList{}
+func filterPCDHostsOnOpenstackCreds(ctx context.Context, k8sClient client.Client, openstackCreds migratev1alpha1.OpenstackCreds) ([]migratev1alpha1.PCDHost, error) {
+	hostList := migratev1alpha1.PCDHostList{}
 	err := k8sClient.List(ctx, &hostList, &client.ListOptions{
 		Namespace: constants.NamespaceMigrationSystem,
 		LabelSelector: labels.SelectorFromSet(labels.Set{
@@ -391,8 +391,8 @@ func filterPCDHostsOnOpenstackCreds(ctx context.Context, k8sClient client.Client
 }
 
 // GetVMwareHostFromESXiName retrieves a VMwareHost resource based on the ESXi host name
-func GetVMwareHostFromESXiName(ctx context.Context, k8sClient client.Client, esxiName, credName string) (*vjailbreakv1alpha1.VMwareHost, error) {
-	vmwareHost := &vjailbreakv1alpha1.VMwareHost{}
+func GetVMwareHostFromESXiName(ctx context.Context, k8sClient client.Client, esxiName, credName string) (*migratev1alpha1.VMwareHost, error) {
+	vmwareHost := &migratev1alpha1.VMwareHost{}
 	esxiK8sName, err := GetK8sCompatibleVMWareObjectName(esxiName, credName)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to convert ESXi name to k8s name")

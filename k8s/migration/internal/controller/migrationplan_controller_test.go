@@ -27,7 +27,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 var _ = ginkgo.Describe("MigrationPlan Controller", func() {
@@ -40,13 +40,13 @@ var _ = ginkgo.Describe("MigrationPlan Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		migrationplan := &vjailbreakv1alpha1.MigrationPlan{}
+		migrationplan := &migratev1alpha1.MigrationPlan{}
 
 		ginkgo.BeforeEach(func() {
 			ginkgo.By("creating the custom resource for the Kind MigrationPlan")
 			err := k8sClient.Get(ctx, typeNamespacedName, migrationplan)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.MigrationPlan{
+				resource := &migratev1alpha1.MigrationPlan{
 					ObjectMeta: metav1.ObjectMeta{
 						Name: resourceName,
 					},
@@ -57,7 +57,7 @@ var _ = ginkgo.Describe("MigrationPlan Controller", func() {
 
 		ginkgo.AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &vjailbreakv1alpha1.MigrationPlan{}
+			resource := &migratev1alpha1.MigrationPlan{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 

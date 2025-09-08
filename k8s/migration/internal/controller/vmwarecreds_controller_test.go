@@ -21,7 +21,7 @@ import (
 
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -37,13 +37,13 @@ var _ = ginkgo.Describe("VMwareCreds Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		vmwarecreds := &vjailbreakv1alpha1.VMwareCreds{}
+		vmwarecreds := &migratev1alpha1.VMwareCreds{}
 
 		ginkgo.BeforeEach(func() {
 			ginkgo.By("creating the custom resource for the Kind VMwareCreds")
 			err := k8sClient.Get(ctx, typeNamespacedName, vmwarecreds)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &vjailbreakv1alpha1.VMwareCreds{
+				resource := &migratev1alpha1.VMwareCreds{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -56,7 +56,7 @@ var _ = ginkgo.Describe("VMwareCreds Controller", func() {
 
 		ginkgo.AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &vjailbreakv1alpha1.VMwareCreds{}
+			resource := &migratev1alpha1.VMwareCreds{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			gomega.Expect(err).NotTo(gomega.HaveOccurred())
 

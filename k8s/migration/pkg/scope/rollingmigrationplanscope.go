@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,7 +15,7 @@ import (
 type RollingMigrationPlanScopeParams struct {
 	Logger               logr.Logger
 	Client               client.Client
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // NewRollingMigrationPlanScope creates a new RollingMigrationPlanScope from the supplied parameters.
@@ -36,7 +36,7 @@ func NewRollingMigrationPlanScope(params RollingMigrationPlanScopeParams) (*Roll
 type RollingMigrationPlanScope struct {
 	logr.Logger
 	Client               client.Client
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // Close closes the current scope persisting the RollingMigrationPlan configuration and status.

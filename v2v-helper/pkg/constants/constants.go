@@ -125,6 +125,6 @@ echo "$(date '+%Y-%m-%d %H:%M:%S') - Network fix script completed" >> "$LOG_FILE
 	// PopulateVMwareMachineFlavors is the default value for populating VMwareMachine objects with OpenStack flavors
 	PopulateVMwareMachineFlavors = true
 
-	// VjailbreakSettingsConfigMapName is the name of the vjailbreak settings configmap
-	VjailbreakSettingsConfigMapName = "stellaris-migrate-settings"
+	// StellarisMigrateSettingsConfigMapName is the name of the stellaris-migrate settings configmap
+	StellarisMigrateSettingsConfigMapName = "stellaris-migrate-settings"
 )

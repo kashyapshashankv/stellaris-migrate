@@ -37,7 +37,7 @@ const generateOpenstackToken = async (creds) => {
 }
 
 export const getNodes = async (namespace = VJAILBREAK_DEFAULT_NAMESPACE) => {
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/vjailbreaknodes`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes`
   const response = await axios.get<NodeList>({
     endpoint,
   })
@@ -48,7 +48,7 @@ export const deleteNode = async (
   nodeName: string,
   namespace = VJAILBREAK_DEFAULT_NAMESPACE
 ) => {
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/vjailbreaknodes/${nodeName}`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes/${nodeName}`
   const response = await axios.del<Node>({
     endpoint,
   })
@@ -93,17 +93,17 @@ const createNodeSpec = (params: {
 const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 6)
 
 function generateAgentName() {
-  return `vjailbreak-agent-${nanoid()}`
+  return `stellaris-migrate-agent-${nanoid()}`
 }
 
-// Create VjailbreakNode object
+// Create StellarisMigrateNode object
 const createNodeObject = (params: {
   name?: string
   namespace?: string
   spec: Spec
 }): NodeItem => ({
   apiVersion: "migrate.k8s.stellaris.io/v1alpha1",
-  kind: "VjailbreakNode",
+  kind: "StellarisMigrateNode",
   metadata: {
     name: params.name || generateAgentName(),
     namespace: params.namespace || "migration-system",
@@ -111,7 +111,7 @@ const createNodeObject = (params: {
   spec: params.spec,
 })
 
-// Get master VjailbreakNode
+// Get master StellarisMigrateNode
 export const getMasterNode = async (
   namespace = VJAILBREAK_DEFAULT_NAMESPACE
 ) => {
@@ -129,7 +129,7 @@ export const createNodes = async (params: {
   namespace?: string
 }) => {
   const namespace = params.namespace || VJAILBREAK_DEFAULT_NAMESPACE
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/vjailbreaknodes`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes`
 
   const results: NodeItem[] = []
   const errors: Error[] = []

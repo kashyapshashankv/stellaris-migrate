@@ -1,10 +1,10 @@
-REPO ?= platform9
+REPO ?= stellaris
 REGISTRY ?= quay.io
-TAG ?= 0.1.13
+TAG ?= 0.0.1
 
-export CONTROLLER_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-controller:${TAG}
-export V2V_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-v2v:${TAG}
-export VPWNED_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-vpwned:${TAG}
+export CONTROLLER_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-controller:${TAG}
+export V2V_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-v2v:${TAG}
+export VPWNED_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-vpwned:${TAG}
 
 # ENVTEST_K8S_VERSION refers to the version of kubebuilder assets to be downloaded by envtest binary.
 ENVTEST_K8S_VERSION = 1.30.0

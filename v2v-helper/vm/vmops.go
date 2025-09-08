@@ -1,5 +1,3 @@
-// Copyright © 2024 The vjailbreak authors
-
 package vm
 
 import (
@@ -12,7 +10,7 @@ import (
 
 	"github.com/gophercloud/gophercloud/openstack/blockstorage/v3/volumes"
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/k8sutils"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
@@ -62,8 +60,8 @@ type VMInfo struct {
 	UEFI              bool
 	Name              string
 	OSType            string
-	GuestNetworks     []vjailbreakv1alpha1.GuestNetwork
-	NetworkInterfaces []vjailbreakv1alpha1.NIC
+	GuestNetworks     []migratev1alpha1.GuestNetwork
+	NetworkInterfaces []migratev1alpha1.NIC
 	RDMDisks          []RDMDisk
 }
 
@@ -861,7 +859,7 @@ func (vmops *VMOps) DisconnectNetworkInterfaces() error {
 }
 
 // GetVMwareMachine retrieves a VMwareMachine object from the Kubernetes cluster based on the VM name.
-func GetVMwareMachine(ctx context.Context, client k8sclient.Client, vmName string) (*vjailbreakv1alpha1.VMwareMachine, error) {
+func GetVMwareMachine(ctx context.Context, client k8sclient.Client, vmName string) (*migratev1alpha1.VMwareMachine, error) {
 	if client == nil || ctx == nil || vmName == "" {
 		return nil, fmt.Errorf("invalid parameters: client, context, and vmName must not be nil or empty")
 	}
@@ -878,7 +876,7 @@ func GetVMwareMachine(ctx context.Context, client k8sclient.Client, vmName strin
 	}
 
 	// Create VMwareMachine object
-	vmwareMachine := &vjailbreakv1alpha1.VMwareMachine{}
+	vmwareMachine := &migratev1alpha1.VMwareMachine{}
 	// Get VMwareMachine object
 	if err := client.Get(ctx, namespacedName, vmwareMachine); err != nil {
 		if k8serrors.IsNotFound(err) {
@@ -890,17 +888,17 @@ func GetVMwareMachine(ctx context.Context, client k8sclient.Client, vmName strin
 	return vmwareMachine, nil
 }
 
-func copyRDMDisks(vminfo *VMInfo, rdmDiskInfo *vjailbreakv1alpha1.VMwareMachine) {
+func copyRDMDisks(vminfo *VMInfo, rdmDiskInfo *migratev1alpha1.VMwareMachine) {
 	// Check if vminfo is nil
 	if vminfo == nil || rdmDiskInfo == nil {
 		fmt.Printf("vminfo or rdm disk info is is nil")
 		return
 	}
-	if reflect.DeepEqual(rdmDiskInfo.Spec, vjailbreakv1alpha1.VMwareMachineSpec{}) {
+	if reflect.DeepEqual(rdmDiskInfo.Spec, migratev1alpha1.VMwareMachineSpec{}) {
 		fmt.Printf("rdm disk info spec is nil")
 		return
 	}
-	if reflect.DeepEqual(rdmDiskInfo.Spec.VMInfo, vjailbreakv1alpha1.VMInfo{}) {
+	if reflect.DeepEqual(rdmDiskInfo.Spec.VMInfo, migratev1alpha1.VMInfo{}) {
 		fmt.Printf("rdm disk info spec is nil")
 		return
 	}

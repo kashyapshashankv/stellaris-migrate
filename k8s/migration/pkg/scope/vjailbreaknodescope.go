@@ -5,54 +5,54 @@ import (
 	"reflect"
 
 	"github.com/go-logr/logr"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// VjailbreakNodeScopeParams defines the input parameters used to create a new Scope.
-type VjailbreakNodeScopeParams struct {
+// StellarisMigrateNodeScopeParams defines the input parameters used to create a new Scope.
+type StellarisMigrateNodeScopeParams struct {
 	Logger         logr.Logger
 	Client         client.Client
-	VjailbreakNode *vjailbreakv1alpha1.VjailbreakNode
+	StellarisMigrateNode *migratev1alpha1.StellarisMigrateNode
 }
 
-// NewVjailbreakNodeScope creates a new VjailbreakNodeScope from the supplied parameters.
-// This is meant to be called for each reconcile iteration only on VjailbreakNodeReconciler.
-func NewVjailbreakNodeScope(params VjailbreakNodeScopeParams) (*VjailbreakNodeScope, error) {
+// NewStellarisMigrateNodeScope creates a new StellarisMigrateNodeScope from the supplied parameters.
+// This is meant to be called for each reconcile iteration only on StellarisMigrateNodeReconciler.
+func NewStellarisMigrateNodeScope(params StellarisMigrateNodeScopeParams) (*StellarisMigrateNodeScope, error) {
 	if reflect.DeepEqual(params.Logger, logr.Logger{}) {
 		params.Logger = ctrl.Log
 	}
 
-	return &VjailbreakNodeScope{
+	return &StellarisMigrateNodeScope{
 		Logger:         params.Logger,
 		Client:         params.Client,
-		VjailbreakNode: params.VjailbreakNode,
+		StellarisMigrateNode: params.StellarisMigrateNode,
 	}, nil
 }
 
-// VjailbreakNodeScope defines the basic context for an actuator to operate upon.
-type VjailbreakNodeScope struct {
+// StellarisMigrateNodeScope defines the basic context for an actuator to operate upon.
+type StellarisMigrateNodeScope struct {
 	logr.Logger
 	Client         client.Client
-	VjailbreakNode *vjailbreakv1alpha1.VjailbreakNode
+	StellarisMigrateNode *migratev1alpha1.StellarisMigrateNode
 }
 
-// Close closes the current scope persisting the VjailbreakNode configuration and status.
-func (s *VjailbreakNodeScope) Close() error {
-	err := s.Client.Update(context.TODO(), s.VjailbreakNode, &client.UpdateOptions{})
+// Close closes the current scope persisting the StellarisMigrateNode configuration and status.
+func (s *StellarisMigrateNodeScope) Close() error {
+	err := s.Client.Update(context.TODO(), s.StellarisMigrateNode, &client.UpdateOptions{})
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-// Name returns the VjailbreakNode name.
-func (s *VjailbreakNodeScope) Name() string {
-	return s.VjailbreakNode.GetName()
+// Name returns the StellarisMigrateNode name.
+func (s *StellarisMigrateNodeScope) Name() string {
+	return s.StellarisMigrateNode.GetName()
 }
 
-// Namespace returns the VjailbreakNode namespace.
-func (s *VjailbreakNodeScope) Namespace() string {
-	return s.VjailbreakNode.GetNamespace()
+// Namespace returns the StellarisMigrateNode namespace.
+func (s *StellarisMigrateNodeScope) Namespace() string {
+	return s.StellarisMigrateNode.GetNamespace()
 }

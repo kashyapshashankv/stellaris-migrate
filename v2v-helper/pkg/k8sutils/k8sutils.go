@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -23,7 +23,7 @@ func GetInclusterClient() (client.Client, error) {
 	}
 	scheme := runtime.NewScheme()
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
-	utilruntime.Must(vjailbreakv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(migratev1alpha1.AddToScheme(scheme))
 	clientset, err := client.New(config, client.Options{
 		Scheme: scheme,
 	})
@@ -34,12 +34,12 @@ func GetInclusterClient() (client.Client, error) {
 	return clientset, err
 }
 
-func GetVMwareMachine(ctx context.Context, vmName string) (*vjailbreakv1alpha1.VMwareMachine, error) {
+func GetVMwareMachine(ctx context.Context, vmName string) (*migratev1alpha1.VMwareMachine, error) {
 	client, err := GetInclusterClient()
 	if err != nil {
 		return nil, err
 	}
-	vmwareMachine := &vjailbreakv1alpha1.VMwareMachine{}
+	vmwareMachine := &migratev1alpha1.VMwareMachine{}
 	vmK8sName, err := utils.GetVMwareMachineName()
 	if err != nil {
 		return nil, err

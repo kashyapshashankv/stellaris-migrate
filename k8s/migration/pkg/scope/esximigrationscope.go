@@ -4,7 +4,7 @@ import (
 	"context"
 	"reflect"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 
 	"github.com/go-logr/logr"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -15,8 +15,8 @@ import (
 type ESXIMigrationScopeParams struct {
 	Logger               logr.Logger
 	Client               client.Client
-	ESXIMigration        *vjailbreakv1alpha1.ESXIMigration
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	ESXIMigration        *migratev1alpha1.ESXIMigration
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // NewESXIMigrationScope creates a new ESXIMigrationScope from the supplied parameters.
@@ -38,8 +38,8 @@ func NewESXIMigrationScope(params ESXIMigrationScopeParams) (*ESXIMigrationScope
 type ESXIMigrationScope struct {
 	logr.Logger
 	Client               client.Client
-	ESXIMigration        *vjailbreakv1alpha1.ESXIMigration
-	RollingMigrationPlan *vjailbreakv1alpha1.RollingMigrationPlan
+	ESXIMigration        *migratev1alpha1.ESXIMigration
+	RollingMigrationPlan *migratev1alpha1.RollingMigrationPlan
 }
 
 // Close closes the current scope persisting the ESXIMigration configuration and status.

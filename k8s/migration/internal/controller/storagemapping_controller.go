@@ -21,7 +21,7 @@ import (
 	"context"
 	"fmt"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log"
@@ -41,7 +41,7 @@ type StorageMappingReconciler struct {
 // move the current state of the cluster closer to the desired state.
 func (r *StorageMappingReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	ctxlog := log.FromContext(ctx)
-	storagemapping := &vjailbreakv1alpha1.StorageMapping{}
+	storagemapping := &migratev1alpha1.StorageMapping{}
 	storagemapping.Name = req.Name
 	storagemapping.Namespace = req.Namespace
 
@@ -56,7 +56,7 @@ func (r *StorageMappingReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 	if storagemapping.DeletionTimestamp.IsZero() {
 		ctxlog.Info(fmt.Sprintf("Reconciling storagemapping '%s'", storagemapping.Name))
 		return r.ReconcileMapping(ctx, storagemapping, func() error {
-			storagemapping.Status = vjailbreakv1alpha1.StorageMappingStatus{}
+			storagemapping.Status = migratev1alpha1.StorageMappingStatus{}
 			return r.Status().Update(ctx, storagemapping)
 		})
 	}
@@ -68,7 +68,7 @@ func (r *StorageMappingReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	r.Client = mgr.GetClient()
 	r.Scheme = mgr.GetScheme()
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.StorageMapping{}).
+		For(&migratev1alpha1.StorageMapping{}).
 		WithEventFilter(predicate.GenerationChangedPredicate{}).
 		Complete(r)
 }

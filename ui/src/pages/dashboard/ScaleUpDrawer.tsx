@@ -215,7 +215,7 @@ export default function ScaleUpDrawer({ open, onClose, masterNode }: ScaleUpDraw
                             <FormControl fullWidth>
                                 <TextField
                                     label="Master Agent Image"
-                                    value={'Image selected from the first vjailbreak node'}
+                                    value={'Image selected from the first stellaris-migrate node'}
                                     disabled
                                     fullWidth
                                     size="small"

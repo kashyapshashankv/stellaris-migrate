@@ -9,10 +9,10 @@ GIT_TAG := $(shell git describe --exact-match --tags $(git log -n1 --pretty='%h'
 SWAGGER_UI_VER := 5.17.14
 BUF_VERSION := 1.42.0
 
-REPO ?= platform9
+REPO ?= stellaris
 REGISTRY ?= quay.io
-TAG ?= 1.0.4
-export VPWNED_IMG ?= ${REGISTRY}/${REPO}/vjailbreak-vpwned:${TAG}
+TAG ?= 0.0.1
+export VPWNED_IMG ?= ${REGISTRY}/${REPO}/stellaris-migrate-vpwned:${TAG}
 
 ifeq ($(BUILD_VERSION),)
 	RELEASE_VER=$(GIT_PARENT)

@@ -13,7 +13,7 @@ import (
 	ctxlog "sigs.k8s.io/controller-runtime/pkg/log"
 )
 
-// VjailbreakSettings holds the settings for vjailbreak components
+// VjailbreakSettings holds the settings for stellaris-migrate components
 type VjailbreakSettings struct {
 	// ChangedBlocksCopyIterationThreshold is the number of iterations to copy changed blocks
 	ChangedBlocksCopyIterationThreshold int
@@ -40,21 +40,21 @@ func atoi(s string) int {
 	return i
 }
 
-// GetVjailbreakSettings retrieves the vjailbreak settings from the configmap
-func GetVjailbreakSettings(ctx context.Context, k8sClient client.Client) (*VjailbreakSettings, error) {
+// GetMigrateSettings retrieves the stellaris-migrate settings from the configmap
+func GetMigrateSettings(ctx context.Context, k8sClient client.Client) (*VjailbreakSettings, error) {
 	log := ctxlog.FromContext(ctx)
 
-	// Get the vjailbreak settings configmap
+	// Get the stellaris-migrate settings configmap
 	vjailbreakSettingsCM := &corev1.ConfigMap{}
 	if err := k8sClient.Get(ctx, k8stypes.NamespacedName{
-		Name:      constants.VjailbreakSettingsConfigMapName,
+		Name:      constants.StellarisMigrateSettingsConfigMapName,
 		Namespace: constants.NamespaceMigrationSystem,
 	}, vjailbreakSettingsCM); err != nil {
 		if apierrors.IsNotFound(err) {
-			log.Info("vjailbreak settings configmap not found, using default settings")
+			log.Info("stellaris-migrate settings configmap not found, using default settings")
 			return getDefaultSettings(), nil
 		}
-		return nil, errors.Wrap(err, "failed to get vjailbreak settings configmap")
+		return nil, errors.Wrap(err, "failed to get stellaris-migrate settings configmap")
 	}
 
 	// Set default values if not present in the configmap
@@ -101,7 +101,7 @@ func GetVjailbreakSettings(ctx context.Context, k8sClient client.Client) (*Vjail
 	}, nil
 }
 
-// getDefaultSettings returns default vjailbreak settings
+// getDefaultSettings returns default stellaris-migrate settings
 func getDefaultSettings() *VjailbreakSettings {
 	return &VjailbreakSettings{
 		ChangedBlocksCopyIterationThreshold: 20,

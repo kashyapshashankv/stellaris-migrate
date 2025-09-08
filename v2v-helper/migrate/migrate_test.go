@@ -1,4 +1,3 @@
-// Copyright © 2024 The vjailbreak authors
 package migrate
 
 import (

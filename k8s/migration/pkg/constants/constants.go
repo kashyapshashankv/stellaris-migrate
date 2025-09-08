@@ -4,7 +4,7 @@ package constants
 import (
 	"time"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 )
 
@@ -24,8 +24,8 @@ const (
 	// MaxJobNameLength defines the maximum length of a job name
 	MaxJobNameLength = 46 // 63 - 11 (prefix v2v-helper-) - 1 (hyphen) - 5 (hash)
 
-	// VjailbreakNodeControllerName is the name of the vjailbreak node controller
-	VjailbreakNodeControllerName = "vjailbreaknode-controller"
+	// StellarisMigrateNodeControllerName is the name of the stellaris-migrate node controller
+	StellarisMigrateNodeControllerName = "stellaris-migrate-node-controller"
 
 	// OpenstackCredsControllerName is the name of the openstack credentials controller
 	OpenstackCredsControllerName = "openstackcreds-controller" //nolint:gosec // not a password string
@@ -114,26 +114,26 @@ const (
 	// VMwareCredsFinalizer is the finalizer for vmware credentials
 	VMwareCredsFinalizer = "vmwarecreds.k8s.stellaris.io/finalizer" //nolint:gosec // not a password string
 
-	// VjailbreakNodePhaseVMCreating is the phase for creating VM
-	VjailbreakNodePhaseVMCreating = vjailbreakv1alpha1.VjailbreakNodePhase("CreatingVM")
+	// StellarisMigrateNodePhaseVMCreating is the phase for creating VM
+	StellarisMigrateNodePhaseVMCreating = migratev1alpha1.StellarisMigrateNodePhase("CreatingVM")
 
-	// VjailbreakNodePhaseVMCreated is the phase for VM created
-	VjailbreakNodePhaseVMCreated = vjailbreakv1alpha1.VjailbreakNodePhase("VMCreated")
+	// StellarisMigrateNodePhaseVMCreated is the phase for VM created
+	StellarisMigrateNodePhaseVMCreated = migratev1alpha1.StellarisMigrateNodePhase("VMCreated")
 
-	// VjailbreakNodePhaseDeleting is the phase for deleting
-	VjailbreakNodePhaseDeleting = vjailbreakv1alpha1.VjailbreakNodePhase("Deleting")
+	// StellarisMigrateNodePhaseDeleting is the phase for deleting
+	StellarisMigrateNodePhaseDeleting = migratev1alpha1.StellarisMigrateNodePhase("Deleting")
 
-	// VjailbreakNodePhaseNodeReady is the phase for node ready
-	VjailbreakNodePhaseNodeReady = vjailbreakv1alpha1.VjailbreakNodePhase("Ready")
+	// StellarisMigrateNodePhaseNodeReady is the phase for node ready
+	StellarisMigrateNodePhaseNodeReady = migratev1alpha1.StellarisMigrateNodePhase("Ready")
 
 	// NamespaceMigrationSystem is the namespace for migration system
 	NamespaceMigrationSystem = "migration-system"
 
-	// VjailbreakMasterNodeName is the name of the vjailbreak master node
-	VjailbreakMasterNodeName = "vjailbreak-master"
+	// StellarisMigrateMasterNodeName is the name of the stellaris-migrate master node
+	StellarisMigrateMasterNodeName = "stellaris-migrate-master"
 
-	// VjailbreakNodeFinalizer is the finalizer for vjailbreak node
-	VjailbreakNodeFinalizer = "migrate.k8s.stellaris.io/finalizer"
+	// StellarisMigrateNodeFinalizer is the finalizer for stellaris-migrate node
+	StellarisMigrateNodeFinalizer = "migrate.k8s.stellaris.io/finalizer"
 
 	// K3sTokenFileLocation is the location of the k3s token file
 	K3sTokenFileLocation = "/etc/stellaris/k3s/token" //nolint:gosec // not a password string
@@ -166,7 +166,7 @@ const (
 	StartCutOverNo = "no"
 
 	// PCDClusterNameNoCluster is the name of the PCD cluster when there is no cluster
-	PCDClusterNameNoCluster = "NO CLUSTER"
+	PCDClusterNameNoCluster = "Stellaris Cluster"
 
 	// RDMDiskControllerName is the name of the RDM disk controller
 	RDMDiskControllerName = "rdmdisk-controller"
@@ -195,8 +195,8 @@ const (
 	// CleanupVolumesAfterConvertFailure is the default value for cleanup volumes after convert failure
 	CleanupVolumesAfterConvertFailure = true
 
-	// VjailbreakSettingsConfigMapName is the name of the vjailbreak settings configmap
-	VjailbreakSettingsConfigMapName = "stellaris-migrate-settings"
+	// StellarisMigrateSettingsConfigMapName is the name of the stellaris-migrate settings configmap
+	StellarisMigrateSettingsConfigMapName = "stellaris-migrate-settings"
 )
 
 // CloudInitScript contains the cloud-init script for VM initialization
@@ -225,18 +225,18 @@ runcmd:
 	MigrationConditionTypeFailed    corev1.PodConditionType = "Failed"
 
 	// VMMigrationStatesEnum is a map of migration phase to state
-	VMMigrationStatesEnum = map[vjailbreakv1alpha1.VMMigrationPhase]int{
-		vjailbreakv1alpha1.VMMigrationPhasePending:                  0,
-		vjailbreakv1alpha1.VMMigrationPhaseValidating:               1,
-		vjailbreakv1alpha1.VMMigrationPhaseFailed:                   2,
-		vjailbreakv1alpha1.VMMigrationPhaseAwaitingDataCopyStart:    3,
-		vjailbreakv1alpha1.VMMigrationPhaseCopying:                  4,
-		vjailbreakv1alpha1.VMMigrationPhaseCopyingChangedBlocks:     5,
-		vjailbreakv1alpha1.VMMigrationPhaseConvertingDisk:           6,
-		vjailbreakv1alpha1.VMMigrationPhaseAwaitingCutOverStartTime: 7,
-		vjailbreakv1alpha1.VMMigrationPhaseAwaitingAdminCutOver:     8,
-		vjailbreakv1alpha1.VMMigrationPhaseSucceeded:                9,
-		vjailbreakv1alpha1.VMMigrationPhaseUnknown:                  10,
+	VMMigrationStatesEnum = map[migratev1alpha1.VMMigrationPhase]int{
+		migratev1alpha1.VMMigrationPhasePending:                  0,
+		migratev1alpha1.VMMigrationPhaseValidating:               1,
+		migratev1alpha1.VMMigrationPhaseFailed:                   2,
+		migratev1alpha1.VMMigrationPhaseAwaitingDataCopyStart:    3,
+		migratev1alpha1.VMMigrationPhaseCopying:                  4,
+		migratev1alpha1.VMMigrationPhaseCopyingChangedBlocks:     5,
+		migratev1alpha1.VMMigrationPhaseConvertingDisk:           6,
+		migratev1alpha1.VMMigrationPhaseAwaitingCutOverStartTime: 7,
+		migratev1alpha1.VMMigrationPhaseAwaitingAdminCutOver:     8,
+		migratev1alpha1.VMMigrationPhaseSucceeded:                9,
+		migratev1alpha1.VMMigrationPhaseUnknown:                  10,
 	}
 
 	// MigrationJobTTL is the TTL for migration job

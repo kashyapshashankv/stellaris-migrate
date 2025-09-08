@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 // ParseInfoFromEnv creates a Platform9 Distributed Cloud connection configuration from environment variables.
@@ -31,7 +31,7 @@ func ParseInfoFromEnv() (Info, error) {
 // ParseInfoFromOpenstackCreds creates a Platform9 Distributed Cloud connection configuration
 // from OpenStack credentials information. It extracts the base URL from the OpenStack auth URL
 // and uses the same TLS verification settings.
-func ParseInfoFromOpenstackCreds(openstackCreds vjailbreakv1alpha1.OpenStackCredsInfo) (Info, error) {
+func ParseInfoFromOpenstackCreds(openstackCreds migratev1alpha1.OpenStackCredsInfo) (Info, error) {
 	return Info{
 		URL:      strings.Join(strings.Split(openstackCreds.AuthURL, "/")[:3], "/"),
 		Insecure: openstackCreds.Insecure,

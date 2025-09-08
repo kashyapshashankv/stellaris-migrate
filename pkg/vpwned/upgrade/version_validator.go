@@ -61,7 +61,7 @@ func DiscoverCurrentCRs(ctx context.Context, kubeClient client.Client) ([]CRInfo
 	}
 
 	for _, crd := range crdList.Items {
-		if strings.Contains(crd.Spec.Group, "vjailbreak") {
+		if strings.Contains(crd.Spec.Group, "stellaris-migrate") {
 			for _, version := range crd.Spec.Versions {
 				crInfo := CRInfo{
 					Group:    crd.Spec.Group,
@@ -125,7 +125,7 @@ func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConf
 	gvr = schema.GroupVersionResource{
 		Group:    "migrate.k8s.stellaris.io",
 		Version:  "v1alpha1",
-		Resource: "vjailbreaknodes",
+		Resource: "stellaris-migrate-nodes",
 	}
 	dynamicClient, err = dynamic.NewForConfig(restConfig)
 	if err != nil {
@@ -137,7 +137,7 @@ func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConf
 	}
 	if len(list.Items) == 0 {
 		result.AgentsScaledDown = true
-	} else if len(list.Items) == 1 && list.Items[0].GetName() == "vjailbreak-master" {
+	} else if len(list.Items) == 1 && list.Items[0].GetName() == "stellaris-migrate-master" {
 		result.AgentsScaledDown = true
 	} else {
 		result.AgentsScaledDown = false
@@ -183,7 +183,7 @@ func checkForAnyCustomResources(ctx context.Context, kubeClient client.Client, r
 		}
 
 		for _, item := range unstructuredList.Items {
-			if crInfo.Kind == "VjailbreakNode" && item.GetName() == "vjailbreak-master" {
+			if crInfo.Kind == "StellarisMigrateNode" && item.GetName() == "stellaris-migrate-master" {
 				continue
 			}
 			log.Printf("Found custom resource %s: %s", crInfo.Kind, item.GetName())
@@ -196,14 +196,14 @@ func checkForAnyCustomResources(ctx context.Context, kubeClient client.Client, r
 
 func BackupResourcesWithID(ctx context.Context, kubeClient client.Client, restConfig *rest.Config, backupID string) error {
 	log.Println("Starting backup of resources...")
-	backupLabel := map[string]string{"vjailbreak-backup": "true", "vjailbreak-backup-id": backupID}
+	backupLabel := map[string]string{"stellaris-migrate-backup": "true", "stellaris-migrate-backup-id": backupID}
 
 	s := json.NewYAMLSerializer(json.DefaultMetaFactory, scheme.Scheme, scheme.Scheme)
 
 	crdList := &apiextensionsv1.CustomResourceDefinitionList{}
 	if err := kubeClient.List(ctx, crdList); err == nil {
 		for _, crd := range crdList.Items {
-			if strings.Contains(crd.Spec.Group, "vjailbreak") {
+			if strings.Contains(crd.Spec.Group, "stellaris-migrate") {
 				var buffer strings.Builder
 				crd.GetObjectKind().SetGroupVersionKind(apiextensionsv1.SchemeGroupVersion.WithKind("CustomResourceDefinition"))
 				if err := s.Encode(&crd, &buffer); err == nil {
@@ -222,7 +222,7 @@ func BackupResourcesWithID(ctx context.Context, kubeClient client.Client, restCo
 	cmList := &corev1.ConfigMapList{}
 	if err := kubeClient.List(ctx, cmList, client.InNamespace("migration-system")); err == nil {
 		for _, cm := range cmList.Items {
-			if _, ok := cm.Labels["vjailbreak-backup"]; ok {
+			if _, ok := cm.Labels["stellaris-migrate-backup"]; ok {
 				continue
 			}
 			var buffer strings.Builder
@@ -262,7 +262,7 @@ func BackupResourcesWithID(ctx context.Context, kubeClient client.Client, restCo
 func RestoreResources(ctx context.Context, kubeClient client.Client) error {
 	log.Println("Restoring resources from backups...")
 
-	backupLabelSelector := client.MatchingLabels{"vjailbreak-backup": "true"}
+	backupLabelSelector := client.MatchingLabels{"stellaris-migrate-backup": "true"}
 	backupCMList := &corev1.ConfigMapList{}
 	if err := kubeClient.List(ctx, backupCMList, client.InNamespace("migration-system"), backupLabelSelector); err != nil {
 		return fmt.Errorf("failed to list backup ConfigMaps: %w", err)
@@ -315,7 +315,7 @@ func RestoreResources(ctx context.Context, kubeClient client.Client) error {
 	}
 
 	controllerName := "migration-controller-manager"
-	uiName := "vjailbreak-ui"
+	uiName := "stellaris-migrate-ui"
 	sdkName := "migration-vpwned-sdk"
 	ns := "migration-system"
 	findDeployBackup := func(name string) (corev1.ConfigMap, bool) {
@@ -495,7 +495,7 @@ func waitForCRDEstablished(ctx context.Context, kubeClient client.Client, timeou
 		}
 		allEstablished := true
 		for _, crd := range crdList.Items {
-			if !strings.Contains(crd.Spec.Group, "vjailbreak") {
+			if !strings.Contains(crd.Spec.Group, "stellaris-migrate") {
 				continue
 			}
 			established := false
@@ -518,9 +518,9 @@ func waitForCRDEstablished(ctx context.Context, kubeClient client.Client, timeou
 }
 
 func CleanupBackupConfigMaps(ctx context.Context, kubeClient client.Client, backupID string) error {
-	selector := client.MatchingLabels{"vjailbreak-backup": "true"}
+	selector := client.MatchingLabels{"stellaris-migrate-backup": "true"}
 	if backupID != "" {
-		selector = client.MatchingLabels{"vjailbreak-backup": "true", "vjailbreak-backup-id": backupID}
+		selector = client.MatchingLabels{"stellaris-migrate-backup": "true", "stellaris-migrate-backup-id": backupID}
 	}
 	backupCMList := &corev1.ConfigMapList{}
 	if err := kubeClient.List(ctx, backupCMList, client.InNamespace("migration-system"), selector); err != nil {
@@ -586,11 +586,11 @@ func CleanupResources(ctx context.Context, kubeClient client.Client, restConfig 
 		log.Println("Deleted RollingMigrationPlans.")
 	}
 
-	gvrNodes := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "vjailbreaknodes"}
+	gvrNodes := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellaris-migrate-nodes"}
 	nodeList, err := dynamicClient.Resource(gvrNodes).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err == nil {
 		for _, item := range nodeList.Items {
-			if item.GetName() != "vjailbreak-master" {
+			if item.GetName() != "stellaris-migrate-master" {
 				_ = dynamicClient.Resource(gvrNodes).Namespace("migration-system").Delete(ctx, item.GetName(), metav1.DeleteOptions{})
 			}
 		}
@@ -750,7 +750,7 @@ func CleanupAllOldBackups(ctx context.Context, kubeClient client.Client) error {
 	log.Println("Cleaning up old backup ConfigMaps...")
 
 	backupCMList := &corev1.ConfigMapList{}
-	if err := kubeClient.List(ctx, backupCMList, client.MatchingLabels{"vjailbreak-backup": "true"}); err != nil {
+	if err := kubeClient.List(ctx, backupCMList, client.MatchingLabels{"stellaris-migrate-backup": "true"}); err != nil {
 		return fmt.Errorf("failed to list backup ConfigMaps: %w", err)
 	}
 

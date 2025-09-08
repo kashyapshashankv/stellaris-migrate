@@ -22,7 +22,7 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -49,7 +49,7 @@ func (r *MigrationTemplateReconciler) Reconcile(ctx context.Context, req ctrl.Re
 	r.ctxlog = log.FromContext(ctx)
 	r.ctxlog.Info("Reconciling MigrationTemplate")
 
-	migrationtemplate := &vjailbreakv1alpha1.MigrationTemplate{}
+	migrationtemplate := &migratev1alpha1.MigrationTemplate{}
 
 	if err := r.Get(ctx, req.NamespacedName, migrationtemplate); err != nil {
 		if apierrors.IsNotFound(err) {
@@ -60,14 +60,14 @@ func (r *MigrationTemplateReconciler) Reconcile(ctx context.Context, req ctrl.Re
 		return ctrl.Result{}, err
 	}
 
-	vmwcreds := &vjailbreakv1alpha1.VMwareCreds{}
+	vmwcreds := &migratev1alpha1.VMwareCreds{}
 	if ok, err := r.checkStatusSuccess(ctx, migrationtemplate.Namespace, migrationtemplate.Spec.Source.VMwareRef, true, vmwcreds); !ok {
 		return ctrl.Result{
 			RequeueAfter: time.Minute,
 		}, err
 	}
 	// Fetch OpenStackCreds CR
-	openstackcreds := &vjailbreakv1alpha1.OpenstackCreds{}
+	openstackcreds := &migratev1alpha1.OpenstackCreds{}
 	if ok, err := r.checkStatusSuccess(ctx, migrationtemplate.Namespace, migrationtemplate.Spec.Destination.OpenstackRef,
 		false, openstackcreds); !ok {
 		return ctrl.Result{}, err
@@ -87,7 +87,7 @@ func (r *MigrationTemplateReconciler) checkStatusSuccess(ctx context.Context,
 	}
 
 	if isvmware {
-		vmwareCreds, ok := credsobj.(*vjailbreakv1alpha1.VMwareCreds)
+		vmwareCreds, ok := credsobj.(*migratev1alpha1.VMwareCreds)
 		if !ok {
 			return false, fmt.Errorf("failed to convert credentials to VMwareCreds")
 		}
@@ -95,7 +95,7 @@ func (r *MigrationTemplateReconciler) checkStatusSuccess(ctx context.Context,
 			return false, fmt.Errorf("VMwareCreds '%s' CR is not validated", vmwareCreds.Name)
 		}
 	} else {
-		openstackCreds, ok := credsobj.(*vjailbreakv1alpha1.OpenstackCreds)
+		openstackCreds, ok := credsobj.(*migratev1alpha1.OpenstackCreds)
 		if !ok {
 			return false, fmt.Errorf("failed to convert credentials to OpenstackCreds")
 		}
@@ -110,6 +110,6 @@ func (r *MigrationTemplateReconciler) checkStatusSuccess(ctx context.Context,
 func (r *MigrationTemplateReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		// Uncomment the following line adding a pointer to an instance of the controlled resource as an argument
-		For(&vjailbreakv1alpha1.MigrationTemplate{}).
+		For(&migratev1alpha1.MigrationTemplate{}).
 		Complete(r)
 }

@@ -1,16 +1,16 @@
-# permissions for end users to edit vjailbreaknodes.
+# permissions for end users to edit stellaris-migrate-nodes.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
     app.kubernetes.io/name: migration
     app.kubernetes.io/managed-by: kustomize
-  name: vjailbreaknode-editor-role
+  name: stellarismigratenode-editor-role
 rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes
+  - stellaris-migrate-nodes
   verbs:
   - create
   - delete
@@ -22,6 +22,6 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - vjailbreaknodes/status
+  - stellaris-migrate-nodes/status
   verbs:
   - get

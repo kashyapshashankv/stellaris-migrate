@@ -1,6 +1,6 @@
 Open Source Credits
 -------------------
-vJailbreak makes use of the following open-source components in whole or in part. 
+Stellaris Migrate makes use of the following open-source components in whole or in part. 
 You can find the source code of these open source projects along with license information below. 
 We acknowledge and are grateful to these developers for their contributions to the open source community.
 

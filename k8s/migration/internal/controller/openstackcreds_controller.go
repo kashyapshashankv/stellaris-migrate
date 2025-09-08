@@ -22,7 +22,7 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	scope "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
 	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
@@ -67,7 +67,7 @@ type OpenstackCredsReconciler struct {
 func (r *OpenstackCredsReconciler) Reconcile(ctx context.Context, req ctrl.Request) (_ ctrl.Result, reterr error) {
 	ctxlog := log.FromContext(ctx).WithName(constants.OpenstackCredsControllerName)
 	// Get the OpenstackCreds object
-	openstackcreds := &vjailbreakv1alpha1.OpenstackCreds{}
+	openstackcreds := &migratev1alpha1.OpenstackCreds{}
 	if err := r.Get(ctx, req.NamespacedName, openstackcreds); err != nil {
 		if apierrors.IsNotFound(err) {
 			ctxlog.Info("Resource not found, likely deleted", "openstackcreds", req.NamespacedName)
@@ -180,7 +180,7 @@ func (r *OpenstackCredsReconciler) reconcileDelete(ctx context.Context, scope *s
 	}
 
 	ctxlog.Info("Cleaning up associated PCDCluster resources")
-	pcdClusterList := &vjailbreakv1alpha1.PCDClusterList{}
+	pcdClusterList := &migratev1alpha1.PCDClusterList{}
 	labelSelector := client.MatchingLabels{constants.OpenstackCredsLabel: openstackcreds.Name}
 	if err := r.List(ctx, pcdClusterList, client.InNamespace(openstackcreds.Namespace), labelSelector); err != nil {
 		return errors.Wrap(err, "failed to list PCDClusters for cleanup")
@@ -220,7 +220,7 @@ func (r *OpenstackCredsReconciler) reconcileDelete(ctx context.Context, scope *s
 // SetupWithManager sets up the controller with the Manager.
 func (r *OpenstackCredsReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&vjailbreakv1alpha1.OpenstackCreds{}).
+		For(&migratev1alpha1.OpenstackCreds{}).
 		WithEventFilter(predicate.GenerationChangedPredicate{}).
 		Complete(r)
 }
@@ -268,19 +268,19 @@ func handleValidatedCreds(ctx context.Context, r *OpenstackCredsReconciler, scop
 		return errors.Wrap(err, "failed to update OpenstackCreds status")
 	}
 
-	// Get vjailbreak settings to check if we should populate VMwareMachine flavors
-	vjailbreakSettings, err := migrationutils.GetVjailbreakSettings(ctx, r.Client)
+	// Get stellaris-migrate settings to check if we should populate VMwareMachine flavors
+	migrateSettings, err := migrationutils.GetMigrateSettings(ctx, r.Client)
 	if err != nil {
-		ctxlog.Error(err, "Failed to get vjailbreak settings")
-		return errors.Wrap(err, "failed to get vjailbreak settings")
+		ctxlog.Error(err, "Failed to get stellaris-migrate settings")
+		return errors.Wrap(err, "failed to get stellaris-migrate settings")
 	}
 
 	// Only populate flavors if the setting is enabled
-	if vjailbreakSettings.PopulateVMwareMachineFlavors {
+	if migrateSettings.PopulateVMwareMachineFlavors {
 		ctxlog.Info("Populating VMwareMachine objects with OpenStack flavors", "openstackcreds", scope.OpenstackCreds.Name)
 		// Now with these creds we should populate the flavors as labels in vmwaremachine object.
 		// This will help us to create the vmwaremachine object with the correct flavor.
-		vmwaremachineList := &vjailbreakv1alpha1.VMwareMachineList{}
+		vmwaremachineList := &migratev1alpha1.VMwareMachineList{}
 		if err := r.List(ctx, vmwaremachineList); err != nil {
 			return errors.Wrap(err, "failed to list vmwaremachine objects")
 		}

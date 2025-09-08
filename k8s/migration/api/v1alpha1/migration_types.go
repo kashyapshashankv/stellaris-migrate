@@ -101,7 +101,7 @@ type MigrationStatus struct {
 // including validation, data transfer, disk conversion, and cutover phases. Migration resources
 // provide detailed status monitoring, error handling, and manual intervention points like
 // cutover initiation. Each Migration is associated with a MigrationPlan and executes on a specific
-// VjailbreakNode agent, tracking progress via status updates and condition changes.
+// StellarisMigrateNode agent, tracking progress via status updates and condition changes.
 type Migration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

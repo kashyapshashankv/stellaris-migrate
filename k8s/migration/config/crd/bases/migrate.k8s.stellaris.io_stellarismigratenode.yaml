@@ -4,14 +4,14 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: vjailbreaknodes.migrate.k8s.stellaris.io
+  name: stellaris-migrate-nodes.migrate.k8s.stellaris.io
 spec:
   group: migrate.k8s.stellaris.io
   names:
-    kind: VjailbreakNode
-    listKind: VjailbreakNodeList
-    plural: vjailbreaknodes
-    singular: vjailbreaknode
+    kind: StellarisMigrateNode
+    listKind: StellarisMigrateNodeList
+    plural: stellaris-migrate-nodes
+    singular: stellarismigratenode
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -25,7 +25,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: |-
-          VjailbreakNode is the Schema for the vjailbreaknodes API that represents
+          StellarisMigrateNode is the Schema for the stellaris-migrate-nodes API that represents
           a node in the migration infrastructure with configuration, resource limits,
           and statistics for monitoring migration progress
         properties:
@@ -47,7 +47,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: Spec defines the desired state of VjailbreakNode
+            description: Spec defines the desired state of StellarisMigrateNode
             properties:
               nodeRole:
                 description: NodeRole is the role assigned to the node (e.g., "worker",
@@ -111,7 +111,7 @@ spec:
             - openstackImageID
             type: object
           status:
-            description: Status defines the observed state of VjailbreakNode
+            description: Status defines the observed state of StellarisMigrateNode
             properties:
               activeMigrations:
                 description: |-

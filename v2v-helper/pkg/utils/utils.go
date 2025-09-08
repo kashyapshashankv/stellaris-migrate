@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
 
 	corev1 "k8s.io/api/core/v1"
@@ -39,7 +39,7 @@ func GetInclusterClient() (client.Client, error) {
 	}
 	scheme := runtime.NewScheme()
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
-	utilruntime.Must(vjailbreakv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(migratev1alpha1.AddToScheme(scheme))
 	clientset, err := client.New(config, client.Options{
 		Scheme: scheme,
 	})
@@ -116,10 +116,10 @@ func atoi(s string) int {
 	return i
 }
 
-func GetVjailbreakSettings(ctx context.Context, k8sClient client.Client) (*VjailbreakSettings, error) {
+func GetMigrateSettings(ctx context.Context, k8sClient client.Client) (*VjailbreakSettings, error) {
 	vjailbreakSettingsCM := &corev1.ConfigMap{}
-	if err := k8sClient.Get(ctx, k8stypes.NamespacedName{Name: constants.VjailbreakSettingsConfigMapName, Namespace: constants.NamespaceMigrationSystem}, vjailbreakSettingsCM); err != nil {
-		return nil, errors.Wrap(err, "failed to get vjailbreak settings configmap")
+	if err := k8sClient.Get(ctx, k8stypes.NamespacedName{Name: constants.StellarisMigrateSettingsConfigMapName, Namespace: constants.NamespaceMigrationSystem}, vjailbreakSettingsCM); err != nil {
+		return nil, errors.Wrap(err, "failed to get stellaris-migrate settings configmap")
 	}
 
 	if vjailbreakSettingsCM.Data == nil {

@@ -21,13 +21,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// VjailbreakNodePhase represents the lifecycle phase of a vjailbreak node
+// StellarisMigrateNodePhase represents the lifecycle phase of a stellaris-migrate node
 // including provisioning, ready, and error states
-type VjailbreakNodePhase string
+type StellarisMigrateNodePhase string
 
-// VjailbreakNodeSpec defines the desired state of VjailbreakNode including
+// StellarisMigrateNodeSpec defines the desired state of StellarisMigrateNode including
 // node configuration, resource limits, and credentials for provisioning
-type VjailbreakNodeSpec struct {
+type StellarisMigrateNodeSpec struct {
 	// NodeRole is the role assigned to the node (e.g., "worker", "controller")
 	NodeRole string `json:"nodeRole"`
 
@@ -42,9 +42,9 @@ type VjailbreakNodeSpec struct {
 	OpenstackImageID string `json:"openstackImageID"`
 }
 
-// VjailbreakNodeStatus defines the observed state of VjailbreakNode including
+// StellarisMigrateNodeStatus defines the observed state of StellarisMigrateNode including
 // migration statistics, health status, and current workload
-type VjailbreakNodeStatus struct {
+type StellarisMigrateNodeStatus struct {
 	// OpenstackUUID is the UUID of the VM in OpenStack
 	OpenstackUUID string `json:"openstackUUID,omitempty"`
 
@@ -53,7 +53,7 @@ type VjailbreakNodeStatus struct {
 
 	// Phase is the current lifecycle phase of the node
 	// (e.g., Provisioning, Ready, Error, Decommissioning)
-	Phase VjailbreakNodePhase `json:"phase,omitempty"`
+	Phase StellarisMigrateNodePhase `json:"phase,omitempty"`
 
 	// ActiveMigrations is the list of active migrations currently being processed on this node,
 	// containing references to MigrationPlan resources
@@ -65,29 +65,29 @@ type VjailbreakNodeStatus struct {
 // +kubebuilder:printcolumn:JSONPath=`.status.phase`,name=Phase,type=string
 // +kubebuilder:printcolumn:JSONPath=`.status.vmIP`,name=VMIP,type=string
 
-// VjailbreakNode is the Schema for the vjailbreaknodes API that represents
+// StellarisMigrateNode is the Schema for the stellaris-migratenodes API that represents
 // a node in the migration infrastructure with configuration, resource limits,
 // and statistics for monitoring migration progress
-type VjailbreakNode struct {
+type StellarisMigrateNode struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// Spec defines the desired state of VjailbreakNode
-	Spec VjailbreakNodeSpec `json:"spec,omitempty"`
+	// Spec defines the desired state of StellarisMigrateNode
+	Spec StellarisMigrateNodeSpec `json:"spec,omitempty"`
 
-	// Status defines the observed state of VjailbreakNode
-	Status VjailbreakNodeStatus `json:"status,omitempty"`
+	// Status defines the observed state of StellarisMigrateNode
+	Status StellarisMigrateNodeStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// VjailbreakNodeList contains a list of VjailbreakNode
-type VjailbreakNodeList struct {
+// StellarisMigrateNodeList contains a list of StellarisMigrateNode
+type StellarisMigrateNodeList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []VjailbreakNode `json:"items"`
+	Items           []StellarisMigrateNode `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&VjailbreakNode{}, &VjailbreakNodeList{})
+	SchemeBuilder.Register(&StellarisMigrateNode{}, &StellarisMigrateNodeList{})
 }

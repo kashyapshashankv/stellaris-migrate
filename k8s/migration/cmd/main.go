@@ -38,7 +38,7 @@ import (
 
 	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 
-	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/internal/controller"
 	// +kubebuilder:scaffold:imports
 )
@@ -50,7 +50,7 @@ var (
 
 func init() {
 	utilruntime.Must(clientgoscheme.AddToScheme(scheme))
-	utilruntime.Must(vjailbreakv1alpha1.AddToScheme(scheme))
+	utilruntime.Must(migratev1alpha1.AddToScheme(scheme))
 	// +kubebuilder:scaffold:scheme
 }
 
@@ -258,12 +258,12 @@ func SetupControllers(mgr ctrl.Manager, local bool) error {
 		setupLog.Error(err, "unable to create controller", "controller", "MigrationTemplate")
 		return err
 	}
-	if err := (&controller.VjailbreakNodeReconciler{
+	if err := (&controller.StellarisMigrateNodeReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 		Local:  local,
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "VjailbreakNode")
+		setupLog.Error(err, "unable to create controller", "controller", "StellarisMigrateNode")
 		return err
 	}
 	if err := (&controller.RollingMigrationPlanReconciler{

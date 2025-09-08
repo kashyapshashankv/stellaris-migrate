@@ -13,7 +13,7 @@ title: "API Reference by Version"
 EOF
 
 for tag in $(git tag --sort=-creatordate | head -n 5); do
-  echo "- [${tag}](/vjailbreak/swagger-ui/${tag}/)" >> $OUTPUT_FILE
+  echo "- [${tag}](/stellaris-migrate/swagger-ui/${tag}/)" >> $OUTPUT_FILE
 done
 
 echo "Swagger UI links generated in $OUTPUT_FILE"
