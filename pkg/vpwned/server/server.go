@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/openapiv3"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/openapiv3"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

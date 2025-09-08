@@ -8,8 +8,8 @@ import (
 
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/openstack/blockstorage/v3/volumes"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils/migrateutils"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils/migrateutils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 )

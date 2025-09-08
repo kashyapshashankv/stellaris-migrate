@@ -1,8 +1,8 @@
 package ironic
 
 import (
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers/base"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers/base"
 )
 
 type IronicProvider struct {

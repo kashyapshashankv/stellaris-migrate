@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/sdk/keystone"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/sdk/testutils"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/keystone"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/testutils"
 )
 
 // RoundTripFunc .

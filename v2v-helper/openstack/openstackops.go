@@ -11,10 +11,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/constants"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils/migrateutils"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils/migrateutils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/openstack"

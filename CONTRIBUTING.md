@@ -30,7 +30,7 @@ The same prerequisites apply for development as for using vJailbreak:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/platform9/vjailbreak.git
+   git clone https://github.com/kashyapshashankv/stellaris-migrate.git
    cd vjailbreak
    ```
 

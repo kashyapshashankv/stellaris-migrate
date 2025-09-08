@@ -4,7 +4,7 @@ package constants
 import (
 	"time"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 )
 

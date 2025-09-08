@@ -25,7 +25,7 @@ endif
 endif
 
 VERSION = $(RELEASE_VER)-$(GIT_BRANCH)-$(GIT_SHA)
-LDFLAGS += "-s -w -X github.com/platform9/vjailbreak/pkg/vpwned/version.Version=$(VERSION)"
+LDFLAGS += "-s -w -X github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/version.Version=$(VERSION)"
 BUILD_OPTIONS += -ldflags=$(LDFLAGS) -buildvcs=false
 
 ifndef PROTOC
@@ -84,20 +84,20 @@ docker-push: ## Push docker image with the manager.
 proto: 
 	@echo "Building proto"
 	$(PROTOC) -I. \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/sdk/proto/third_party/googleapis \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/vendor \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/vendor/github.com/grpc-ecosystem/grpc-gateway/v2 \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/proto/third_party/googleapis \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/vendor \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/vendor/github.com/grpc-ecosystem/grpc-gateway/v2 \
 	--go-grpc_out=api/proto --go_out=api/proto \
 	$(PROTOC_FILES)
 	#TODO: Add swagger generator command
 	$(PROTOC) -I. \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/sdk/proto/third_party/googleapis \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/vendor \
-	-I${GOPATH}/src/github.com/platform9/vjailbreak/pkg/vpwned/vendor/github.com/grpc-ecosystem/grpc-gateway/v2 \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/proto/third_party/googleapis \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/vendor \
+	-I${GOPATH}/src/github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/vendor/github.com/grpc-ecosystem/grpc-gateway/v2 \
 	--grpc-gateway_out=logtostderr=true,allow_delete_body=true:api/proto \
 	--openapiv2_out ./openapiv3/dist --openapiv2_opt logtostderr=true,allow_merge=true \
 	$(PROTOC_FILES)
-	go generate github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service
+	go generate github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service
 
 mockgen:
 	go install go.uber.org/mock/mockgen@latest

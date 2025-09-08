@@ -30,10 +30,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	constants "github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
-	scope "github.com/platform9/vjailbreak/k8s/migration/pkg/scope"
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
+	scope "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 )
 
 // VMwareCredsReconciler reconciles a VMwareCreds object

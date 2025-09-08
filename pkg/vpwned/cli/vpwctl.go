@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	_ "github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers/base"
-	_ "github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers/maas"
+	_ "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers/base"
+	_ "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers/maas"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

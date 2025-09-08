@@ -9,7 +9,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/platform9/vjailbreak/v2v-helper/vcenter"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vcenter"
 	"github.com/stretchr/testify/assert"
 	"github.com/vmware/govmomi"
 	"github.com/vmware/govmomi/find"

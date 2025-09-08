@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
 )
 
 const (

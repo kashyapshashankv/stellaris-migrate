@@ -1,4 +1,4 @@
-module github.com/platform9/vjailbreak/pkg/vpwned
+module github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned
 
 go 1.24.0
 

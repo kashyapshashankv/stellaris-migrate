@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/targets/vcenter"
-	"github.com/platform9/vjailbreak/pkg/vpwned/utils/tableprinter"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/targets/vcenter"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/utils/tableprinter"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

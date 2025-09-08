@@ -28,11 +28,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/scope"
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
-	providers "github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
+	providers "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 )
 

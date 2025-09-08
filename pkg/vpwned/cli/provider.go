@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"strings"
 
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
-	"github.com/platform9/vjailbreak/pkg/vpwned/utils/tableprinter"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/utils/tableprinter"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

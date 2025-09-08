@@ -22,8 +22,8 @@ import (
 	"time"
 
 	"github.com/go-logr/logr"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils/migrateutils"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils/migrateutils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -32,9 +32,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	constants "github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 )
 
 // RDMDiskReconciler reconciles a RDMDisk object

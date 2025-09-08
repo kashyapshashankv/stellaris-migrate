@@ -14,8 +14,8 @@ import (
 	reflect "reflect"
 
 	go_ipmi "github.com/bougou/go-ipmi"
-	service "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	providers "github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
+	service "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	providers "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
 	gomock "go.uber.org/mock/gomock"
 )
 

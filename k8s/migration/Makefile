@@ -86,7 +86,7 @@ lint-fix: golangci-lint ## Run golangci-lint linter and perform fixes
 
 .PHONY: build
 build: manifests generate # fmt vet ## Build manager binary.
-	CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} go build -a -ldflags "-X github.com/platform9/vjailbreak/k8s/migration/internal/controller.v2vimage=${V2V_IMG}" -o manager cmd/main.go
+	CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} go build -a -ldflags "-X github.com/kashyapshashankv/stellaris-migrate/k8s/migration/internal/controller.v2vimage=${V2V_IMG}" -o manager cmd/main.go
 
 .PHONY: run
 run: manifests generate  # fmt vet ## Run a controller from your host.

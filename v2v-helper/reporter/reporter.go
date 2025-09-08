@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"

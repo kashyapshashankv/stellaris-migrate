@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	vm "github.com/platform9/vjailbreak/v2v-helper/vm"
+	vm "github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 )
 
 // MockVirtV2VOperations is a mock of VirtV2VOperations interface.

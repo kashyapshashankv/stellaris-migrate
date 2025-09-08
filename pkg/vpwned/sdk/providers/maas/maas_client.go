@@ -11,7 +11,7 @@ import (
 	ipmi "github.com/bougou/go-ipmi"
 	gomaasclient "github.com/canonical/gomaasclient/client"
 	"github.com/canonical/gomaasclient/entity"
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
 	"github.com/sirupsen/logrus"
 )
 

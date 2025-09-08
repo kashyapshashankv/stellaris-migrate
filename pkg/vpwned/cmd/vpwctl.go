@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/platform9/vjailbreak/pkg/vpwned/cli"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/cli"
 )
 
 /*

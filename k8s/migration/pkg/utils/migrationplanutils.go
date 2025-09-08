@@ -16,10 +16,10 @@ import (
 	"unicode"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	"k8s.io/apimachinery/pkg/util/validation"
 )
 

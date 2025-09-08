@@ -7,7 +7,7 @@ import (
 
 	"github.com/gophercloud/gophercloud"
 	"github.com/gophercloud/gophercloud/openstack/blockstorage/v3/volumes"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 )
 
 // RDMDiskToVolumeManageMap builds the request payload for manage volume.

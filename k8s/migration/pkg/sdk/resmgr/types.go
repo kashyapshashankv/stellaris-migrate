@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/sdk/keystone"
-	pcd "github.com/platform9/vjailbreak/k8s/migration/pkg/sdk/pcd"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/keystone"
+	pcd "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/pcd"
 )
 
 // Extensions represents extended host information including network interfaces and their configuration.

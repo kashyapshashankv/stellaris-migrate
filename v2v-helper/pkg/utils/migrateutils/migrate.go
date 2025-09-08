@@ -4,9 +4,9 @@ import (
 	"log"
 
 	"github.com/pkg/errors"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/constants"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/xml"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/xml"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/vm"
 )
 
 func GenerateXMLConfig(vminfo vm.VMInfo) error {

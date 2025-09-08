@@ -8,9 +8,9 @@ import (
 	"github.com/pkg/errors"
 
 	ipmi "github.com/bougou/go-ipmi"
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers"
-	"github.com/platform9/vjailbreak/pkg/vpwned/sdk/providers/base"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/sdk/providers/base"
 	"github.com/sirupsen/logrus"
 )
 

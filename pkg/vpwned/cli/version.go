@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/server"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/server"
 	"github.com/spf13/cobra"
 )
 

@@ -1,4 +1,4 @@
-module github.com/platform9/vjailbreak/v2v-helper
+module github.com/kashyapshashankv/stellaris-migrate/v2v-helper
 
 go 1.24.0
 
@@ -7,7 +7,7 @@ require (
 	github.com/gophercloud/gophercloud v1.14.1
 	github.com/hashicorp/go-retryablehttp v0.7.7
 	github.com/pkg/errors v0.9.1
-	github.com/platform9/vjailbreak/k8s/migration v0.0.0-20250718102048-de8740c10909
+	github.com/kashyapshashankv/stellaris-migrate/k8s/migration v0.0.0-20250718102048-de8740c10909
 	github.com/prometheus-community/pro-bing v0.4.1
 	github.com/stretchr/testify v1.10.0
 	github.com/vmware/govmomi v0.51.0
@@ -61,4 +61,4 @@ require (
 	sigs.k8s.io/yaml v1.5.0 // indirect
 )
 
-replace github.com/platform9/vjailbreak/k8s/migration => ../k8s/migration
+replace github.com/kashyapshashankv/stellaris-migrate/k8s/migration => ../k8s/migration

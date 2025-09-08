@@ -4,12 +4,12 @@
 
 A free and open-source tool that simplifies the migration of virtual machines from VMware to any OpenStack-compliant cloud.
 
-[![Build Status](https://github.com/platform9/vjailbreak/actions/workflows/packer.yml/badge.svg)](https://github.com/platform9/vjailbreak/actions/workflows/packer.yml)
-[![Latest Release](https://badgen.net/github/release/platform9/vjailbreak/latest)](https://github.com/platform9/vjailbreak/releases/latest)
-[![All Releases](https://badgen.net/github/releases/platform9/vjailbreak)](https://github.com/platform9/vjailbreak/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/platform9/vjailbreak)](https://github.com/platform9/vjailbreak/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/platform9/vjailbreak)](https://github.com/platform9/vjailbreak/network/members)
-[![Go Report Card](https://goreportcard.com/badge/github.com/platform9/vjailbreak/v2v-helper)](https://goreportcard.com/report/github.com/platform9/vjailbreak/v2v-helper)
+[![Build Status](https://github.com/kashyapshashankv/stellaris-migrate/actions/workflows/packer.yml/badge.svg)](https://github.com/kashyapshashankv/stellaris-migrate/actions/workflows/packer.yml)
+[![Latest Release](https://badgen.net/github/release/platform9/vjailbreak/latest)](https://github.com/kashyapshashankv/stellaris-migrate/releases/latest)
+[![All Releases](https://badgen.net/github/releases/platform9/vjailbreak)](https://github.com/kashyapshashankv/stellaris-migrate/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/platform9/vjailbreak)](https://github.com/kashyapshashankv/stellaris-migrate/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/platform9/vjailbreak)](https://github.com/kashyapshashankv/stellaris-migrate/network/members)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kashyapshashankv/stellaris-migrate/v2v-helper)](https://goreportcard.com/report/github.com/kashyapshashankv/stellaris-migrate/v2v-helper)
 
 </div>
 

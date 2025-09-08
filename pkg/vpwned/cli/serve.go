@@ -10,7 +10,7 @@ import (
 	"time"
 
 	homedir "github.com/mitchellh/go-homedir"
-	"github.com/platform9/vjailbreak/pkg/vpwned/server"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/server"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

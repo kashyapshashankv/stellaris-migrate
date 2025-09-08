@@ -26,10 +26,10 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/scope"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils/migrateutils"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils/migrateutils"
 )
 
 // CheckAndCreateMasterNodeEntry ensures a master node entry exists and creates it if needed

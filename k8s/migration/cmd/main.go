@@ -36,10 +36,10 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	"github.com/platform9/vjailbreak/k8s/migration/internal/controller"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/internal/controller"
 	// +kubebuilder:scaffold:imports
 )
 

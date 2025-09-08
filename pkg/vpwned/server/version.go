@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/juju/errors"
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
-	"github.com/platform9/vjailbreak/pkg/vpwned/upgrade"
-	version "github.com/platform9/vjailbreak/pkg/vpwned/version"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
+	"github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/upgrade"
+	version "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/version"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"

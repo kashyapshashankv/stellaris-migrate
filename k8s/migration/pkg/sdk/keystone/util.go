@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	pcd "github.com/platform9/vjailbreak/k8s/migration/pkg/sdk/pcd"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	pcd "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/sdk/pcd"
 )
 
 // ParseCredentialsFromEnv creates a Credentials struct from environment variables.

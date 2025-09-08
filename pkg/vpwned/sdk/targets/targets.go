@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strings"
 
-	api "github.com/platform9/vjailbreak/pkg/vpwned/api/proto/v1/service"
+	api "github.com/kashyapshashankv/stellaris-migrate/pkg/vpwned/api/proto/v1/service"
 )
 
 var targets map[string]Targets = make(map[string]Targets)

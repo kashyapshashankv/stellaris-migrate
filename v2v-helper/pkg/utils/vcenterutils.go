@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	v1 "k8s.io/api/core/v1"

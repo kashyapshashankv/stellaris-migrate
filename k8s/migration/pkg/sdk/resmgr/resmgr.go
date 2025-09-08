@@ -14,7 +14,7 @@ import (
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
 // Resmgr defines the interface for interacting with Platform9 Resource Manager service.

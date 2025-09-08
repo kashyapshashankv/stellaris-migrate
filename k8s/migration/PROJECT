@@ -6,7 +6,7 @@ domain: k8s.stellaris.io
 layout:
 - go.kubebuilder.io/v4
 projectName: migration
-repo: github.com/platform9/vjailbreak/k8s/migration
+repo: github.com/kashyapshashankv/stellaris-migrate/k8s/migration
 resources:
 - api:
     crdVersion: v1
@@ -15,7 +15,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: Migration
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -24,7 +24,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: OpenstackCreds
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -33,7 +33,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: VMwareCreds
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -42,7 +42,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: NetworkMapping
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -51,7 +51,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: StorageMapping
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -60,7 +60,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: MigrationPlan
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -69,7 +69,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: MigrationTemplate
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -78,7 +78,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: VjailbreakNode
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -86,7 +86,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: VMwareCluster
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -94,7 +94,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: VMwareMachine
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -102,7 +102,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: VMwareHost
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -111,7 +111,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: RollingMigrationPlan
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -120,7 +120,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: ESXIMigration
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -129,7 +129,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: ClusterMigration
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -138,7 +138,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: BMConfig
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -146,7 +146,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: PCDCluster
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -154,7 +154,7 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: PCDHost
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 - api:
     crdVersion: v1
@@ -163,6 +163,6 @@ resources:
   domain: k8s.stellaris.io
   group: vjailbreak
   kind: RDMDisk
-  path: github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1
+  path: github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1
   version: v1alpha1
 version: "3"

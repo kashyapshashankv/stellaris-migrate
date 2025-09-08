@@ -24,7 +24,7 @@ import (
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 
-	"github.com/platform9/vjailbreak/k8s/migration/test/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/test/utils"
 )
 
 const namespace = "migration-system"

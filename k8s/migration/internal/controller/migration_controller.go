@@ -24,7 +24,7 @@ import (
 	"strings"
 	"time"
 
-	openstackconst "github.com/platform9/vjailbreak/v2v-helper/pkg/constants"
+	openstackconst "github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/constants"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	corev1 "k8s.io/api/core/v1"
@@ -39,10 +39,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	"github.com/pkg/errors"
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	constants "github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/scope"
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 )
 
 // MigrationReconciler reconciles a Migration object

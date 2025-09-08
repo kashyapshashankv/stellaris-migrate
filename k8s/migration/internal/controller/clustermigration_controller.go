@@ -22,8 +22,8 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	"github.com/platform9/vjailbreak/k8s/migration/pkg/scope"
-	utils "github.com/platform9/vjailbreak/k8s/migration/pkg/utils"
+	"github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/scope"
+	utils "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/utils"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -31,8 +31,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
-	vjailbreakv1alpha1 "github.com/platform9/vjailbreak/k8s/migration/api/v1alpha1"
-	constants "github.com/platform9/vjailbreak/k8s/migration/pkg/constants"
+	vjailbreakv1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
+	constants "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/pkg/constants"
 	k8stypes "k8s.io/apimachinery/pkg/types"
 )
 
