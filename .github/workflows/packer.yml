@@ -110,33 +110,7 @@ jobs:
       - name: Set environment variables for images
         id: set_env
         run: |
-          GIT_SHA=$(git rev-parse --short HEAD)
-          BUILD_VERSION=${{ github.run_number }}
-
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            if [[ "${{ github.event.inputs.short_sha }}" != "" ]]; then
-              echo "short_sha is provided as ${{ github.event.inputs.short_sha }}"
-              GIT_SHA=${{ github.event.inputs.short_sha }}
-            fi
-            if [[ "${{ github.event.inputs.version }}" != "" ]]; then
-              echo "version is provided as ${{ github.event.inputs.version }}"
-              BUILD_VERSION=${{ github.event.inputs.version }}
-            fi
-          fi
-
-          # Release Event
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            TAG=${{ github.event.release.tag_name }}
-
-          # Nightly Build
-          elif [[ "${{ github.event.inputs.is_nightly }}" == "true" ]]; then
-            LAST_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-            TAG="${LAST_VERSION}-${GIT_SHA}"
-          
-          # Push and Workflow dispatch
-          else
-            TAG="${BUILD_VERSION}-${GIT_SHA}"
-          fi
+          TAG="${{ env.TAG }}"
 
           echo "tag=${{ env.TAG }}" >> $GITHUB_OUTPUT
           echo "qcow2_img=${{ env.QCOW2_IMG }}:${TAG}" >> $GITHUB_OUTPUT
