@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Migration, Phase } from "src/api/migrations/model"
 import { useErrorHandler } from "./useErrorHandler"
 import { useStatusTracker } from "./useStatusMonitor"
 

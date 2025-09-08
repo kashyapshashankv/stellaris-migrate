@@ -1343,18 +1343,6 @@ export default function RollingMigrationFormDrawer({
             navigate("/dashboard/cluster-conversions");
         } catch (error) {
             console.error("Failed to submit rolling migration plan:", error);
-
-            // Track cluster conversion failure
-            const parts = sourceCluster.split(":");
-            const credName = parts[0];
-            const sourceItem = sourceData.find(item => item.credName === credName);
-            const clusterObj = sourceItem?.clusters.find(cluster =>
-                cluster.id === sourceCluster
-            );
-            const selectedPCD = pcdData.find(p => p.id === destinationPCD);
-            const selectedVMsData = vmsWithAssignments
-                .filter(vm => selectedVMs.includes(vm.id));
-
             reportError(error as Error, {
                 context: 'rolling-migration-plan-submission',
                 metadata: {
