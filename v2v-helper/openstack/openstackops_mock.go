@@ -13,8 +13,8 @@ import (
 	servers "github.com/gophercloud/gophercloud/openstack/compute/v2/servers"
 	networks "github.com/gophercloud/gophercloud/openstack/networking/v2/networks"
 	ports "github.com/gophercloud/gophercloud/openstack/networking/v2/ports"
-	utils "github.com/platform9/vjailbreak/v2v-helper/pkg/utils"
-	vm "github.com/platform9/vjailbreak/v2v-helper/vm"
+	utils "v2v-helper/pkg/utils"
+	vm "v2v-helper/vm"
 )
 
 // MockOpenstackOperations is a mock of OpenstackOperations interface.

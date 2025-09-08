@@ -15,7 +15,7 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils"
+	"v2v-helper/pkg/utils"
 
 	"golang.org/x/sys/unix"
 
