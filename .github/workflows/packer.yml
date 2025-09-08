@@ -43,15 +43,15 @@ env:
   CONTROLLER_IMG: ${{ vars.REGISTRY || 'quay.io' }}/${{ vars.REPO || 'stellaris' }}/stellaris-migrate-controller
   VPWNED_IMG: ${{ vars.REGISTRY || 'quay.io' }}/${{ vars.REPO || 'stellaris' }}/stellaris-migrate-vpwned
   NIGHTLY_RELEASE: ${{ github.event.inputs.is_nightly }}
-  AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
-  BUGSNAG_API_KEY: ${{ secrets.BUGSNAG_API_KEY }}
+  TAG: "0.0.1"
+  RELEASE: "true"
 
 
 jobs:
   determine-release:
     runs-on: self-hosted
     outputs:
-      is_release: ${{ env.release_found }}
+      is_release: ${{ steps.set_env.outputs.release }}
       is_nightly: ${{ github.event.inputs.is_nightly }}
       tag: ${{ steps.set_env.outputs.tag }}
       ui_img: ${{ steps.set_env.outputs.ui_img }}
