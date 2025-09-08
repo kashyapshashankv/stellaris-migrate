@@ -209,7 +209,7 @@ jobs:
           echo "V2V_IMG=${{ needs.determine-release.outputs.v2v_img }}" >> $GITHUB_ENV
 
       - name: Build controller image
-        run: make vjail-controller-only
+        run: make stellaris-migrate-controller-only
         
       - name: Save controller image as tar file
         run: |
