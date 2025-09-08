@@ -37,7 +37,7 @@ const generateOpenstackToken = async (creds) => {
 }
 
 export const getNodes = async (namespace = VJAILBREAK_DEFAULT_NAMESPACE) => {
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellarismigratenodes`
   const response = await axios.get<NodeList>({
     endpoint,
   })
@@ -48,7 +48,7 @@ export const deleteNode = async (
   nodeName: string,
   namespace = VJAILBREAK_DEFAULT_NAMESPACE
 ) => {
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes/${nodeName}`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellarismigratenodes/${nodeName}`
   const response = await axios.del<Node>({
     endpoint,
   })
@@ -129,7 +129,7 @@ export const createNodes = async (params: {
   namespace?: string
 }) => {
   const namespace = params.namespace || VJAILBREAK_DEFAULT_NAMESPACE
-  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellaris-migrate-nodes`
+  const endpoint = `${VJAILBREAK_API_BASE_PATH}/namespaces/${namespace}/stellarismigratenodes`
 
   const results: NodeItem[] = []
   const errors: Error[] = []

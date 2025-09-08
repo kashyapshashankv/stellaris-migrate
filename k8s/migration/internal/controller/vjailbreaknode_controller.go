@@ -43,9 +43,9 @@ type StellarisMigrateNodeReconciler struct {
 	Local  bool
 }
 
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellaris-migrate-nodes/finalizers,verbs=update
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellarismigratenodes,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellarismigratenodes/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=migrate.k8s.stellaris.io,resources=stellarismigratenodes/finalizers,verbs=update
 // +kubebuilder:rbac:groups=core,resources=nodes,verbs=get;list;watch;delete
 
 // Reconcile handles the reconciliation of StellarisMigrateNode resources

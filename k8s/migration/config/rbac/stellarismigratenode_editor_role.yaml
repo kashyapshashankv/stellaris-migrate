@@ -1,4 +1,4 @@
-# permissions for end users to edit stellaris-migrate-nodes.
+# permissions for end users to edit stellarismigratenodes.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -10,7 +10,7 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - stellaris-migrate-nodes
+  - stellarismigratenodes
   verbs:
   - create
   - delete
@@ -22,6 +22,6 @@ rules:
 - apiGroups:
   - migrate.k8s.stellaris.io
   resources:
-  - stellaris-migrate-nodes/status
+  - stellarismigratenodes/status
   verbs:
   - get

@@ -125,7 +125,7 @@ func RunPreUpgradeChecks(ctx context.Context, kubeClient client.Client, restConf
 	gvr = schema.GroupVersionResource{
 		Group:    "migrate.k8s.stellaris.io",
 		Version:  "v1alpha1",
-		Resource: "stellaris-migrate-nodes",
+		Resource: "stellarismigratenodes",
 	}
 	dynamicClient, err = dynamic.NewForConfig(restConfig)
 	if err != nil {
@@ -586,7 +586,7 @@ func CleanupResources(ctx context.Context, kubeClient client.Client, restConfig 
 		log.Println("Deleted RollingMigrationPlans.")
 	}
 
-	gvrNodes := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellaris-migrate-nodes"}
+	gvrNodes := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellarismigratenodes"}
 	nodeList, err := dynamicClient.Resource(gvrNodes).Namespace("migration-system").List(ctx, metav1.ListOptions{})
 	if err == nil {
 		for _, item := range nodeList.Items {

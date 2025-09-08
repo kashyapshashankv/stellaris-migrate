@@ -640,7 +640,7 @@ func checkAndDeleteRollingMigrationPlans(ctx context.Context, restConfig *rest.C
 }
 
 func checkAndScaleDownAgent(ctx context.Context, restConfig *rest.Config) (bool, string) {
-	gvr := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellaris-migrate-nodes"}
+	gvr := schema.GroupVersionResource{Group: "migrate.k8s.stellaris.io", Version: "v1alpha1", Resource: "stellarismigratenodes"}
 	dynamicClient, err := dynamic.NewForConfig(restConfig)
 	if err != nil {
 		return false, "Failed to create dynamic client"

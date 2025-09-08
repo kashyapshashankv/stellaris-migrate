@@ -4,13 +4,13 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.17.1
-  name: stellaris-migrate-nodes.migrate.k8s.stellaris.io
+  name: stellarismigratenodes.migrate.k8s.stellaris.io
 spec:
   group: migrate.k8s.stellaris.io
   names:
     kind: StellarisMigrateNode
     listKind: StellarisMigrateNodeList
-    plural: stellaris-migrate-nodes
+    plural: stellarismigratenodes
     singular: stellarismigratenode
   scope: Namespaced
   versions:
@@ -25,7 +25,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: |-
-          StellarisMigrateNode is the Schema for the stellaris-migrate-nodes API that represents
+          StellarisMigrateNode is the Schema for the stellarismigratenodes API that represents
           a node in the migration infrastructure with configuration, resource limits,
           and statistics for monitoring migration progress
         properties:
