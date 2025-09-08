@@ -1,12 +1,9 @@
 import { useEffect } from "react"
-import { Migration, Phase } from "src/api/migrations/model"
-import { useAmplitude } from "./useAmplitude"
 import { useErrorHandler } from "./useErrorHandler"
 import { useStatusTracker } from "./useStatusMonitor"
-import { AMPLITUDE_EVENTS } from "src/types/amplitude"
+
 
 export const useMigrationStatusMonitor = (migrations: Migration[] = []) => {
-  const { track } = useAmplitude({ component: "MigrationStatusMonitor" })
   const { reportError } = useErrorHandler({
     component: "MigrationStatusMonitor",
   })
@@ -67,19 +64,6 @@ export const useMigrationStatusMonitor = (migrations: Migration[] = []) => {
       ) {
         const errorDetails = getErrorDetails()
 
-        // Track with Amplitude
-        track(AMPLITUDE_EVENTS.MIGRATION_EXECUTION_FAILED, {
-          migrationName,
-          migrationPlan: migration.spec?.migrationPlan,
-          vmName: migration.spec?.vmName,
-          podRef: migration.spec?.podRef,
-          previousPhase: tracker.previousPhase,
-          currentPhase,
-          errorMessage: errorDetails.message,
-          errorReason: errorDetails.reason,
-          failureTime: errorDetails.lastTransitionTime,
-          namespace: migration.metadata?.namespace,
-        })
 
         // Report to Bugsnag
         const bugsnagError = new Error(
@@ -118,14 +102,6 @@ export const useMigrationStatusMonitor = (migrations: Migration[] = []) => {
         currentPhase === Phase.Succeeded &&
         tracker.lastReportedPhase !== Phase.Succeeded
       ) {
-        track(AMPLITUDE_EVENTS.MIGRATION_SUCCEEDED, {
-          migrationName,
-          migrationPlan: migration.spec?.migrationPlan,
-          vmName: migration.spec?.vmName,
-          previousPhase: tracker.previousPhase,
-          currentPhase,
-          namespace: migration.metadata?.namespace,
-        })
 
         // Mark as reported
         statusTrackerRef.current[migrationName].lastReportedPhase =
@@ -135,7 +111,7 @@ export const useMigrationStatusMonitor = (migrations: Migration[] = []) => {
       // Update previous phase
       statusTrackerRef.current[migrationName].previousPhase = currentPhase
     })
-  }, [migrations, track, reportError, autoCleanup])
+  }, [migrations, reportError, autoCleanup])
 
   return {}
 }

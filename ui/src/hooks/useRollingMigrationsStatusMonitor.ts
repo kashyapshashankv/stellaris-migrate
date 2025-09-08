@@ -1,14 +1,11 @@
 import { useEffect } from "react"
 import { RollingMigrationPlan } from "src/api/rolling-migration-plans/model"
-import { useAmplitude } from "./useAmplitude"
 import { useErrorHandler } from "./useErrorHandler"
 import { useStatusTracker } from "./useStatusMonitor"
-import { AMPLITUDE_EVENTS } from "src/types/amplitude"
 
 export const useRollingMigrationsStatusMonitor = (
   rollingMigrationPlans: RollingMigrationPlan[] = []
 ) => {
-  const { track } = useAmplitude({ component: "RollingMigrationsStatusMonitor" })
   const { reportError } = useErrorHandler({
     component: "RollingMigrationsStatusMonitor",
   })
@@ -58,19 +55,6 @@ export const useRollingMigrationsStatusMonitor = (
       if (isFailed && tracker.lastReportedPhase !== currentPhase) {
         const errorDetails = getErrorDetails()
 
-        // Track with Amplitude
-        track(AMPLITUDE_EVENTS.CLUSTER_CONVERSION_EXECUTION_FAILED, {
-          rollingMigrationPlanName: planName,
-          clusterName: rollingMigrationPlan.spec?.clusterSequence?.[0]?.clusterName,
-          previousPhase: tracker.previousPhase,
-          currentPhase,
-          errorMessage: errorDetails.message,
-          bmConfigRef: rollingMigrationPlan.spec?.bmConfigRef?.name,
-          clusterSequenceLength: rollingMigrationPlan.spec?.clusterSequence?.length || 0,
-          vmSequenceLength: rollingMigrationPlan.spec?.clusterSequence?.[0]?.vmSequence?.length || 0,
-          namespace: rollingMigrationPlan.metadata?.namespace,
-          migrationStrategy: rollingMigrationPlan.spec?.migrationStrategy?.type,
-        })
 
         // Report to Bugsnag
         const bugsnagError = new Error(
@@ -107,17 +91,6 @@ export const useRollingMigrationsStatusMonitor = (
       // Handle rolling migration plan success (optional - for analytics)
       const isSucceeded = currentPhase === "Succeeded"
       if (isSucceeded && tracker.lastReportedPhase !== currentPhase) {
-        track(AMPLITUDE_EVENTS.CLUSTER_CONVERSION_SUCCEEDED, {
-          rollingMigrationPlanName: planName,
-          clusterName: rollingMigrationPlan.spec?.clusterSequence?.[0]?.clusterName,
-          previousPhase: tracker.previousPhase,
-          currentPhase,
-          bmConfigRef: rollingMigrationPlan.spec?.bmConfigRef?.name,
-          clusterSequenceLength: rollingMigrationPlan.spec?.clusterSequence?.length || 0,
-          vmSequenceLength: rollingMigrationPlan.spec?.clusterSequence?.[0]?.vmSequence?.length || 0,
-          namespace: rollingMigrationPlan.metadata?.namespace,
-          migrationStrategy: rollingMigrationPlan.spec?.migrationStrategy?.type,
-        })
 
         // Mark as reported
         statusTrackerRef.current[planName].lastReportedPhase = currentPhase
@@ -128,7 +101,7 @@ export const useRollingMigrationsStatusMonitor = (
         statusTrackerRef.current[planName].previousPhase = currentPhase
       }
     })
-  }, [rollingMigrationPlans, track, reportError, autoCleanup])
+  }, [rollingMigrationPlans, reportError, autoCleanup])
 
   return {}
 }

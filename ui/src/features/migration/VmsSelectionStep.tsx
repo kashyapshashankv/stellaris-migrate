@@ -42,7 +42,6 @@ import { useErrorHandler } from "src/hooks/useErrorHandler";
 import { validateOpenstackIPs } from "src/api/openstack-creds/openstackCreds";
 import { getSecret } from "src/api/secrets/secrets";
 import { VJAILBREAK_DEFAULT_NAMESPACE } from "src/api/constants";
-import { useAmplitude } from "src/hooks/useAmplitude";
 
 const VmsSelectionStepContainer = styled("div")(({ theme }) => ({
   display: "grid",
@@ -141,7 +140,6 @@ export default function VmsSelectionStep({
   openstackCredentials,
 }: VmsSelectionStepProps) {
   const { reportError } = useErrorHandler({ component: "VmsSelectionStep" });
-  const { track } = useAmplitude({ component: "VmsSelectionStep" });
   const [migratedVms, setMigratedVms] = useState<Set<string>>(new Set());
   const [loadingMigratedVms, setLoadingMigratedVms] = useState(false);
   const [flavorDialogOpen, setFlavorDialogOpen] = useState(false);
@@ -979,12 +977,6 @@ export default function VmsSelectionStep({
       // Show success toast
       showToast(`IP addresses successfully updated for VM "${editingVm.name}"`);
 
-      // Track the analytics event
-      track('ip_addresses_updated', {
-        vm_name: editingVm.name,
-        interface_count: editingVm.networkInterfaces.length,
-        action: 'modal_multi_ip_update'
-      });
 
     } catch (error) {
       console.error("Failed to update IPs:", error);
@@ -1017,13 +1009,6 @@ export default function VmsSelectionStep({
         });
       }
 
-
-      // Track the analytics event
-      track('os_family_assigned', {
-        vm_name: vmId,
-        os_family: osFamily,
-        action: 'os-family-assignment'
-      });
 
       showToast(`OS family successfully assigned for VM "${vmId}"`);
 

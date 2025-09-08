@@ -15,8 +15,6 @@ import CheckIcon from "@mui/icons-material/Check";
 import OpenstackRCFileUploader, { OpenstackRCFileUploaderRef } from "src/components/forms/OpenstackRCFileUpload";
 import { useKeyboardSubmit } from "src/hooks/ui/useKeyboardSubmit";
 import { useErrorHandler } from "src/hooks/useErrorHandler";
-import { useAmplitude } from "src/hooks/useAmplitude";
-import { AMPLITUDE_EVENTS } from "src/types/amplitude";
 
 interface OpenstackCredentialsDrawerProps {
     open: boolean;
@@ -28,7 +26,6 @@ export default function OpenstackCredentialsDrawer({
     onClose,
 }: OpenstackCredentialsDrawerProps) {
     const { reportError } = useErrorHandler({ component: "OpenstackCredentialsDrawer" });
-    const { track } = useAmplitude({ component: "OpenstackCredentialsDrawer" });
     const [validatingOpenstackCreds, setValidatingOpenstackCreds] = useState(false);
     const [openstackCredsValidated, setOpenstackCredsValidated] = useState<boolean | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -139,25 +136,9 @@ export default function OpenstackCredentialsDrawer({
 
             setCreatedCredentialName(response.metadata.name);
 
-            // Track successful credential creation
-            track(AMPLITUDE_EVENTS.CREDENTIALS_ADDED, {
-                credentialType: "openstack",
-                credentialName,
-                isPcd,
-                namespace: response.metadata.namespace,
-            });
-
         } catch (error: unknown) {
             console.error("Error creating OpenStack credentials:", error);
 
-            // Track credential creation failure
-            track(AMPLITUDE_EVENTS.CREDENTIALS_FAILED, {
-                credentialType: "openstack",
-                credentialName,
-                isPcd,
-                errorMessage: error instanceof Error ? error.message : String(error),
-                stage: "creation",
-            });
 
             reportError(error as Error, {
                 context: 'openstack-credential-creation',
@@ -189,13 +170,6 @@ export default function OpenstackCredentialsDrawer({
             setOpenstackCredsValidated(true);
             setValidatingOpenstackCreds(false);
 
-            // Track successful credential validation
-            track(AMPLITUDE_EVENTS.CREDENTIALS_ADDED, {
-                credentialType: "openstack",
-                credentialName: createdCredentialName,
-                isPcd,
-                stage: "validation_success",
-            });
 
             // Close the drawer after a short delay to show success state
             setTimeout(() => {
@@ -206,15 +180,6 @@ export default function OpenstackCredentialsDrawer({
             setOpenstackCredsValidated(false);
             setValidatingOpenstackCreds(false);
             setError(message || "Validation failed");
-
-            // Track credential validation failure
-            track(AMPLITUDE_EVENTS.CREDENTIALS_FAILED, {
-                credentialType: "openstack",
-                credentialName: createdCredentialName,
-                isPcd,
-                errorMessage: message || "Validation failed",
-                stage: "validation",
-            });
 
             reportError(new Error(`OpenStack credential validation failed: ${message || "Unknown reason"}`), {
                 context: 'openstack-validation-failure',

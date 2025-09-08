@@ -50,8 +50,6 @@ import { flatten } from "ramda"
 import { useKeyboardSubmit } from "src/hooks/ui/useKeyboardSubmit"
 import { useClusterData } from "./useClusterData"
 import { useErrorHandler } from "src/hooks/useErrorHandler"
-import { useAmplitude } from "src/hooks/useAmplitude"
-import { AMPLITUDE_EVENTS } from "src/types/amplitude"
 
 const stringsCompareFn = (a, b) =>
   a.toLowerCase().localeCompare(b.toLowerCase())
@@ -172,7 +170,6 @@ export default function MigrationFormDrawer({
   const { params, getParamsUpdater } = useParams<FormValues>(defaultValues)
   const { pcdData } = useClusterData()
   const { reportError } = useErrorHandler({ component: "MigrationForm" })
-  const { track } = useAmplitude({ component: "MigrationForm" })
   const [error, setError] = useState<{ title: string; message: string } | null>(
     null
   )
@@ -486,32 +483,11 @@ export default function MigrationFormDrawer({
       const data = await postMigrationPlan(body);
       console.log('Migration plan created successfully:', data);
 
-      // Track successful migration creation
-      track(AMPLITUDE_EVENTS.MIGRATION_CREATED, {
-        migrationName: data.metadata?.name,
-        migrationTemplateName: updatedMigrationTemplate?.metadata?.name,
-        virtualMachineCount: vmsToMigrate?.length || 0,
-        migrationType: migrationFields.type,
-        hasDataCopyStartTime: !!migrationFields.dataCopyStart,
-        hasAdminInitiatedCutover: !!migrationFields.adminInitiatedCutOver,
-        hasTimedCutover: !!(migrationFields.vmCutoverStart && migrationFields.vmCutoverEnd),
-        retryEnabled: !!migrationFields.retry,
-        postMigrationAction,
-        namespace: data.metadata?.namespace,
-      });
 
       return data;
     } catch (error: unknown) {
       console.error("Error creating migration plan", error);
 
-      // Track migration creation failure
-      track(AMPLITUDE_EVENTS.MIGRATION_CREATION_FAILED, {
-        migrationTemplateName: updatedMigrationTemplate?.metadata?.name,
-        virtualMachineCount: vmsToMigrate?.length || 0,
-        migrationType: migrationFields.type,
-        errorMessage: error instanceof Error ? error.message : String(error),
-        stage: "creation",
-      });
 
       reportError(error as Error, {
         context: 'migration-plan-creation',
