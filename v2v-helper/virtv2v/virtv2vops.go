@@ -20,9 +20,9 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/constants"
-	"github.com/platform9/vjailbreak/v2v-helper/pkg/utils"
-	"github.com/platform9/vjailbreak/v2v-helper/vm"
+	"../pkg/constants"
+	"../pkg/utils"
+	"../vm"
 )
 
 //go:generate mockgen -source=../virtv2v/virtv2vops.go -destination=../virtv2v/virtv2vops_mock.go -package=virtv2v
