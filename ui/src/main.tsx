@@ -9,13 +9,11 @@ import { createRoot } from "react-dom/client"
 import { BrowserRouter } from "react-router-dom"
 import App from "./App.tsx"
 import { ThemeProvider } from "./theme/ThemeContext.tsx"
-import { AnalyticsProvider } from "./components/AnalyticsProvider.tsx"
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AnalyticsProvider>
       <BrowserRouter>
         <ThemeProvider>
           <QueryClientProvider client={queryClient}>
@@ -24,7 +22,6 @@ createRoot(document.getElementById("root")!).render(
           </QueryClientProvider>
         </ThemeProvider>
       </BrowserRouter>
-    </AnalyticsProvider>
   </StrictMode>
 )
 
