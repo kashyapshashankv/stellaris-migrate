@@ -19,9 +19,9 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { NavigationItem, SidenavProps } from '../../types/navigation'
 import { useVersionQuery } from '../../hooks/api/useVersionQuery'
 import Platform9Logo from '../Platform9Logo'
-import { UpgradeModal } from '../UpgradeModal';
-import UpgradeIcon from '@mui/icons-material/Upgrade';
-import Button from '@mui/material/Button';
+// import { UpgradeModal } from '../UpgradeModal';
+// import UpgradeIcon from '@mui/icons-material/Upgrade';
+// import Button from '@mui/material/Button';
 
 const DRAWER_WIDTH = 280
 const DRAWER_WIDTH_COLLAPSED = 72
@@ -100,86 +100,86 @@ const BrandContainer = styled(Box, {
 }))
 
 
-const VersionBadge = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'collapsed'
-})<{ collapsed?: boolean }>(({ theme, collapsed }) => ({
-  fontSize: '0.8rem',
-  color: alpha(theme.palette.text.secondary, 0.6),
-  fontWeight: 400,
-  width: collapsed ? '60px' : 'auto',
-  textAlign: 'center',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  padding: collapsed ? theme.spacing(0.5, 1) : 0,
-}))
+// const VersionBadge = styled(Box, {
+//   shouldForwardProp: (prop) => prop !== 'collapsed'
+// })<{ collapsed?: boolean }>(({ theme, collapsed }) => ({
+//   fontSize: '0.8rem',
+//   color: alpha(theme.palette.text.secondary, 0.6),
+//   fontWeight: 400,
+//   width: collapsed ? '60px' : 'auto',
+//   textAlign: 'center',
+//   overflow: 'hidden',
+//   textOverflow: 'ellipsis',
+//   whiteSpace: 'nowrap',
+//   padding: collapsed ? theme.spacing(0.5, 1) : 0,
+// }))
 
-const VersionDisplay = ({ collapsed }: { collapsed?: boolean }) => {
-  const { data: versionInfo, isLoading, error } = useVersionQuery()
+// const VersionDisplay = ({ collapsed }: { collapsed?: boolean }) => {
+//   const { data: versionInfo, isLoading, error } = useVersionQuery()
 
-  if (isLoading) {
-    const content = (
-      <VersionBadge collapsed={collapsed}>
-        {collapsed ? '...' : 'Loading version...'}
-      </VersionBadge>
-    )
+//   if (isLoading) {
+//     const content = (
+//       <VersionBadge collapsed={collapsed}>
+//         {collapsed ? '...' : 'Loading version...'}
+//       </VersionBadge>
+//     )
     
-    if (collapsed) {
-      return (
-        <Tooltip title="Loading version..." placement="right" arrow>
-          {content}
-        </Tooltip>
-      )
-    }
-    return content
-  }
+//     if (collapsed) {
+//       return (
+//         <Tooltip title="Loading version..." placement="right" arrow>
+//           {content}
+//         </Tooltip>
+//       )
+//     }
+//     return content
+//   }
 
-  if (error) {
-    const content = (
-      <VersionBadge collapsed={collapsed}>
-        {collapsed ? 'v?' : 'Version: Unable to load'}
-      </VersionBadge>
-    )
+//   if (error) {
+//     const content = (
+//       <VersionBadge collapsed={collapsed}>
+//         {collapsed ? 'v?' : 'Version: Unable to load'}
+//       </VersionBadge>
+//     )
     
-    if (collapsed) {
-      return (
-        <Tooltip title="Version: Unable to load" placement="right" arrow>
-          {content}
-        </Tooltip>
-      )
-    }
-    return content
-  }
+//     if (collapsed) {
+//       return (
+//         <Tooltip title="Version: Unable to load" placement="right" arrow>
+//           {content}
+//         </Tooltip>
+//       )
+//     }
+//     return content
+//   }
 
-  const content = (
-    <VersionBadge collapsed={collapsed}>
-      {collapsed ? `${versionInfo?.version || '?'}` : `Version: ${versionInfo?.version}`}
-    </VersionBadge>
-  )
+//   const content = (
+//     <VersionBadge collapsed={collapsed}>
+//       {collapsed ? `${versionInfo?.version || '?'}` : `Version: ${versionInfo?.version}`}
+//     </VersionBadge>
+//   )
 
-  if (collapsed) {
-    return (
-      <Tooltip 
-        title={
-          <Box>
-            Version: {versionInfo?.version}
-            {versionInfo?.upgradeAvailable && versionInfo?.upgradeVersion && (
-              <Box component="span" sx={{ display: 'block', fontSize: '0.85rem', mt: 0.5 }}>
-                Update available: {versionInfo.upgradeVersion}
-              </Box>
-            )}
-          </Box>
-        } 
-        placement="right" 
-        arrow
-      >
-        {content}
-      </Tooltip>
-    )
-  }
+//   if (collapsed) {
+//     return (
+//       <Tooltip 
+//         title={
+//           <Box>
+//             Version: {versionInfo?.version}
+//             {versionInfo?.upgradeAvailable && versionInfo?.upgradeVersion && (
+//               <Box component="span" sx={{ display: 'block', fontSize: '0.85rem', mt: 0.5 }}>
+//                 Update available: {versionInfo.upgradeVersion}
+//               </Box>
+//             )}
+//           </Box>
+//         } 
+//         placement="right" 
+//         arrow
+//       >
+//         {content}
+//       </Tooltip>
+//     )
+//   }
 
-  return content
-}
+//   return content
+// }
 
 
 const StyledListItemButton = styled(ListItemButton, {
@@ -367,8 +367,8 @@ export default function Sidenav({
   const isCollapsed = controlledCollapsed ?? internalCollapsed
   const activeItem = controlledActiveItem ?? location.pathname
 
-  const { data: versionInfo } = useVersionQuery();
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
+  // const { data: versionInfo } = useVersionQuery();
+  // const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
   useEffect(() => {
     if (controlledCollapsed === undefined) {

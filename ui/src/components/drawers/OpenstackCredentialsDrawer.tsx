@@ -9,7 +9,7 @@ import { useOpenstackCredentialsQuery } from "src/hooks/api/useOpenstackCredenti
 import { THREE_SECONDS } from "src/constants";
 import { useInterval } from "src/hooks/useInterval";
 import { getOpenstackCredentials } from "src/api/openstack-creds/openstackCreds";
-import { TextField, FormControl, FormLabel, CircularProgress, Switch, FormControlLabel } from "@mui/material";
+import { TextField, FormControl, FormLabel, CircularProgress } from "@mui/material";
 import { isValidName } from "src/utils";
 import CheckIcon from "@mui/icons-material/Check";
 import OpenstackRCFileUploader, { OpenstackRCFileUploaderRef } from "src/components/forms/OpenstackRCFileUpload";
