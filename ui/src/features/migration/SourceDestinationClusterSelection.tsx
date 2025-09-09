@@ -79,12 +79,12 @@ export default function SourceDestinationClusterSelection({
         loadingPCD: hookLoadingPCD
     } = useClusterData();
     
-    // State for PCD search
+    // State for Openstack search
     const [pcdSearchTerm, setPcdSearchTerm] = React.useState("");
     // State for VMware search
     const [vmwareSearchTerm, setVmwareSearchTerm] = React.useState("");
     
-    // Filter PCD data based on search term
+    // Filter Openstack data based on search term
     const filteredPcdData = React.useMemo(() => {
         if (!pcdSearchTerm) return pcdData;
         return pcdData.filter(pcd => 
@@ -292,7 +292,7 @@ export default function SourceDestinationClusterSelection({
                 </Box>
 
                 <Box>
-                    <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: "500" }}>PCD Destination Cluster</Typography>
+                    <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: "500" }}>Openstack Destination Cluster</Typography>
                     <FormControl fullWidth variant="outlined" size="small">
                         <Select
                             value={currentPcdCluster}
@@ -301,7 +301,7 @@ export default function SourceDestinationClusterSelection({
                             disabled={loadingPCD}
                             error={!!errors["pcdCluster"]}
                             renderValue={(selected) => {
-                                if (!selected) return <em>Select PCD Cluster</em>;
+                                if (!selected) return <em>Select Openstack Cluster</em>;
                                 const pcd = pcdData.find(p => p.id === selected);
                                 return (
                                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -342,10 +342,10 @@ export default function SourceDestinationClusterSelection({
                                     }}
                                 />
                             </Box>
-                            <MenuItem value="" disabled><em>Select PCD Cluster</em></MenuItem>
+                            <MenuItem value="" disabled><em>Select Openstack Cluster</em></MenuItem>
 
                             {pcdData.length === 0 ? (
-                                <MenuItem disabled>No PCD clusters found</MenuItem>
+                                <MenuItem disabled>No Openstack clusters found</MenuItem>
                             ) : filteredPcdData.length === 0 ? (
                                 <MenuItem disabled>No matching clusters found</MenuItem>
                             ) : (

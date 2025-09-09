@@ -67,7 +67,7 @@ type MigrationPlanReconciler struct {
 var migrationPlanFinalizer = "migrationplan.migrate.stellaris.io/finalizer"
 
 // The default image. This is replaced by Go linker flags in the Dockerfile
-var v2vimage = "platform9/v2v-helper:v0.1"
+var v2vimage = "stellaris/stellaris-migrate-v2v-helper:0.0.1"
 
 // +kubebuilder:rbac:groups=core,resources=pods,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=core,resources=pods/status,verbs=get;update;patch

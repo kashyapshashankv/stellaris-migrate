@@ -935,7 +935,7 @@ spec:
           OpenstackCreds is the Schema for the OpenStack credentials API that defines authentication
           and connection details for OpenStack environments. It provides a secure way to store and validate
           OpenStack credentials for use in migration operations, including authentication information,
-          available compute flavors, volume types, networks, and Platform9 Distributed Cloud host configurations.
+          available compute flavors, volume types, networks, and Openstack Cloud host configurations.
         properties:
           apiVersion:
             description: |-
@@ -1012,7 +1012,7 @@ spec:
               pcdHostConfig:
                 description: PCDHostConfig is the list of available clusters in openstack
                 items:
-                  description: HostConfig defines the configuration for a Platform9
+                  description: HostConfig defines the configuration for a Openstack
                     Distributed Cloud host
                   properties:
                     clusterName:
@@ -1152,7 +1152,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: |-
-          PCDCluster is the Schema for the pcdclusters API that represents a Platform9 Distributed Cloud
+          PCDCluster is the Schema for the pcdclusters API that represents a Openstack Cloud
           cluster in the migration system. It defines cluster configuration including host membership,
           high availability settings, and resource rebalancing policies. PCDCluster resources track both
           the desired state of clusters as part of migration planning and the observed state of actual
@@ -1245,7 +1245,7 @@ spec:
       openAPIV3Schema:
         description: |-
           PCDHost is the Schema for the pcdhosts API that represents a physical or virtual host
-          in a Platform9 Distributed Cloud environment. It tracks the host's configuration,
+          in a Openstack Cloud environment. It tracks the host's configuration,
           network interfaces, assigned roles, and operational status. PCDHost resources are created
           as part of the migration process when converting ESXi hosts to PCD hosts or when provisioning
           new infrastructure to replace migrated VMware hosts.
@@ -1284,7 +1284,7 @@ spec:
               interfaces:
                 items:
                   description: |-
-                    PCDHostInterface defines the network interface configuration for a Platform9 Distributed Cloud host,
+                    PCDHostInterface defines the network interface configuration for a Openstack Cloud host,
                     including IP addresses, MAC address, and interface name. It's used to configure proper network
                     connectivity for PCD hosts created during the migration process.
                   properties:
@@ -2033,7 +2033,7 @@ spec:
         description: |-
           VMwareCluster is the Schema for the vmwareclusters API that represents a VMware vSphere cluster
           in the source environment. It tracks cluster configuration, member hosts, and migration status
-          as part of the VMware to Platform9 Distributed Cloud migration process. VMwareCluster resources
+          as part of the VMware to Openstack Cloud migration process. VMwareCluster resources
           serve as source components that are migrated to corresponding PCDCluster resources in the target environment.
         properties:
           apiVersion:
@@ -2214,7 +2214,7 @@ spec:
         description: |-
           VMwareHost is the Schema for the vmwarehosts API that represents a VMware ESXi host
           in the source environment. It tracks host configuration, hardware identification, and cluster membership
-          as part of the VMware to Platform9 Distributed Cloud migration process. VMwareHost resources are
+          as part of the VMware to Openstack Cloud migration process. VMwareHost resources are
           source components that are migrated to PCDHost resources in the target environment and are automatically
           removed from vCenter inventory after all VMs have been migrated off and the host is in maintenance mode.
         properties:

@@ -278,7 +278,7 @@ export default function OpenstackCredentialsDrawer({
                             size="small"
                         />
 
-                        <FormControlLabel
+                        {/* <FormControlLabel
                             control={
                                 <Switch
                                     checked={isPcd}
@@ -288,7 +288,7 @@ export default function OpenstackCredentialsDrawer({
                             }
                             label="Is PCD credential"
                             sx={{ mt: 2 }}
-                        />
+                        /> */}
 
                         {/* OpenStack Validation Status */}
                         <Box sx={{ display: "flex", gap: 2, mt: 2, alignItems: "center" }}>

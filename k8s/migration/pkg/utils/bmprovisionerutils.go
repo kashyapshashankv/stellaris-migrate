@@ -398,7 +398,7 @@ func GetBMConfig(ctx context.Context, k8sClient client.Client, bmConfigRef corev
 	return bmConfig, nil
 }
 
-// ValidateOpenstackIsPCD checks if the OpenStack environment is a Platform9 Distributed Cloud (PCD)
+// ValidateOpenstackIsPCD checks if the OpenStack environment is a Openstack Cloud (PCD)
 func ValidateOpenstackIsPCD(ctx context.Context, k8sClient client.Client, rollingMigrationPlan *migratev1alpha1.RollingMigrationPlan) (bool, error) {
 	migrationTemplate, err := GetMigrationTemplateFromRollingMigrationPlan(ctx, k8sClient, rollingMigrationPlan)
 	if err != nil {
@@ -414,7 +414,7 @@ func ValidateOpenstackIsPCD(ctx context.Context, k8sClient client.Client, rollin
 	return IsOpenstackPCD(openstackCreds), nil
 }
 
-// IsOpenstackPCD determines if OpenStack credentials belong to a Platform9 Distributed Cloud
+// IsOpenstackPCD determines if OpenStack credentials belong to a Openstack Cloud
 func IsOpenstackPCD(openstackCreds migratev1alpha1.OpenstackCreds) bool {
 	if _, ok := openstackCreds.Labels[constants.IsPCDCredsLabel]; !ok {
 		return false

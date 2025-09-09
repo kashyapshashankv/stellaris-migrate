@@ -31,7 +31,7 @@ COPY --from=builder /app/bin/vpwctl .
 
 # Copy any additional files you need
 # Uncomment and modify as needed
-COPY --from=builder /app/openapiv3 /opt/platform9/vpwned/openapiv3
+COPY --from=builder /app/openapiv3 /opt/stellaris/vpwned/openapiv3
 
 # Set the timezone (optional)
 ENV TZ=UTC

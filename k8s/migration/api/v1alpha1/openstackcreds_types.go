@@ -22,7 +22,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// HostConfig defines the configuration for a Platform9 Distributed Cloud host
+// HostConfig defines the configuration for a Openstack Cloud host
 type HostConfig struct {
 	ID                    string            `json:"id,omitempty"`
 	Name                  string            `json:"name,omitempty"`
@@ -97,7 +97,7 @@ type OpenstackCredsStatus struct {
 // OpenstackCreds is the Schema for the OpenStack credentials API that defines authentication
 // and connection details for OpenStack environments. It provides a secure way to store and validate
 // OpenStack credentials for use in migration operations, including authentication information,
-// available compute flavors, volume types, networks, and Platform9 Distributed Cloud host configurations.
+// available compute flavors, volume types, networks, and Openstack Cloud host configurations.
 type OpenstackCreds struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`

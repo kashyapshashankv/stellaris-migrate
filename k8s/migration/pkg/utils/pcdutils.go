@@ -1,4 +1,4 @@
-// Package utils provides utility functions for Platform9 Distributed Cloud (PCD) operations.
+// Package utils provides utility functions for Openstack Cloud (PCD) operations.
 // It includes functions for syncing, creating, updating, and deleting PCD resources,
 // managing ESXi hosts, cluster operations, and other infrastructure management tasks
 // related to VMware to OpenStack migrations.

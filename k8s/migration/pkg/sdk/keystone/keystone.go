@@ -1,5 +1,3 @@
-// Copyright © 2020 The Platform9 Systems Inc.
-
 package keystone
 
 import (
@@ -273,8 +271,6 @@ type Role struct {
 type HTTPClient struct {
 
 	// endpoint should contain the base path of keystone.
-	//
-	// Example: https://some-du.platform9.horse/keystone
 	endpoint string
 
 	httpClient *http.Client

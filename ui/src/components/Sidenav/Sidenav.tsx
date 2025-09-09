@@ -442,7 +442,7 @@ export default function Sidenav({
       </List>
 
       <Box sx={{ mt: 'auto', mb: 1.5, px: 2, position: 'relative' }}>
-        <VersionDisplay collapsed={isCollapsed} />
+        {/* <VersionDisplay collapsed={isCollapsed} />
         {versionInfo?.upgradeAvailable && versionInfo?.upgradeVersion && (
           isCollapsed ? (
             <Tooltip title={`Upgrade Available`} placement="right" arrow>
@@ -468,7 +468,7 @@ export default function Sidenav({
             </Button>
           )
         )}
-        <UpgradeModal show={isUpgradeModalOpen} onClose={() => setIsUpgradeModalOpen(false)} />
+        <UpgradeModal show={isUpgradeModalOpen} onClose={() => setIsUpgradeModalOpen(false)} /> */}
       </Box>
     </Box>
   )

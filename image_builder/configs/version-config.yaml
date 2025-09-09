@@ -4,8 +4,8 @@ metadata:
   name: version-config
   namespace: migration-system
 data:
-  version: ${TAG}
+  version: 0.0.1
   upgradeAvailable: "false"
   upgradeVersion: ""
-  githubOwner: ""  # Optional: Defaults to "kashyapshashankv" if not set
-  githubRepo: "" # Optional: Defaults to "stellaris-migrate" if not set
+  githubOwner: "kashyapshashankv"  # Optional: Defaults to "kashyapshashankv" if not set
+  githubRepo: "stellaris-migrate" # Optional: Defaults to "stellaris-migrate" if not set

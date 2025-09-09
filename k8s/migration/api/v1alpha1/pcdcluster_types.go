@@ -51,7 +51,7 @@ type PCDClusterStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// PCDCluster is the Schema for the pcdclusters API that represents a Platform9 Distributed Cloud
+// PCDCluster is the Schema for the pcdclusters API that represents a Openstack Cloud
 // cluster in the migration system. It defines cluster configuration including host membership,
 // high availability settings, and resource rebalancing policies. PCDCluster resources track both
 // the desired state of clusters as part of migration planning and the observed state of actual

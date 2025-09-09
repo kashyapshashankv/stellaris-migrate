@@ -26,7 +26,7 @@ import (
 type RollingMigrationPlanPhase string
 
 // ClusterMapping defines the relationship between a VMware vCenter cluster and its corresponding
-// Platform9 Distributed Cloud (PCD) cluster for migration operations. This mapping ensures that
+// Openstack Cloud (PCD) cluster for migration operations. This mapping ensures that
 // virtual machines are properly migrated to the appropriate target infrastructure.
 type ClusterMapping struct {
 	// VMwareClusterName is the name of the vCenter cluster
@@ -135,7 +135,7 @@ type RollingMigrationPlanStatus struct {
 // +kubebuilder:subresource:status
 
 // RollingMigrationPlan is the Schema for the rollingmigrationplans API that defines a coordinated
-// migration of multiple VMware clusters and ESXi hosts to Platform9 Distributed Cloud (PCD).
+// migration of multiple VMware clusters and ESXi hosts to Openstack Cloud (PCD).
 // It supports sequenced migration of VMs across clusters with configurable batch sizes,
 // cluster-to-cluster mapping, and tracking of migration progress across the entire datacenter migration.
 type RollingMigrationPlan struct {

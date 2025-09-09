@@ -10,7 +10,7 @@ Remove the sequencing from the rolling migration.
 
 @2nd May
 1. Add source-destination column to the migration table.
-2. PCD cluster info should be present.
+2. Openstack cluster info should be present.
 3. Status  -> Migration Status
 
 Add Notification framework to the UI.

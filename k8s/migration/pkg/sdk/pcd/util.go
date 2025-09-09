@@ -8,7 +8,7 @@ import (
 	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
-// ParseInfoFromEnv creates a Platform9 Distributed Cloud connection configuration from environment variables.
+// ParseInfoFromEnv creates a Openstack Cloud connection configuration from environment variables.
 // It reads DU_URL for the service endpoint and DU_INSECURE to determine whether to skip TLS verification.
 // Returns an error if required environment variables are not set.
 func ParseInfoFromEnv() (Info, error) {
@@ -28,7 +28,7 @@ func ParseInfoFromEnv() (Info, error) {
 	return du, nil
 }
 
-// ParseInfoFromOpenstackCreds creates a Platform9 Distributed Cloud connection configuration
+// ParseInfoFromOpenstackCreds creates a Openstack Cloud connection configuration
 // from OpenStack credentials information. It extracts the base URL from the OpenStack auth URL
 // and uses the same TLS verification settings.
 func ParseInfoFromOpenstackCreds(openstackCreds migratev1alpha1.OpenStackCredsInfo) (Info, error) {

@@ -1398,7 +1398,6 @@ export default function RollingMigrationFormDrawer({
             return true;
         });
 
-        // PCD host config validation - not needed anymore since validation is handled by esxHostConfigValid
 
         // ESX host config validation - ensure all ESX hosts have host configs assigned
         const esxHostConfigValid = !esxHostConfigValidation.hasError;

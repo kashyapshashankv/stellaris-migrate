@@ -1,6 +1,7 @@
 const typography = {
+  fontFamily: "Red Hat Display",
   h1: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "50px",
     fontWeight: "bold",
     fontStretch: "normal",
@@ -9,7 +10,7 @@ const typography = {
     letterSpacing: "normal",
   },
   h2: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "37px",
     fontWeight: "bold",
     fontStretch: "normal",
@@ -18,7 +19,7 @@ const typography = {
     letterSpacing: "normal",
   },
   h3: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "28px",
     fontWeight: "bold",
     fontStretch: "normal",
@@ -27,7 +28,7 @@ const typography = {
     letterSpacing: "normal",
   },
   h4: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "21px",
     fontWeight: "bold",
     fontStretch: "normal",
@@ -36,7 +37,7 @@ const typography = {
     letterSpacing: "normal",
   },
   subtitle1: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "21px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -45,7 +46,7 @@ const typography = {
     letterSpacing: "normal",
   },
   subtitle2: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "16px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -54,7 +55,7 @@ const typography = {
     letterSpacing: "normal",
   },
   body1: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "16px",
     fontWeight: "normal",
     fontStretch: "normal",
@@ -63,7 +64,7 @@ const typography = {
     letterSpacing: "normal",
   },
   body2: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "14px",
     fontWeight: "normal",
     fontStretch: "normal",
@@ -72,7 +73,7 @@ const typography = {
     letterSpacing: "normal",
   },
   body3: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "14px",
     fontWeight: "normal",
     fontStretch: "normal",
@@ -81,7 +82,7 @@ const typography = {
     letterSpacing: "normal",
   },
   body3SemiBold: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "14px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -90,7 +91,7 @@ const typography = {
     letterSpacing: "normal",
   },
   body3Bold: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "14px",
     fontWeight: "bold",
     fontStretch: "normal",
@@ -99,7 +100,7 @@ const typography = {
     letterSpacing: "normal",
   },
   caption1: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "14px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -108,7 +109,7 @@ const typography = {
     letterSpacing: "0.8px",
   },
   caption2: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "12px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -117,7 +118,7 @@ const typography = {
     letterSpacing: "0.8px",
   },
   caption3: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "11px",
     fontWeight: 600,
     fontStretch: "normal",
@@ -126,7 +127,7 @@ const typography = {
     letterSpacing: "normal",
   },
   caption4: {
-    fontFamily: "Fira Sans",
+    fontFamily: "Red Hat Display",
     fontSize: "12px",
     fontWeight: 600,
     fontStretch: "normal",

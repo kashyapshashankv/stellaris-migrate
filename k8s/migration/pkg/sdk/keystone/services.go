@@ -1,5 +1,3 @@
-// Copyright © 2021 The Platform9 Systems Inc.
-
 package keystone
 
 import (

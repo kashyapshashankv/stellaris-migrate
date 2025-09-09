@@ -2,8 +2,8 @@ import { NavigationItem } from '../types/navigation'
 import MigrationIcon from '@mui/icons-material/SwapHoriz'
 import AgentsIcon from '@mui/icons-material/Computer'
 import CredentialsIcon from '@mui/icons-material/VpnKey'
-import ClusterIcon from '@mui/icons-material/Hub'
-import ConfigIcon from '@mui/icons-material/Settings'
+// import ClusterIcon from '@mui/icons-material/Hub'
+// import ConfigIcon from '@mui/icons-material/Settings'
 import MonitoringIcon from '@mui/icons-material/Analytics'
 
 export const navigationItems: NavigationItem[] = [
@@ -13,12 +13,12 @@ export const navigationItems: NavigationItem[] = [
     path: '/dashboard/migrations',
     icon: <MigrationIcon />
   },
-  {
-    id: 'cluster-conversions',
-    label: 'Cluster Conversions',
-    path: '/dashboard/cluster-conversions',
-    icon: <ClusterIcon />
-  },
+  // {
+  //   id: 'cluster-conversions',
+  //   label: 'Cluster Conversions',
+  //   path: '/dashboard/cluster-conversions',
+  //   icon: <ClusterIcon />
+  // },
   {
     id: 'credentials',
     label: 'Credentials',
@@ -31,12 +31,12 @@ export const navigationItems: NavigationItem[] = [
     path: '/dashboard/agents',
     icon: <AgentsIcon />
   },
-  {
-    id: 'maas-config',
-    label: 'Maas Config',
-    path: '/dashboard/maas-config',
-    icon: <ConfigIcon />
-  },
+  // {
+  //   id: 'maas-config',
+  //   label: 'Maas Config',
+  //   path: '/dashboard/maas-config',
+  //   icon: <ConfigIcon />
+  // },
   {
     id: 'monitoring',
     label: 'Monitoring',

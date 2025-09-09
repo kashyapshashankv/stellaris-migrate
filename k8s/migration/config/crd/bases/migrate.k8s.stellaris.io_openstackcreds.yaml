@@ -25,7 +25,7 @@ spec:
           OpenstackCreds is the Schema for the OpenStack credentials API that defines authentication
           and connection details for OpenStack environments. It provides a secure way to store and validate
           OpenStack credentials for use in migration operations, including authentication information,
-          available compute flavors, volume types, networks, and Platform9 Distributed Cloud host configurations.
+          available compute flavors, volume types, networks, and Openstack Cloud host configurations.
         properties:
           apiVersion:
             description: |-
@@ -102,7 +102,7 @@ spec:
               pcdHostConfig:
                 description: PCDHostConfig is the list of available clusters in openstack
                 items:
-                  description: HostConfig defines the configuration for a Platform9
+                  description: HostConfig defines the configuration for a Openstack
                     Distributed Cloud host
                   properties:
                     clusterName:

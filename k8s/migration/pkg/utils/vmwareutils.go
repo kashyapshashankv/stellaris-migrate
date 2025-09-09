@@ -1,6 +1,6 @@
 // Package utils provides utility functions for handling migration-related operations.
 // It includes functions for working with VMware environments, ESXi hosts, VM management,
-// and integration with Platform9 components for migration workflows.
+// and integration with Openstack components for migration workflows.
 package utils
 
 import (

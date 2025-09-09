@@ -172,8 +172,8 @@ export const useClusterData = (
       const clusterData = await Promise.all(clusterDataPromises)
       setPcdData(clusterData)
     } catch (error) {
-      console.error("Failed to fetch PCD clusters:", error)
-      setError("Failed to fetch PCD clusters")
+      console.error("Failed to fetch Openstack clusters:", error)
+      setError("Failed to fetch Openstack clusters")
     } finally {
       setLoadingPCD(false)
     }

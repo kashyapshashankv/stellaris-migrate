@@ -350,7 +350,7 @@ export default function MigrationOptionsAlt({
                       onChange("postMigrationAction")({
                         ...params.postMigrationAction,
                         renameVm: isChecked,
-                        suffix: isChecked ? (params.postMigrationAction?.suffix || "_migrated_to_pcd") : undefined
+                        suffix: isChecked ? (params.postMigrationAction?.suffix || "_migrated") : undefined
                       });
                     }}
                   />
@@ -359,7 +359,7 @@ export default function MigrationOptionsAlt({
               <Select
                 size="small"
                 disabled={!selectedMigrationOptions.postMigrationAction?.renameVm}
-                value={params.postMigrationAction?.suffix || "_migrated_to_pcd"}
+                value={params.postMigrationAction?.suffix || "_migrated"}
                 onChange={(e) => {
                   onChange("postMigrationAction")({
                     ...params.postMigrationAction,
@@ -367,7 +367,7 @@ export default function MigrationOptionsAlt({
                   });
                 }}
               >
-                <MenuItem value="_migrated_to_pcd">_migrated_to_pcd</MenuItem>
+                <MenuItem value="_migrated">_migrated</MenuItem>
               </Select>
               <Typography variant="caption">
                 This suffix will be appended to the source VM name after migration.
@@ -390,7 +390,7 @@ export default function MigrationOptionsAlt({
                       onChange("postMigrationAction")({
                         ...params.postMigrationAction,
                         moveToFolder: isChecked,
-                        folderName: isChecked ? (params.postMigrationAction?.folderName || "vjailbreakedVMs") : undefined
+                        folderName: isChecked ? (params.postMigrationAction?.folderName || "MigratedVMs") : undefined
                       });
                     }}
                   />
@@ -407,7 +407,7 @@ export default function MigrationOptionsAlt({
                   });
                 }}
               >
-                <MenuItem value="vjailbreakedVMs">vjailbreakedVMs</MenuItem>
+                <MenuItem value="MigratedVMs">MigratedVMs</MenuItem>
               </Select>
               <Typography variant="caption">
                 This folder name will be used to organize the migrated VMs in vCenter.
@@ -431,27 +431,6 @@ export default function MigrationOptionsAlt({
                 </Typography>
               </Fields>
 
-            {isPCD && (
-              <Fields sx={{ gridGap: "0" }}>
-                <FormControlLabel
-                  label="Use Dynamic Hotplug-Enabled Flavors"
-                  control={
-                    <Checkbox
-                      checked={params?.useFlavorless || false}
-                      onChange={(e) => {
-                        const isChecked = e.target.checked;
-                        updateSelectedMigrationOptions("useFlavorless")(isChecked);
-                        onChange("useFlavorless")(isChecked);
-                      }}
-                    />
-                  }
-                />
-                <Typography variant="caption" sx={{ marginLeft: "32px" }}>
-                  This will use the base flavor ID specified in PCD.
-                </Typography>
-              </Fields>
-
-            )}
             {/*
             Pre and Post Web Hooks
 // ...

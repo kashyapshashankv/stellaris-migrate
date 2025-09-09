@@ -40,7 +40,7 @@ type InterfaceAddress struct {
 	Broadcast string `json:"broadcast"`
 }
 
-// Host represents a physical or virtual host in the Platform9 environment,
+// Host represents a physical or virtual host in the Openstack environment,
 // containing detailed information about the system, its hardware, and configuration status.
 type Host struct {
 	ID   string `json:"id"`
@@ -143,7 +143,7 @@ type Host struct {
 	HostconfigID string `json:"hostconfig_id,omitempty"`
 }
 
-// Cluster represents a group of hosts managed as a single entity in Platform9,
+// Cluster represents a group of hosts managed as a single entity in Openstack,
 // including configuration for high availability and resource balancing capabilities.
 type Cluster struct {
 	Name               string `json:"name"`
@@ -162,7 +162,7 @@ type Cluster struct {
 }
 
 // Impl is the implementation of the Resmgr interface that provides
-// methods for interacting with the Platform9 Resource Manager service.
+// methods for interacting with the Openstack Resource Manager service.
 type Impl struct {
 	url           string
 	authenticator keystone.Authenticator
@@ -184,7 +184,7 @@ type RoleResponse struct {
 	Roles []string `json:"roles"`
 }
 
-// PF9CAPIExtensions contains extended information about Platform9 Cluster API status
+// PF9CAPIExtensions contains extended information about Openstack Cluster API status
 // and management state for a host or cluster.
 type PF9CAPIExtensions struct {
 	CapiManaged struct {

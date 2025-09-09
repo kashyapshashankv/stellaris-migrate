@@ -55,7 +55,7 @@ type VMwareClusterStatus struct {
 
 // VMwareCluster is the Schema for the vmwareclusters API that represents a VMware vSphere cluster
 // in the source environment. It tracks cluster configuration, member hosts, and migration status
-// as part of the VMware to Platform9 Distributed Cloud migration process. VMwareCluster resources
+// as part of the VMware to Openstack Cloud migration process. VMwareCluster resources
 // serve as source components that are migrated to corresponding PCDCluster resources in the target environment.
 type VMwareCluster struct {
 	metav1.TypeMeta   `json:",inline"`

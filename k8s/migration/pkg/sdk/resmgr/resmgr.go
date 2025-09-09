@@ -1,5 +1,5 @@
-// Package resmgr provides a client SDK for interacting with the Platform9 Resource Manager service.
-// It enables management of hosts, clusters, roles, and configurations in a Platform9 Distributed Cloud environment.
+// Package resmgr provides a client SDK for interacting with the Openstack Resource Manager service.
+// It enables management of hosts, clusters, roles, and configurations in a Openstack Cloud environment.
 package resmgr
 
 import (
@@ -17,7 +17,7 @@ import (
 	migratev1alpha1 "github.com/kashyapshashankv/stellaris-migrate/k8s/migration/api/v1alpha1"
 )
 
-// Resmgr defines the interface for interacting with Platform9 Resource Manager service.
+// Resmgr defines the interface for interacting with Openstack Resource Manager service.
 // It provides operations for managing hosts, clusters, roles, and configurations.
 type Resmgr interface {
 	ListHosts(ctx context.Context) ([]Host, error)
@@ -35,7 +35,7 @@ type Resmgr interface {
 }
 
 // NewResmgrClient creates a new Resource Manager client instance using the provided configuration.
-// It returns an implementation that satisfies the Resmgr interface for interacting with the Platform9 resource manager.
+// It returns an implementation that satisfies the Resmgr interface for interacting with the Openstack resource manager.
 func NewResmgrClient(config Config) Resmgr {
 	return &Impl{
 		url:           config.DU.URL,
@@ -449,7 +449,7 @@ func (r *Impl) GetRoles(ctx context.Context, hostID string) ([]string, error) {
 }
 
 // ListClusters retrieves all clusters from the resource manager.
-// It returns a list of available clusters in the Platform9 environment.
+// It returns a list of available clusters in the Openstack environment.
 func (r *Impl) ListClusters(ctx context.Context) ([]Cluster, error) {
 	url := fmt.Sprintf("%s/resmgr/v2/clusters", r.url)
 	req, err := r.getResmgrReq(ctx, url, http.MethodGet, nil)

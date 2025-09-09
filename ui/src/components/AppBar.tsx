@@ -61,12 +61,12 @@ export default function ButtonAppBar({ setOpenMigrationForm, hide = false }) {
             <span>Start Migration</span>
           </Box>
         </MenuItem>
-        <MenuItem onClick={() => handleMigrationSelect('rolling')}>
+        {/* <MenuItem onClick={() => handleMigrationSelect('rolling')}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <ClusterIcon fontSize="small" />
             <span>Start Cluster Conversion</span>
           </Box>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </Box>
   )
