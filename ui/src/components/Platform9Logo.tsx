@@ -46,12 +46,12 @@ export default function Platform9Logo({ collapsed = false }: Platform9LogoProps)
     <LogoContainer>
       <CubeIcon
         src={cubeIcon}
-        alt="Platform9"
+        alt="Stellaris Migrate"
         collapsed={collapsed}
       />
       {!collapsed && (
         <BrandText variant="h6">
-          vJailbreak
+          Stellaris Migrate
         </BrandText>
       )}
     </LogoContainer>
