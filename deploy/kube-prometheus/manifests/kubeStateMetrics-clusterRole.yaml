@@ -17,7 +17,7 @@ rules:
   - get
   - watch
 - apiGroups:
-  - vjailbreak.k8s.pf9.io
+  - migrate.k8s.stellaris.io
   resources:
   - migrations
   verbs:
