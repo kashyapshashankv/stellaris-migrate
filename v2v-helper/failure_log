@@ -1,0 +1,282 @@
+[root@migrate-test rpms]# /usr/sbin/virt-v2v-in-place -v -x --firstboot /home/fedora/scripts/user_firstboot.sh -i disk /dev/vdc
+info: virt-v2v-in-place: virt-v2v 2.7.13fedora=42,release=1.fc42 (x86_64)
+info: libvirt version: 11.0.0
+libguestfs: trace: set_verbose true
+libguestfs: trace: set_verbose = 0
+libguestfs: trace: get_backend
+libguestfs: trace: get_backend = "direct"
+check_host_free_space: large_tmpdir=/var/tmp free_space=87103483904
+[   0.0] Setting up the source: -i disk /dev/vdc
+libguestfs: trace: set_verbose true
+libguestfs: trace: set_verbose = 0
+libguestfs: trace: disk_format "/dev/vdc"
+libguestfs: command: run: qemu-img --help | grep -sqE -- '\binfo\b.*-U\b'
+libguestfs: command: run: qemu-img
+libguestfs: command: run: \ info
+libguestfs: command: run: \ -U
+libguestfs: command: run: \ --output json
+libguestfs: command: run: \ /dev/vdc
+libguestfs: parse_json: qemu-img info JSON output:\n{\n    "children": [\n        {\n            "name": "file",\n            "info": {\n                "children": [\n                ],\n                "virtual-size": 44023414784,\n                "filename": "/dev/vdc",\n                "format": "host_device",\n                "actual-size": 0,\n                "format-specific": {\n                    "type": "file",\n                    "data": {\n                    }\n                },\n                "dirty-flag": false\n            }\n        }\n    ],\n    "virtual-size": 44023414784,\n    "filename": "/dev/vdc",\n    "format": "raw",\n    "actual-size": 0,\n    "dirty-flag": false\n}\n\n
+libguestfs: trace: disk_format = "raw"
+nbdkit --dump-config
+info: nbdkit version:
+nbdkit 1.42.7 (nbdkit-1.42.7-1.fc42)
+parsed version: 1.42.7
+running nbdkit:
+ LANG=C 'nbdkit' '--exit-with-parent' '--foreground' '--pidfile' '/tmp/v2vnbdkit.PkaNQd/nbdkit1.pid' '--unix' '/tmp/v2v.sDripF/in0' '--threads' '16' '-D' 'nbdkit.backend.datapath=0' '--verbose' 'file' 'file=/dev/vdc' 'cache=none'
+nbdkit: debug: nbdkit 1.42.7 (nbdkit-1.42.7-1.fc42)
+nbdkit: debug: TLS disabled: could not load TLS certificates
+nbdkit: debug: service mode: unix socket
+nbdkit: debug: NBD URI: nbd+unix://?socket=/tmp/v2v.sDripF/in0
+nbdkit: debug: registering plugin /usr/lib64/nbdkit/plugins/nbdkit-file-plugin.so
+nbdkit: debug: registered plugin /usr/lib64/nbdkit/plugins/nbdkit-file-plugin.so (name file)
+nbdkit: debug: file: load
+nbdkit: debug: file: config key=file, value=/dev/vdc
+nbdkit: debug: file: config key=cache, value=none
+nbdkit: debug: file: config_complete
+nbdkit: debug: using thread model: parallel
+nbdkit: debug: file: get_ready
+nbdkit: debug: bound to unix socket /tmp/v2v.sDripF/in0
+nbdkit: debug: written pidfile /tmp/v2vnbdkit.PkaNQd/nbdkit1.pid
+nbdkit: debug: file: after_fork
+libguestfs: trace: set_verbose true
+libguestfs: trace: set_verbose = 0
+libguestfs: trace: get_backend
+libguestfs: trace: get_backend = "direct"
+[   1.1] Opening the source
+libguestfs: trace: set_verbose true
+libguestfs: trace: set_verbose = 0
+libguestfs: trace: set_identifier "v2v"
+libguestfs: trace: v2v: set_identifier = 0
+libguestfs: trace: v2v: get_memsize
+libguestfs: trace: v2v: get_memsize = 1280
+libguestfs: trace: v2v: set_memsize 2560
+libguestfs: trace: v2v: set_memsize = 0
+libguestfs: trace: v2v: set_smp 8
+libguestfs: trace: v2v: set_smp = 0
+libguestfs: trace: v2v: set_network true
+libguestfs: trace: v2v: set_network = 0
+libguestfs: trace: v2v: add_drive "" "format:raw" "protocol:nbd" "server:unix:/tmp/v2v.sDripF/in0" "cachemode:unsafe" "discard:besteffort"
+libguestfs: trace: v2v: add_drive = 0
+libguestfs: trace: v2v: launch
+libguestfs: trace: v2v: max_disks
+libguestfs: trace: v2v: max_disks = 255
+libguestfs: trace: v2v: get_tmpdir
+libguestfs: trace: v2v: get_tmpdir = "/tmp"
+libguestfs: trace: v2v: version
+libguestfs: trace: v2v: version = <struct guestfs_version = major: 1, minor: 56, release: 2, extra: fedora=42,release=1.fc42,libvirt, >
+libguestfs: trace: v2v: get_backend
+libguestfs: trace: v2v: get_backend = "direct"
+libguestfs: launch: program=virt-v2v-in-place
+libguestfs: launch: identifier=v2v
+libguestfs: launch: version=1.56.2fedora=42,release=1.fc42,libvirt
+libguestfs: launch: backend registered: direct
+libguestfs: launch: backend registered: libvirt
+libguestfs: launch: backend=direct
+libguestfs: launch: tmpdir=/tmp/libguestfsNT5MBR
+libguestfs: launch: umask=0022
+libguestfs: launch: euid=0
+libguestfs: launch: host: Linux migrate-test 6.8.0-60-generic #63-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 15 19:04:15 UTC 2025 x86_64
+libguestfs: trace: v2v: get_cachedir
+libguestfs: trace: v2v: get_cachedir = "/var/tmp"
+libguestfs: begin building supermin appliance
+libguestfs: run supermin
+libguestfs: command: run: /usr/bin/supermin
+libguestfs: command: run: \ --build
+libguestfs: command: run: \ --verbose
+libguestfs: command: run: \ --if-newer
+libguestfs: command: run: \ --lock /var/tmp/.guestfs-0/lock
+libguestfs: command: run: \ --copy-kernel
+libguestfs: command: run: \ -f ext2
+libguestfs: command: run: \ --host-cpu x86_64
+libguestfs: command: run: \ /usr/lib64/guestfs/supermin.d
+libguestfs: command: run: \ -o /var/tmp/.guestfs-0/appliance.d
+supermin: version: 5.3.5
+supermin: rpm: detected RPM version 4.20
+supermin: rpm: detected RPM architecture x86_64
+supermin: package handler: fedora/rpm
+supermin: acquiring lock on /var/tmp/.guestfs-0/lock
+supermin: if-newer: output does not need rebuilding
+libguestfs: finished building supermin appliance
+libguestfs: begin testing qemu features
+libguestfs: trace: v2v: get_cachedir
+libguestfs: trace: v2v: get_cachedir = "/var/tmp"
+libguestfs: checking for previously cached test results of /usr/bin/qemu-kvm, in /var/tmp/.guestfs-0
+libguestfs: loading previously cached test results
+libguestfs: qemu version: 9.2
+libguestfs: qemu KVM: enabled
+libguestfs: trace: v2v: get_backend_setting "force_tcg"
+libguestfs: trace: v2v: get_backend_setting = NULL (error)
+libguestfs: trace: v2v: get_backend_setting "force_kvm"
+libguestfs: trace: v2v: get_backend_setting = NULL (error)
+libguestfs: trace: v2v: get_sockdir
+libguestfs: trace: v2v: get_sockdir = "/tmp"
+libguestfs: finished testing qemu features
+libguestfs: trace: v2v: get_backend_setting "gdb"
+libguestfs: trace: v2v: get_backend_setting = NULL (error)
+libguestfs: command: run: passt --help
+Usage: passt [OPTION]...
+
+  -d, --debug\t\tBe verbose
+      --trace\t\tBe extra verbose, implies --debug
+  -q, --quiet\t\tDon't print informational messages
+  -f, --foreground\tDon't run in background
+    default: run in background
+  -l, --log-file PATH\tLog (only) to given file
+  --log-size BYTES\tMaximum size of log file
+    default: 1 MiB
+  --runas UID|UID:GID \tRun as given UID, GID, which can be
+    numeric, or login and group names
+    default: drop to user "nobody"
+  -h, --help\t\tDisplay this help message and exit
+  --version\t\tShow version and exit
+  -s, --socket, --socket-path PATH\tUNIX domain socket path
+    default: probe free path starting from /tmp/passt_1.socket
+  --vhost-user\t\tEnable vhost-user mode
+    UNIX domain socket is provided by -s option
+  --print-capabilities\tprint back-end capabilities in JSON format,
+    only meaningful for vhost-user mode
+  --repair-path PATH\tpath for passt-repair(1)
+    default: append '.repair' to UNIX domain path
+  --migrate-exit\tDEPRECATED:
+\t\t\tsource quits after migration
+    default: source keeps running after migration
+  --migrate-no-linger\tDEPRECATED:
+\t\t\tclose sockets on migration
+    default: keep sockets open, ignore events
+  -F, --fd FD\t\tUse FD as pre-opened connected socket
+  -p, --pcap FILE\tLog tap-facing traffic to pcap file
+  -P, --pid FILE\tWrite own PID to the given file
+  -m, --mtu MTU\tAssign MTU via DHCP/NDP
+    a zero value disables assignment
+    default: 65520: maximum 802.3 MTU minus 802.3 header
+                    length, rounded to 32 bits (IPv4 words)
+  -a, --address ADDR\tAssign IPv4 or IPv6 address ADDR
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: use addresses from interface with default route
+  -n, --netmask MASK\tAssign IPv4 MASK, dot-decimal or bits
+    default: netmask from matching address on the host
+  -M, --mac-addr ADDR\tUse source MAC address ADDR
+    default: 9a:55:9a:55:9a:55 (locally administered)
+  -g, --gateway ADDR\tPass IPv4 or IPv6 address as gateway
+    default: gateway from interface with default route
+  -i, --interface NAME\tInterface for addresses and routes
+    default: from --outbound-if4 and --outbound-if6, if any
+             otherwise interface with first default route
+  -o, --outbound ADDR\tBind to address as outbound source
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: use source address from routing tables
+  --outbound-if4 NAME\tBind to outbound interface for IPv4
+    default: use interface from default route
+  --outbound-if6 NAME\tBind to outbound interface for IPv6
+    default: use interface from default route
+  -D, --dns ADDR\tUse IPv4 or IPv6 address as DNS
+    can be specified multiple times
+    a single, empty option disables DNS information
+    default: use addresses from /etc/resolv.conf
+  -S, --search LIST\tSpace-separated list, search domains
+    a single, empty option disables the DNS search list
+  -H, --hostname NAME \tHostname to configure client with
+  --fqdn NAME\t\tFQDN to configure client with
+    default: use search list from /etc/resolv.conf
+  --no-dhcp-dns\tNo DNS list in DHCP/DHCPv6/NDP
+  --no-dhcp-search\tNo list in DHCP/DHCPv6/NDP
+  --map-host-loopback ADDR\tTranslate ADDR to refer to host
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: gateway address
+  --map-guest-addr ADDR\tTranslate ADDR to guest's address
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: none
+  --dns-forward ADDR\tForward DNS queries sent to ADDR
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: don't forward DNS queries
+  --dns-host ADDR\tHost nameserver to direct queries to
+    can be specified zero to two times (for IPv4 and IPv6)
+    default: first nameserver from host's /etc/resolv.conf
+  --no-tcp\t\tDisable TCP protocol handler
+  --no-udp\t\tDisable UDP protocol handler
+  --no-icmp\t\tDisable ICMP/ICMPv6 protocol handler
+  --no-dhcp\t\tDisable DHCP server
+  --no-ndp\t\tDisable NDP responses
+  --no-dhcpv6\t\tDisable DHCPv6 server
+  --no-ra\t\tDisable router advertisements
+  --freebind\t\tBind to any address for forwarding
+  --no-map-gw\t\tDon't map gateway address to host
+  -4, --ipv4-only\tEnable IPv4 operation only
+  -6, --ipv6-only\tEnable IPv6 operation only
+  -1, --one-off\tQuit after handling one single client
+  -t, --tcp-ports SPEC\tTCP port forwarding to guest
+    can be specified multiple times
+    SPEC can be:
+      'none': don't forward any ports
+      'all': forward all unbound, non-ephemeral ports
+      a comma-separated list, optionally ranged with '-'
+        and optional target ports after ':', with optional
+        address specification suffixed by '/' and optional
+        interface prefixed by '%'. Ranges can be reduced by
+        excluding ports or ranges prefixed by '~'
+        Examples:
+        -t 22\t\tForward local port 22 to 22 on guest
+        -t 22:23\tForward local port 22 to 23 on guest
+        -t 22,25\tForward ports 22, 25 to ports 22, 25
+        -t 22-80  \tForward ports 22 to 80
+        -t 22-80:32-90\tForward ports 22 to 80 to
+\t\t\tcorresponding port numbers plus 10
+        -t 192.0.2.1/5\tBind port 5 of 192.0.2.1 to guest
+        -t 5-25,~10-20\tForward ports 5 to 9, and 21 to 25
+        -t ~25\t\tForward all ports except for 25
+    default: none
+  -u, --udp-ports SPEC\tUDP port forwarding to guest
+    SPEC is as described for TCP above
+    default: none
+libguestfs: command: run: passt
+libguestfs: command: run: \ --one-off
+libguestfs: command: run: \ --socket /tmp/libguestfsBVJORc/passt.sock
+libguestfs: command: run: \ --pid /tmp/libguestfsBVJORc/passt1.pid
+libguestfs: command: run: \ --address 169.254.2.15
+libguestfs: command: run: \ --netmask 16
+libguestfs: command: run: \ --mac-addr 52:56:00:00:00:02
+libguestfs: command: run: \ --gateway 169.254.2.2
+Started as root, will change to nobody.
+No interfaces with usable IPv6 routes
+UNIX domain socket bound at /tmp/libguestfsBVJORc/passt.sock
+Template interface: ens3 (IPv4)
+MAC:
+    host: 52:56:00:00:00:02
+    NAT to host 127.0.0.1: 169.254.2.2
+DHCP:
+    assign: 169.254.2.15
+    mask: 255.255.0.0
+    router: 169.254.2.2
+DNS:
+    10.43.0.10
+DNS search list:
+    migration-system.svc.cluster.local
+    svc.cluster.local
+    cluster.local
+    openstacklocal
+
+You can now start qemu (>= 7.2, with commit 13c6be96618c):
+    kvm ... -device virtio-net-pci,netdev=s -netdev stream,id=s,server=off,addr.type=unix,addr.path=/tmp/libguestfsBVJORc/passt.sock
+or qrap, for earlier qemu versions:
+    ./qrap 5 kvm ... -net socket,fd=5 -net nic,model=virtio
+Failed to detach isolating namespaces: Operation not permitted
+Failed to sandbox process, exiting
+libguestfs: trace: v2v: launch = -1 (error)
+virt-v2v-in-place: error: libguestfs error: passt exited with status 1
+rm -rf -- '/tmp/v2vnbdkit.PkaNQd'
+nbdkit: debug: file: cleanup
+nbdkit: debug: file: unload plugin
+rm -rf -- '/tmp/v2v.sDripF'
+libguestfs: trace: v2v: close
+libguestfs: closing guestfs handle 0x592a94cbf3c0 (state 0)
+libguestfs: command: run: rm
+libguestfs: command: run: \ -rf /tmp/libguestfsNT5MBR
+libguestfs: command: run: rm
+libguestfs: command: run: \ -rf /tmp/libguestfsBVJORc
+libguestfs: trace: close
+libguestfs: closing guestfs handle 0x592a94cbf1a0 (state 0)
+libguestfs: trace: close
+libguestfs: closing guestfs handle 0x592a94cbdac0 (state 0)
+libguestfs: trace: close
+libguestfs: closing guestfs handle 0x592a94cbdf90 (state 0)
