@@ -22,13 +22,11 @@ prometheus_config_reloader="quay.io/prometheus-operator/prometheus-config-reload
 prometheus_operator="quay.io/prometheus-operator/prometheus-operator:v0.76.0"
 configmap_reload="ghcr.io/jimmidyson/configmap-reload:v0.13.1"
 grafana="docker.io/grafana/grafana:11.2.0"
+alpine="quay.io/platform9/vjailbreak:alpine"
 v2v_helper="quay.io/stellaris/stellaris-migrate-v2v-helper:$TAG"
 controller="quay.io/stellaris/stellaris-migrate-controller:$TAG"
 ui="quay.io/stellaris/stellaris-migrate-ui:$TAG"
 vpwned="quay.io/stellaris/stellaris-migrate-vpwned:$TAG"
-virtiowin="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso"
-# TODO(suhas): Create a seperate repository for alpine image in quay
-alpine="quay.io/platform9/vjailbreak:alpine"
 
 # Download and export images
 images=(
@@ -41,13 +39,9 @@ images=(
   "$pushgateway"
   "$prometheus_config_reloader"
   "$prometheus_operator"
-  "$v2v_helper"
-  "$controller"
-  "$ui"
   "$configmap_reload"
   "$grafana"
   "$alpine"
-  "$vpwned"
 )
 
 for img in "${images[@]}"; do
@@ -67,8 +61,3 @@ sleep 10
 ctr images export "image_builder/images/kube-rbac-proxy.tar" quay.io/brancz/kube-rbac-proxy:v0.19.1
 
 echo "[✔] All images downloaded and exported as tar files."
-
-
-# Download virtio-win.iso
-echo "[*] Downloading virtio-win.iso"
-wget -O image_builder/images/virtio-win.iso "$virtiowin"

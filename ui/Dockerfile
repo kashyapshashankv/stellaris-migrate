@@ -37,5 +37,6 @@ COPY startup.sh /usr/local/bin/start.sh
 # Expose port
 EXPOSE 3000
 
+RUN ["chmod", "+x", "/usr/local/bin/start.sh"]
 # Start Nginx server
 CMD ["/usr/local/bin/start.sh"]

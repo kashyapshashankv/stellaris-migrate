@@ -16,7 +16,7 @@ spec:
       serviceAccountName: migration-controller-manager
       containers:
         - name: stellaris-migrate-ui-container
-          image: steallaris/stellaris-migrate-ui:v0.1
+          image: quay.io/stellaris/stellaris-migrate-ui:0.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
