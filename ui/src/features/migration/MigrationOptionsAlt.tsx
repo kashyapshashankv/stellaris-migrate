@@ -80,7 +80,7 @@ export default function MigrationOptionsAlt({
   params,
   onChange,
   selectedMigrationOptions,
-  openstackCredentials,
+  // openstackCredentials,
   updateSelectedMigrationOptions,
   errors,
   getErrorsUpdater,

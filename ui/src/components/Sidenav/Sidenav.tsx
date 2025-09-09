@@ -17,7 +17,7 @@ import { ChevronLeft, ChevronRight, OpenInNew } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { NavigationItem, SidenavProps } from '../../types/navigation'
-import { useVersionQuery } from '../../hooks/api/useVersionQuery'
+// import { useVersionQuery } from '../../hooks/api/useVersionQuery'
 import Platform9Logo from '../Platform9Logo'
 // import { UpgradeModal } from '../UpgradeModal';
 // import UpgradeIcon from '@mui/icons-material/Upgrade';
