@@ -469,20 +469,20 @@ func (osclient *OpenStackClients) CreateVM(flavor *flavors.Flavor, networkIDs, p
 		SecurityGroups: securityGroups,
 	}
 
-	if useFlavorless {
-		utils.PrintLog(fmt.Sprintf("Using flavorless provisioning. Adding hotplug metadata: CPU=%d, Memory=%dMB", vminfo.CPU, vminfo.Memory))
-		serverCreateOpts.Metadata = map[string]string{
-			constants.HotplugCPUKey:       fmt.Sprintf("%d", vminfo.CPU),
-			constants.HotplugMemoryKey:    fmt.Sprintf("%d", vminfo.Memory),
-			constants.HotplugCPUMaxKey:    fmt.Sprintf("%d", vminfo.CPU),
-			constants.HotplugMemoryMaxKey: fmt.Sprintf("%d", vminfo.Memory),
-		}
-	}
+	// if useFlavorless {
+	// 	utils.PrintLog(fmt.Sprintf("Using flavorless provisioning. Adding hotplug metadata: CPU=%d, Memory=%dMB", vminfo.CPU, vminfo.Memory))
+	// 	serverCreateOpts.Metadata = map[string]string{
+	// 		constants.HotplugCPUKey:       fmt.Sprintf("%d", vminfo.CPU),
+	// 		constants.HotplugMemoryKey:    fmt.Sprintf("%d", vminfo.Memory),
+	// 		constants.HotplugCPUMaxKey:    fmt.Sprintf("%d", vminfo.CPU),
+	// 		constants.HotplugMemoryMaxKey: fmt.Sprintf("%d", vminfo.Memory),
+	// 	}
+	// }
 
-	if availabilityZone != "" && !strings.Contains(availabilityZone, constants.PCDClusterNameNoCluster) {
-		// for PCD, this will be set to cluster name
-		serverCreateOpts.AvailabilityZone = availabilityZone
-	}
+	// if availabilityZone != "" && !strings.Contains(availabilityZone, constants.PCDClusterNameNoCluster) {
+	// 	// for PCD, this will be set to cluster name
+	// 	serverCreateOpts.AvailabilityZone = availabilityZone
+	// }
 	createOpts := bootfromvolume.CreateOptsExt{
 		CreateOptsBuilder: serverCreateOpts,
 		BlockDevice:       []bootfromvolume.BlockDevice{blockDevice},

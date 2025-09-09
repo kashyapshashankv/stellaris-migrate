@@ -858,8 +858,7 @@ func (migobj *Migrate) CreateTargetInstance(vminfo vm.VMInfo) error {
 	if err != nil {
 		return errors.Wrap(err, "failed to get stellaris-migrate settings")
 	}
-	utils.PrintLog(fmt.Sprintf("Fetched stellaris-migrate settings for VM active wait retry limit: %d, VM active wait interval seconds: %d", migrateSettings.VMActiveWaitRetryLimit, migrateSettings.VMActiveWaitIntervalSeconds))
-
+	utils.PrintLog(fmt.Sprintf("Fetched stellaris-migrate settings for VM active wait retry limit: %d, VM active wait interval seconds: %d, %d", migrateSettings.VMActiveWaitRetryLimit, migrateSettings.VMActiveWaitIntervalSeconds,migobj.TargetAvailabilityZone))
 	// Create a new VM in OpenStack
 	newVM, err := openstackops.CreateVM(flavor, networkids, portids, vminfo, migobj.TargetAvailabilityZone, securityGroupIDs, *migrateSettings, migobj.UseFlavorless)
 	if err != nil {
