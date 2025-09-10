@@ -156,7 +156,7 @@ export default function MigrationOptionsAlt({
                 size="small"
                 disabled={!selectedMigrationOptions.dataCopyMethod}
                 labelId="source-item-label"
-                value={params?.dataCopyMethod || "cold"}
+                value={params?.dataCopyMethod || "hot"}
                 onChange={(e) => {
                   onChange("dataCopyMethod")(e.target.value)
                 }}
@@ -399,7 +399,7 @@ export default function MigrationOptionsAlt({
               <Select
                 size="small"
                 disabled={!selectedMigrationOptions.postMigrationAction?.moveToFolder}
-                value={params.postMigrationAction?.folderName || "vjailbreakedVMs"}
+                value={params.postMigrationAction?.folderName || "MigratedVMs"}
                 onChange={(e) => {
                   onChange("postMigrationAction")({
                     ...params.postMigrationAction,

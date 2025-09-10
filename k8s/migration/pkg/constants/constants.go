@@ -166,7 +166,7 @@ const (
 	StartCutOverNo = "no"
 
 	// PCDClusterNameNoCluster is the name of the PCD cluster when there is no cluster
-	PCDClusterNameNoCluster = "Stellaris Cluster"
+	PCDClusterNameNoCluster = "NO CLUSTER"
 
 	// RDMDiskControllerName is the name of the RDM disk controller
 	RDMDiskControllerName = "rdmdisk-controller"

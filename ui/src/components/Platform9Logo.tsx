@@ -1,5 +1,7 @@
 import { styled, Typography } from '@mui/material'
-import cubeIcon from '../assets/platform9-cube.svg'
+import cubeIcon from '../assets/logo.png'
+
+// import {DARK_BG_PRIMARY} from '../theme/colors.tsx'
 
 const LogoContainer = styled('div')(() => ({
   display: 'flex',
@@ -27,10 +29,10 @@ const CubeIcon = styled('img')<{ collapsed?: boolean }>(({ collapsed }) => ({
   }),
 }))
 
-const BrandText = styled(Typography)(({ theme }) => ({
+const BrandText = styled(Typography)(({ DARK_BG_PRIMARY }) => ({
   fontWeight: 700,
-  fontSize: '1.5rem',
-  background: theme.palette.primary.main,
+  fontSize: '1.2rem',
+  background: DARK_BG_PRIMARY,
   backgroundClip: 'text',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
