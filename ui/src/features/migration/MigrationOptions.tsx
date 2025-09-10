@@ -158,7 +158,7 @@ export default function MigrationOptions({
                 size="small"
                 disabled={!selectedMigrationOptions.dataCopyMethod}
                 labelId="source-item-label"
-                value={params?.dataCopyMethod || "cold"}
+                value={params?.dataCopyMethod || "hot"}
                 onChange={(e) => {
                   onChange("dataCopyMethod")(e.target.value)
                 }}

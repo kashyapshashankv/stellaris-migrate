@@ -214,7 +214,7 @@ export default function MigrationFormDrawer({
     openstackCredentials?.status?.openstackValidationStatus === "Succeeded"
 
   // Polling Conditions
-  const shouldPollMigrationTemplate = !migrationTemplate?.metadata?.name
+  const shouldPollMigrationTemplate = false//!migrationTemplate?.metadata?.name
 
   const shouldPollMigrationPlan =
     !!migrationPlan?.metadata?.name && migrationPlan?.status === undefined
