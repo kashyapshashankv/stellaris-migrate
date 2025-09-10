@@ -2263,7 +2263,7 @@ export default function RollingMigrationFormDrawer({
                 });
                 setVmsWithAssignments(updatedVMs);
 
-                const actionText = isAutoAssign ? "cleared flavor assignment for" : "assigned flavor to";
+                // const actionText = isAutoAssign ? "cleared flavor assignment for" : "assigned flavor to";
                 // console.log(`Successfully ${actionText} ${selectedVMs.length} VM${selectedVMs.length > 1 ? 's' : ''}`);
 
                 // Refresh VM list to get updated flavor information from API
