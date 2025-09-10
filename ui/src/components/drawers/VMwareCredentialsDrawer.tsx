@@ -39,7 +39,7 @@ export default function VMwareCredentialsDrawer({
     const closeDrawer = useCallback(() => {
         // Check if we have a created credential that hasn't been fully validated (succeeded)
         if (createdCredentialName) {
-            console.log(`Cleaning up VMware credential on drawer close: ${createdCredentialName}`);
+            // console.log(`Cleaning up VMware credential on drawer close: ${createdCredentialName}`);
             try {
                 deleteVMwareCredsWithSecretFlow(createdCredentialName)
                     .then(() => console.log(`Cancelled credential ${createdCredentialName} deleted successfully`))

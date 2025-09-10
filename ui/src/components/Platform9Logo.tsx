@@ -9,7 +9,7 @@ const LogoContainer = styled('div')(() => ({
 }))
 
 const CubeIcon = styled('img')<{ collapsed?: boolean }>(({ collapsed }) => ({
-  height: collapsed ? '20px' : '28px',
+  height: collapsed ? '55px' : '60px',
   width: 'auto',
   transition: 'all 0.3s ease',
   cursor: collapsed ? 'pointer' : 'default',
@@ -27,10 +27,10 @@ const CubeIcon = styled('img')<{ collapsed?: boolean }>(({ collapsed }) => ({
   }),
 }))
 
-const BrandText = styled(Typography)(({ theme }) => ({
+const BrandText = styled(Typography)(() => ({
   fontWeight: 600,
   fontSize: '1.3rem',
-  background: theme.palette.primary.main,
+  background: "#33383f",
   backgroundClip: 'text',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',

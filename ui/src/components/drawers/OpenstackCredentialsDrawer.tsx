@@ -41,7 +41,7 @@ export default function OpenstackCredentialsDrawer({
     // Reset state and clean up when the drawer is closed
     const closeDrawer = useCallback(() => {
         if (createdCredentialName) {
-            console.log(`Cleaning up OpenStack credential on drawer close: ${createdCredentialName}`);
+            // console.log(`Cleaning up OpenStack credential on drawer close: ${createdCredentialName}`);
             try {
                 deleteOpenStackCredsWithSecretFlow(createdCredentialName)
                     .then(() => console.log(`Cancelled credential ${createdCredentialName} deleted successfully`))

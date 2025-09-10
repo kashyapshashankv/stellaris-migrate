@@ -316,7 +316,7 @@ export default function MigrationFormDrawer({
 
   useInterval(
     async () => {
-      console.log("migrationTemplate", migrationTemplate?.metadata?.name)
+      // console.log("migrationTemplate", migrationTemplate?.metadata?.name)
       if (shouldPollMigrationTemplate) {
         try {
           fetchMigrationTemplate()
@@ -473,15 +473,15 @@ export default function MigrationFormDrawer({
     };
 
 
-    console.log('Migration Fields:', JSON.stringify(migrationFields, null, 2));
+    // console.log('Migration Fields:', JSON.stringify(migrationFields, null, 2));
 
     const body = createMigrationPlanJson(migrationFields);
-    console.log('Final Request Body:', JSON.stringify(body, null, 2));
+    // console.log('Final Request Body:', JSON.stringify(body, null, 2));
 
     try {
-      console.log('Sending migration plan creation request...');
+      // console.log('Sending migration plan creation request...');
       const data = await postMigrationPlan(body);
-      console.log('Migration plan created successfully:', data);
+      // console.log('Migration plan created successfully:', data);
 
 
       return data;

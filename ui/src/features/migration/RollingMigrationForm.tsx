@@ -481,9 +481,9 @@ export default function RollingMigrationFormDrawer({
                 // We'll resolve flavor names later when openstackFlavors is available
                 const flavorName = targetFlavorId || "auto-assign";
 
-                if (vm.spec.vms.name == "nvidia-bcm-router") {
-                    console.log(vm.spec.vms.networkInterfaces);
-                }
+                // if (vm.spec.vms.name == "nvidia-bcm-router") {
+                //     // console.log(vm.spec.vms.networkInterfaces);
+                // }
 
                 // Get all IP addresses from network interfaces in comma-separated format
                 const allIPs = vm.spec.vms.networkInterfaces && vm.spec.vms.networkInterfaces.length > 0
@@ -1256,7 +1256,7 @@ export default function RollingMigrationFormDrawer({
                     const hostConfigId = selectedPcdConfig ? selectedPcdConfig.id : host.pcdHostConfigName;
 
                     if (hostConfigId) {
-                        console.log(`Updating host ${host.name} with hostConfigId: ${hostConfigId}`);
+                        // console.log(`Updating host ${host.name} with hostConfigId: ${hostConfigId}`);
                         await patchVMwareHost(host.id, hostConfigId, VJAILBREAK_DEFAULT_NAMESPACE);
                     }
                 } catch (error) {
@@ -1337,7 +1337,7 @@ export default function RollingMigrationFormDrawer({
 
             await postRollingMigrationPlan(migrationPlanJson, VJAILBREAK_DEFAULT_NAMESPACE);
 
-            console.log("Submitted rolling migration plan", migrationPlanJson);
+            // console.log("Submitted rolling migration plan", migrationPlanJson);
 
             onClose();
             navigate("/dashboard/cluster-conversions");
@@ -2155,7 +2155,7 @@ export default function RollingMigrationFormDrawer({
             });
             setVmsWithAssignments(updatedVMs);
 
-            console.log(`Successfully assigned flavor "${flavorName}" to VM ${vmId}`);
+            // console.log(`Successfully assigned flavor "${flavorName}" to VM ${vmId}`);
 
         } catch (error) {
             console.error(`Failed to update flavor for VM ${vmId}:`, error);
@@ -2187,7 +2187,7 @@ export default function RollingMigrationFormDrawer({
 
             setOrderedESXHosts(updatedESXHosts);
 
-            console.log(`Successfully assigned host config "${configName}" to ESX host ${hostId}`);
+            // console.log(`Successfully assigned host config "${configName}" to ESX host ${hostId}`);
 
         } catch (error) {
             console.error(`Failed to update host config for ESX host ${hostId}:`, error);
@@ -2264,7 +2264,7 @@ export default function RollingMigrationFormDrawer({
                 setVmsWithAssignments(updatedVMs);
 
                 const actionText = isAutoAssign ? "cleared flavor assignment for" : "assigned flavor to";
-                console.log(`Successfully ${actionText} ${selectedVMs.length} VM${selectedVMs.length > 1 ? 's' : ''}`);
+                // console.log(`Successfully ${actionText} ${selectedVMs.length} VM${selectedVMs.length > 1 ? 's' : ''}`);
 
                 // Refresh VM list to get updated flavor information from API
                 await fetchClusterVMs();

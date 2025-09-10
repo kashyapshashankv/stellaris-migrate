@@ -123,7 +123,7 @@ export default function ScaleUpDrawer({ open, onClose, masterNode }: ScaleUpDraw
                 setLoadingFlavors(true);
                 try {
                     const flavours = openstackCredentials?.spec.flavors;
-                    console.log(flavours);
+                    // console.log(flavours);
                     setFlavors(flavours || []);
 
                 } catch (error) {
