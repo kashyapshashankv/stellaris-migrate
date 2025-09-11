@@ -11,6 +11,7 @@ import (
 	"strings"
 	"sync"
 	"syscall"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/kashyapshashankv/stellaris-migrate/v2v-helper/pkg/utils"
@@ -181,12 +182,16 @@ func (nbdserver *NBDServer) CopyDisk(ctx context.Context, dest string, diskindex
 		}
 	}()
 	// Use the helper function to ensure log file is closed after command execution
+	utils.PrintLog("Running NDB")
 	err = utils.RunCommandWithLogFile(cmd)
 	if err != nil {
 		// retry once with debug enabled, to get more details
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
-		err = cmd.Run()
+		// RunCommandWithLogFile
+		utils.PrintLog("Running NDB Again after failure.")
+		time.Sleep(300 * time.Second)
+		err = utils.RunCommandWithLogFile(cmd)
 		if err != nil {
 			return errors.Wrapf(err, "failed to run nbdcopy")
 		}
